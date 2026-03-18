@@ -1,0 +1,46 @@
+aid: traefik
+name: Traefik
+description: >-
+  Traefik is a modern open-source HTTP reverse proxy and load balancer that
+  makes deploying microservices and API gateways easy with automatic service
+  discovery, Let's Encrypt integration, and a rich middleware ecosystem.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - API Gateway
+  - Reverse Proxy
+  - Load Balancer
+  - Kubernetes
+  - Open Source
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/traefik/refs/heads/main/apis.yml
+created: '2026-03-18'
+modified: '2026-03-18'
+specificationVersion: '0.19'
+apis:
+  - aid: traefik:traefik
+    name: Traefik Proxy
+    description: >-
+      Traefik is a leading modern reverse proxy and load balancer that makes
+      deploying microservices easy with native support for Kubernetes, Docker,
+      and automatic TLS certificate provisioning.
+    humanURL: https://traefik.io/traefik/
+    tags:
+      - API Gateway
+      - Reverse Proxy
+      - Kubernetes
+    properties:
+      - type: Documentation
+        url: https://doc.traefik.io/traefik/
+      - type: Getting Started
+        url: https://doc.traefik.io/traefik/getting-started/quick-start/
+common:
+  - type: Website
+    url: https://traefik.io/
+  - type: Documentation
+    url: https://doc.traefik.io/traefik/
+  - type: GitHub Organization
+    url: https://github.com/traefik/traefik
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
