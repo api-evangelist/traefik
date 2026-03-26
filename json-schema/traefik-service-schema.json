@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://traefik.io/schemas/traefik/service.json",
+  "title": "Traefik Service",
+  "description": "Represents an HTTP, TCP, or UDP service in a running Traefik instance, including its load balancer configuration, backend servers, and health check settings.",
+  "type": "object",
+  "required": ["name"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the service in name@provider format.",
+      "minLength": 1
+    },
+    "type": {
+      "type": "string",
+      "description": "The type of service.",
+      "enum": ["loadBalancer", "weighted", "mirroring"]
+    },
+    "status": {
+      "type": "string",
+      "description": "The current operational status of the service.",
+      "enum": ["enabled", "disabled", "warning"]
+    },
+    "provider": {
+      "type": "string",
+      "description": "The configuration provider that created this service (e.g., docker, kubernetes, file)."
+    },
+    "protocol": {
+      "type": "string",
+      "description": "The protocol this service handles.",
+      "enum": ["http", "tcp", "udp"]
+    },
+    "loadBalancer": {
+      "$ref": "#/$defs/LoadBalancer",
+      "description": "Load balancer configuration including backend servers and health checks."
+    },
+    "serverStatus": {
+      "type": "object",
+      "description": "Map of server URLs to their current health status.",
+      "additionalProperties": {
+        "type": "string"
+      }
+    }
+  },
+  "$defs": {
+    "LoadBalancer": {
+      "type": "object",
+      "description": "Load balancer configuration distributing traffic across backend servers.",
+      "properties": {
+        "servers": {
+          "type": "array",
+          "description": "List of backend servers to load balance across.",
+          "items": {
+            "$ref": "#/$defs/Server"
+          }
+        },
+        "passHostHeader": {
+          "type": "boolean",
+          "description": "Whether to pass the original Host header to backend servers."
+        },
+        "healthCheck": {
+          "$ref": "#/$defs/HealthCheck",
+          "description": "Health check configuration for monitoring backend server availability."
+        }
+      }
+    },
+    "Server": {
+      "type": "object",
+      "description": "A backend server in the load balancer pool.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URL of the backend server (HTTP/HTTPS services)."
+        },
+        "address": {
+          "type": "string",
+          "description": "The address of the backend server in host:port format (TCP/UDP services)."
+        }
+      }
+    },
+    "HealthCheck": {
+      "type": "object",
+      "description": "Configuration for periodic health checks against backend servers.",
+      "properties": {
+        "scheme": {
+          "type": "string",
+          "description": "The scheme to use for health check requests (http or https)."
+        },
+        "path": {
+          "type": "string",
+          "description": "The path to use for health check requests."
+        },
+        "port": {
+          "type": "integer",
+          "description": "The port to use for health check requests.",
+          "minimum": 1,
+          "maximum": 65535
+        },
+        "interval": {
+          "type": "string",
+          "description": "The interval between health checks (e.g., '10s', '30s')."
+        },
+        "timeout": {
+          "type": "string",
+          "description": "The timeout for each health check request (e.g., '5s')."
+        }
+      }
+    }
+  }
+}

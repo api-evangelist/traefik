@@ -1,0 +1,953 @@
+openapi: 3.1.0
+info:
+  title: Traefik REST API
+  description: >-
+    The Traefik REST API provides read-only HTTP endpoints for inspecting the
+    runtime configuration and state of a running Traefik instance. It exposes
+    information about HTTP, TCP, and UDP routers, services, and middlewares, as
+    well as entry points and the current Traefik version. The API must be enabled
+    in the Traefik static configuration and should be secured before exposing in
+    production environments.
+  version: '3'
+  contact:
+    name: Traefik Labs
+    url: https://traefik.io/
+  license:
+    name: MIT
+    url: https://github.com/traefik/traefik/blob/master/LICENSE.md
+externalDocs:
+  description: Traefik API Documentation
+  url: https://doc.traefik.io/traefik/operations/api/
+servers:
+  - url: http://localhost:8080/api
+    description: Default Traefik API endpoint (traefik entrypoint on port 8080)
+tags:
+  - name: Overview
+    description: >-
+      Overview and version information for the running Traefik instance.
+  - name: HTTP
+    description: >-
+      Endpoints for inspecting HTTP routers, services, and middlewares.
+  - name: TCP
+    description: >-
+      Endpoints for inspecting TCP routers, services, and middlewares.
+  - name: UDP
+    description: >-
+      Endpoints for inspecting UDP routers and services.
+  - name: Entrypoints
+    description: >-
+      Endpoints for listing configured entry points.
+  - name: Health
+    description: >-
+      Health check and ping endpoints for liveness probes.
+paths:
+  /version:
+    get:
+      operationId: getVersion
+      summary: Get Traefik version
+      description: >-
+        Returns the current version of the running Traefik instance, including
+        the version string, codename, and start date.
+      tags:
+        - Overview
+      responses:
+        '200':
+          description: Version information returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Version'
+  /overview:
+    get:
+      operationId: getOverview
+      summary: Get overview statistics
+      description: >-
+        Returns an overview of the current Traefik configuration including
+        counts of HTTP, TCP, and UDP routers, services, and middlewares, as well
+        as enabled features and provider information.
+      tags:
+        - Overview
+      responses:
+        '200':
+          description: Overview returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Overview'
+  /rawdata:
+    get:
+      operationId: getRawData
+      summary: Get raw configuration data
+      description: >-
+        Returns the complete raw dynamic configuration data for all routers,
+        services, middlewares, and transports currently loaded from all
+        providers.
+      tags:
+        - Overview
+      responses:
+        '200':
+          description: Raw configuration data returned successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Complete raw configuration data from all providers.
+  /entrypoints:
+    get:
+      operationId: listEntryPoints
+      summary: List all entry points
+      description: >-
+        Returns a list of all configured entry points for the Traefik instance,
+        including their names, addresses, and transport configuration.
+      tags:
+        - Entrypoints
+      responses:
+        '200':
+          description: Entry points returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EntryPoint'
+  /entrypoints/{name}:
+    get:
+      operationId: getEntryPoint
+      summary: Get a specific entry point
+      description: >-
+        Returns the configuration of a specific entry point by name.
+      tags:
+        - Entrypoints
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name of the entry point.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Entry point returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntryPoint'
+        '404':
+          description: Entry point not found
+  /http/routers:
+    get:
+      operationId: listHTTPRouters
+      summary: List all HTTP routers
+      description: >-
+        Returns a list of all HTTP routers configured in the running Traefik
+        instance, including their rules, entry points, middlewares, and service
+        assignments.
+      tags:
+        - HTTP
+      parameters:
+        - $ref: '#/components/parameters/search'
+        - $ref: '#/components/parameters/status'
+        - $ref: '#/components/parameters/per_page'
+        - $ref: '#/components/parameters/page'
+      responses:
+        '200':
+          description: HTTP routers returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HTTPRouter'
+  /http/routers/{name}:
+    get:
+      operationId: getHTTPRouter
+      summary: Get a specific HTTP router
+      description: >-
+        Returns the configuration of a specific HTTP router by its name,
+        including the rule, priority, entry points, service, and middlewares.
+      tags:
+        - HTTP
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: >-
+            The name of the HTTP router, in the format name@provider.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: HTTP router returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPRouter'
+        '404':
+          description: Router not found
+  /http/services:
+    get:
+      operationId: listHTTPServices
+      summary: List all HTTP services
+      description: >-
+        Returns a list of all HTTP services configured in the running Traefik
+        instance, including their load balancer configuration and server details.
+      tags:
+        - HTTP
+      parameters:
+        - $ref: '#/components/parameters/search'
+        - $ref: '#/components/parameters/status'
+        - $ref: '#/components/parameters/per_page'
+        - $ref: '#/components/parameters/page'
+      responses:
+        '200':
+          description: HTTP services returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HTTPService'
+  /http/services/{name}:
+    get:
+      operationId: getHTTPService
+      summary: Get a specific HTTP service
+      description: >-
+        Returns the configuration of a specific HTTP service by its name,
+        including the load balancer servers and health check status.
+      tags:
+        - HTTP
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: >-
+            The name of the HTTP service, in the format name@provider.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: HTTP service returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPService'
+        '404':
+          description: Service not found
+  /http/middlewares:
+    get:
+      operationId: listHTTPMiddlewares
+      summary: List all HTTP middlewares
+      description: >-
+        Returns a list of all HTTP middlewares configured in the running Traefik
+        instance, including their type and configuration details.
+      tags:
+        - HTTP
+      parameters:
+        - $ref: '#/components/parameters/search'
+        - $ref: '#/components/parameters/status'
+        - $ref: '#/components/parameters/per_page'
+        - $ref: '#/components/parameters/page'
+      responses:
+        '200':
+          description: HTTP middlewares returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HTTPMiddleware'
+  /http/middlewares/{name}:
+    get:
+      operationId: getHTTPMiddleware
+      summary: Get a specific HTTP middleware
+      description: >-
+        Returns the configuration of a specific HTTP middleware by its name.
+      tags:
+        - HTTP
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: >-
+            The name of the HTTP middleware, in the format name@provider.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: HTTP middleware returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPMiddleware'
+        '404':
+          description: Middleware not found
+  /tcp/routers:
+    get:
+      operationId: listTCPRouters
+      summary: List all TCP routers
+      description: >-
+        Returns a list of all TCP routers configured in the running Traefik
+        instance.
+      tags:
+        - TCP
+      parameters:
+        - $ref: '#/components/parameters/search'
+        - $ref: '#/components/parameters/status'
+        - $ref: '#/components/parameters/per_page'
+        - $ref: '#/components/parameters/page'
+      responses:
+        '200':
+          description: TCP routers returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TCPRouter'
+  /tcp/routers/{name}:
+    get:
+      operationId: getTCPRouter
+      summary: Get a specific TCP router
+      description: >-
+        Returns the configuration of a specific TCP router by its name.
+      tags:
+        - TCP
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: >-
+            The name of the TCP router, in the format name@provider.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: TCP router returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TCPRouter'
+        '404':
+          description: Router not found
+  /tcp/services:
+    get:
+      operationId: listTCPServices
+      summary: List all TCP services
+      description: >-
+        Returns a list of all TCP services configured in the running Traefik
+        instance.
+      tags:
+        - TCP
+      parameters:
+        - $ref: '#/components/parameters/search'
+        - $ref: '#/components/parameters/status'
+        - $ref: '#/components/parameters/per_page'
+        - $ref: '#/components/parameters/page'
+      responses:
+        '200':
+          description: TCP services returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TCPService'
+  /tcp/services/{name}:
+    get:
+      operationId: getTCPService
+      summary: Get a specific TCP service
+      description: >-
+        Returns the configuration of a specific TCP service by its name.
+      tags:
+        - TCP
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: >-
+            The name of the TCP service, in the format name@provider.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: TCP service returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TCPService'
+        '404':
+          description: Service not found
+  /tcp/middlewares:
+    get:
+      operationId: listTCPMiddlewares
+      summary: List all TCP middlewares
+      description: >-
+        Returns a list of all TCP middlewares configured in the running Traefik
+        instance.
+      tags:
+        - TCP
+      parameters:
+        - $ref: '#/components/parameters/search'
+        - $ref: '#/components/parameters/status'
+        - $ref: '#/components/parameters/per_page'
+        - $ref: '#/components/parameters/page'
+      responses:
+        '200':
+          description: TCP middlewares returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TCPMiddleware'
+  /tcp/middlewares/{name}:
+    get:
+      operationId: getTCPMiddleware
+      summary: Get a specific TCP middleware
+      description: >-
+        Returns the configuration of a specific TCP middleware by its name.
+      tags:
+        - TCP
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: >-
+            The name of the TCP middleware, in the format name@provider.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: TCP middleware returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TCPMiddleware'
+        '404':
+          description: Middleware not found
+  /udp/routers:
+    get:
+      operationId: listUDPRouters
+      summary: List all UDP routers
+      description: >-
+        Returns a list of all UDP routers configured in the running Traefik
+        instance.
+      tags:
+        - UDP
+      parameters:
+        - $ref: '#/components/parameters/search'
+        - $ref: '#/components/parameters/status'
+        - $ref: '#/components/parameters/per_page'
+        - $ref: '#/components/parameters/page'
+      responses:
+        '200':
+          description: UDP routers returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UDPRouter'
+  /udp/routers/{name}:
+    get:
+      operationId: getUDPRouter
+      summary: Get a specific UDP router
+      description: >-
+        Returns the configuration of a specific UDP router by its name.
+      tags:
+        - UDP
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: >-
+            The name of the UDP router, in the format name@provider.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: UDP router returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UDPRouter'
+        '404':
+          description: Router not found
+  /udp/services:
+    get:
+      operationId: listUDPServices
+      summary: List all UDP services
+      description: >-
+        Returns a list of all UDP services configured in the running Traefik
+        instance.
+      tags:
+        - UDP
+      parameters:
+        - $ref: '#/components/parameters/search'
+        - $ref: '#/components/parameters/status'
+        - $ref: '#/components/parameters/per_page'
+        - $ref: '#/components/parameters/page'
+      responses:
+        '200':
+          description: UDP services returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UDPService'
+  /udp/services/{name}:
+    get:
+      operationId: getUDPService
+      summary: Get a specific UDP service
+      description: >-
+        Returns the configuration of a specific UDP service by its name.
+      tags:
+        - UDP
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: >-
+            The name of the UDP service, in the format name@provider.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: UDP service returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UDPService'
+        '404':
+          description: Service not found
+  /ping:
+    get:
+      operationId: ping
+      summary: Health check ping
+      description: >-
+        Returns HTTP 200 with body "OK" when the Traefik process is alive and
+        ready. Used for liveness probes in container orchestration. Note that
+        the ping endpoint is typically configured on a separate entry point
+        or path outside the /api prefix.
+      tags:
+        - Health
+      responses:
+        '200':
+          description: Traefik is alive and ready
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: OK
+components:
+  parameters:
+    search:
+      name: search
+      in: query
+      required: false
+      description: Filter results by name using a search string.
+      schema:
+        type: string
+    status:
+      name: status
+      in: query
+      required: false
+      description: Filter results by status (enabled or disabled).
+      schema:
+        type: string
+        enum:
+          - enabled
+          - disabled
+    per_page:
+      name: per_page
+      in: query
+      required: false
+      description: Number of results per page.
+      schema:
+        type: integer
+        default: 100
+    page:
+      name: page
+      in: query
+      required: false
+      description: Page number for paginated results.
+      schema:
+        type: integer
+        default: 1
+  schemas:
+    Version:
+      type: object
+      description: Traefik version and build information.
+      properties:
+        Version:
+          type: string
+          description: The semantic version string of the running Traefik instance.
+        Codename:
+          type: string
+          description: The codename for this Traefik release.
+        startDate:
+          type: string
+          format: date-time
+          description: The start time of the running Traefik process.
+    Overview:
+      type: object
+      description: >-
+        Overview statistics of the running Traefik instance including counts
+        of all configured objects.
+      properties:
+        http:
+          $ref: '#/components/schemas/OverviewSection'
+        tcp:
+          $ref: '#/components/schemas/OverviewSection'
+        udp:
+          $ref: '#/components/schemas/OverviewUDPSection'
+        features:
+          type: object
+          description: Enabled features in the running instance.
+          properties:
+            tracing:
+              type: string
+            metrics:
+              type: string
+            accessLog:
+              type: boolean
+        providers:
+          type: array
+          description: List of active configuration providers.
+          items:
+            type: string
+    OverviewSection:
+      type: object
+      description: Counts for routers, services, and middlewares in a protocol section.
+      properties:
+        routers:
+          $ref: '#/components/schemas/StatusCount'
+        services:
+          $ref: '#/components/schemas/StatusCount'
+        middlewares:
+          $ref: '#/components/schemas/StatusCount'
+    OverviewUDPSection:
+      type: object
+      description: Counts for UDP routers and services.
+      properties:
+        routers:
+          $ref: '#/components/schemas/StatusCount'
+        services:
+          $ref: '#/components/schemas/StatusCount'
+    StatusCount:
+      type: object
+      description: Count of objects by status.
+      properties:
+        total:
+          type: integer
+        warnings:
+          type: integer
+        errors:
+          type: integer
+    EntryPoint:
+      type: object
+      description: A configured entry point for accepting incoming traffic.
+      properties:
+        name:
+          type: string
+          description: The name of the entry point.
+        address:
+          type: string
+          description: The address the entry point listens on (e.g., ":80", ":443").
+        transport:
+          type: object
+          description: Transport layer configuration.
+          properties:
+            lifeCycle:
+              type: object
+              properties:
+                requestAcceptGraceTimeout:
+                  type: string
+                graceTimeOut:
+                  type: string
+            respondingTimeouts:
+              type: object
+              properties:
+                readTimeout:
+                  type: string
+                writeTimeout:
+                  type: string
+                idleTimeout:
+                  type: string
+    HTTPRouter:
+      type: object
+      description: An HTTP router that matches incoming requests and routes them to services.
+      properties:
+        name:
+          type: string
+          description: The name of the router in name@provider format.
+        entryPoints:
+          type: array
+          description: Entry points this router is bound to.
+          items:
+            type: string
+        middlewares:
+          type: array
+          description: Middlewares applied to this router in order.
+          items:
+            type: string
+        service:
+          type: string
+          description: The service this router routes traffic to.
+        rule:
+          type: string
+          description: The routing rule expression (e.g., Host, Path, Headers matchers).
+        ruleSyntax:
+          type: string
+          description: The syntax version of the rule.
+        priority:
+          type: integer
+          description: The priority of the router when multiple routers match.
+        status:
+          type: string
+          description: The current status of the router.
+          enum:
+            - enabled
+            - disabled
+            - warning
+        using:
+          type: array
+          description: Entry points being used by this router.
+          items:
+            type: string
+        provider:
+          type: string
+          description: The configuration provider that created this router.
+        tls:
+          type: object
+          description: TLS configuration for this router.
+          properties:
+            options:
+              type: string
+            certResolver:
+              type: string
+            domains:
+              type: array
+              items:
+                type: object
+                properties:
+                  main:
+                    type: string
+                  sans:
+                    type: array
+                    items:
+                      type: string
+    HTTPService:
+      type: object
+      description: An HTTP service representing one or more backend servers.
+      properties:
+        name:
+          type: string
+          description: The name of the service in name@provider format.
+        type:
+          type: string
+          description: The type of service (loadBalancer, weighted, mirroring).
+        status:
+          type: string
+          description: The current status of the service.
+          enum:
+            - enabled
+            - disabled
+            - warning
+        provider:
+          type: string
+          description: The configuration provider that created this service.
+        loadBalancer:
+          type: object
+          description: Load balancer configuration with backend servers.
+          properties:
+            servers:
+              type: array
+              items:
+                type: object
+                properties:
+                  url:
+                    type: string
+                    description: The URL of the backend server.
+            passHostHeader:
+              type: boolean
+              description: Whether to pass the host header to backends.
+            healthCheck:
+              type: object
+              description: Health check configuration for the backend servers.
+              properties:
+                scheme:
+                  type: string
+                path:
+                  type: string
+                port:
+                  type: integer
+                interval:
+                  type: string
+                timeout:
+                  type: string
+        serverStatus:
+          type: object
+          description: Map of server URLs to their current health status.
+          additionalProperties:
+            type: string
+    HTTPMiddleware:
+      type: object
+      description: An HTTP middleware that modifies requests or responses.
+      properties:
+        name:
+          type: string
+          description: The name of the middleware in name@provider format.
+        type:
+          type: string
+          description: >-
+            The type of middleware (e.g., addPrefix, basicAuth, buffering,
+            chain, circuitBreaker, compress, headers, ipAllowList, rateLimit,
+            redirectScheme, replacePath, retry, stripPrefix).
+        status:
+          type: string
+          description: The current status of the middleware.
+          enum:
+            - enabled
+            - disabled
+            - warning
+        provider:
+          type: string
+          description: The configuration provider that created this middleware.
+        usedBy:
+          type: array
+          description: Routers currently using this middleware.
+          items:
+            type: string
+    TCPRouter:
+      type: object
+      description: A TCP router that matches incoming TCP connections and routes them to services.
+      properties:
+        name:
+          type: string
+          description: The name of the TCP router in name@provider format.
+        entryPoints:
+          type: array
+          description: Entry points this router is bound to.
+          items:
+            type: string
+        service:
+          type: string
+          description: The TCP service this router routes traffic to.
+        rule:
+          type: string
+          description: The TCP routing rule expression (HostSNI matcher).
+        status:
+          type: string
+          enum:
+            - enabled
+            - disabled
+            - warning
+        provider:
+          type: string
+        tls:
+          type: object
+          properties:
+            passthrough:
+              type: boolean
+            options:
+              type: string
+            certResolver:
+              type: string
+    TCPService:
+      type: object
+      description: A TCP service representing one or more backend TCP servers.
+      properties:
+        name:
+          type: string
+          description: The name of the TCP service in name@provider format.
+        type:
+          type: string
+        status:
+          type: string
+          enum:
+            - enabled
+            - disabled
+            - warning
+        provider:
+          type: string
+        loadBalancer:
+          type: object
+          properties:
+            servers:
+              type: array
+              items:
+                type: object
+                properties:
+                  address:
+                    type: string
+                    description: The address of the backend TCP server (host:port).
+    TCPMiddleware:
+      type: object
+      description: A TCP middleware that modifies TCP connections.
+      properties:
+        name:
+          type: string
+          description: The name of the TCP middleware in name@provider format.
+        type:
+          type: string
+          description: The type of TCP middleware (e.g., ipAllowList, inFlightConn).
+        status:
+          type: string
+          enum:
+            - enabled
+            - disabled
+            - warning
+        provider:
+          type: string
+    UDPRouter:
+      type: object
+      description: A UDP router that routes incoming UDP datagrams to services.
+      properties:
+        name:
+          type: string
+          description: The name of the UDP router in name@provider format.
+        entryPoints:
+          type: array
+          items:
+            type: string
+        service:
+          type: string
+          description: The UDP service this router routes traffic to.
+        status:
+          type: string
+          enum:
+            - enabled
+            - disabled
+            - warning
+        provider:
+          type: string
+    UDPService:
+      type: object
+      description: A UDP service representing one or more backend UDP servers.
+      properties:
+        name:
+          type: string
+          description: The name of the UDP service in name@provider format.
+        type:
+          type: string
+        status:
+          type: string
+          enum:
+            - enabled
+            - disabled
+            - warning
+        provider:
+          type: string
+        loadBalancer:
+          type: object
+          properties:
+            servers:
+              type: array
+              items:
+                type: object
+                properties:
+                  address:
+                    type: string
+                    description: The address of the backend UDP server (host:port).

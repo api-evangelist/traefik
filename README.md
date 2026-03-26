@@ -5,9 +5,9 @@ Traefik is a modern open-source HTTP reverse proxy and load balancer that makes 
 
 ## Scope
 
-- **Type:** Index 
-- **Position:** Consuming 
-- **Access:** 3rd-Party 
+- **Type:** Contract
+- **Position:** Consuming
+- **Access:** 3rd-Party
 
 ## Tags:
 
@@ -15,8 +15,8 @@ Traefik is a modern open-source HTTP reverse proxy and load balancer that makes 
 
 ## Timestamps
 
-- **Created:** 2026-03-18 
-- **Modified:** 2026-03-18 
+- **Created:** 2026-03-18
+- **Modified:** 2026-03-26
 
 ## APIs
 
@@ -52,6 +52,7 @@ The Traefik REST API exposes runtime configuration and state for all routers, se
 
 - [Documentation](https://doc.traefik.io/traefik/operations/api/)
 - [Reference](https://doc.traefik.io/traefik/operations/api/#endpoints)
+- [OpenAPI](openapi/traefik-api-openapi.yml)
 
 ### Traefik Ping API
 The Traefik Ping API provides a simple health check endpoint at `/ping` that returns HTTP 200 with the body "OK" when the Traefik process is alive and ready. It is used for liveness probes in container orchestration environments and can be configured on a dedicated entry point.
@@ -91,11 +92,14 @@ The Traefik Dashboard is a built-in web UI that provides a real-time visual over
 - [GitHub Organization](https://github.com/traefik)
 - [GitHubRepository](https://github.com/traefik/traefik)
 - [Issue Tracker](https://github.com/traefik/traefik/issues)
+- [JSON-LD](json-ld/traefik-context.jsonld)
+- [JSONSchema](json-schema/traefik-router-schema.json)
+- [JSONSchema](json-schema/traefik-service-schema.json)
 - [Community](https://community.traefik.io/)
 - [Stack Overflow](https://stackoverflow.com/questions/tagged/traefik)
 
 ## Maintainers
 
-**FN:** Kin Lane
+**FN:** API Evangelist
 
-**Email:** kin@apievangelist.com
+**Email:** info@apievangelist.com

@@ -15,7 +15,7 @@ tags:
 url: >-
   https://raw.githubusercontent.com/api-evangelist/traefik/refs/heads/main/apis.yml
 created: '2026-03-18'
-modified: '2026-03-18'
+modified: '2026-03-26'
 specificationVersion: '0.19'
 apis:
   - aid: traefik:traefik
@@ -60,6 +60,8 @@ apis:
         url: https://doc.traefik.io/traefik/operations/api/
       - type: Reference
         url: https://doc.traefik.io/traefik/operations/api/#endpoints
+      - type: OpenAPI
+        url: openapi/traefik-api-openapi.yml
   - aid: traefik:traefik-ping
     name: Traefik Ping API
     description: >-
@@ -109,6 +111,12 @@ common:
     url: https://github.com/traefik/traefik
   - type: Issue Tracker
     url: https://github.com/traefik/traefik/issues
+  - type: JSON-LD
+    url: json-ld/traefik-context.jsonld
+  - type: JSONSchema
+    url: json-schema/traefik-router-schema.json
+  - type: JSONSchema
+    url: json-schema/traefik-service-schema.json
   - type: Community
     url: https://community.traefik.io/
   - type: Stack Overflow

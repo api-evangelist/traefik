@@ -1,0 +1,128 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "traefik": "https://traefik.io/ns/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+
+    "Router": {
+      "@id": "traefik:Router",
+      "@context": {
+        "name": "schema:name",
+        "entryPoints": {
+          "@id": "traefik:entryPoints",
+          "@container": "@set"
+        },
+        "rule": "traefik:rule",
+        "ruleSyntax": "traefik:ruleSyntax",
+        "priority": "traefik:priority",
+        "service": "traefik:service",
+        "middlewares": {
+          "@id": "traefik:middlewares",
+          "@container": "@list"
+        },
+        "status": "traefik:status",
+        "provider": "traefik:provider",
+        "tls": "traefik:tls"
+      }
+    },
+
+    "Service": {
+      "@id": "traefik:Service",
+      "@context": {
+        "name": "schema:name",
+        "type": "traefik:serviceType",
+        "status": "traefik:status",
+        "provider": "traefik:provider",
+        "loadBalancer": "traefik:loadBalancer",
+        "serverStatus": "traefik:serverStatus"
+      }
+    },
+
+    "Middleware": {
+      "@id": "traefik:Middleware",
+      "@context": {
+        "name": "schema:name",
+        "type": "traefik:middlewareType",
+        "status": "traefik:status",
+        "provider": "traefik:provider",
+        "usedBy": {
+          "@id": "traefik:usedBy",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "EntryPoint": {
+      "@id": "traefik:EntryPoint",
+      "@context": {
+        "name": "schema:name",
+        "address": "traefik:address",
+        "transport": "traefik:transport"
+      }
+    },
+
+    "LoadBalancer": {
+      "@id": "traefik:LoadBalancer",
+      "@context": {
+        "servers": {
+          "@id": "traefik:servers",
+          "@container": "@set"
+        },
+        "passHostHeader": "traefik:passHostHeader",
+        "healthCheck": "traefik:healthCheck"
+      }
+    },
+
+    "Server": {
+      "@id": "traefik:Server",
+      "@context": {
+        "url": {
+          "@id": "schema:url",
+          "@type": "@id"
+        },
+        "address": "traefik:address"
+      }
+    },
+
+    "TLSConfig": {
+      "@id": "traefik:TLSConfig",
+      "@context": {
+        "passthrough": "traefik:passthrough",
+        "options": "traefik:tlsOptions",
+        "certResolver": "traefik:certResolver",
+        "domains": {
+          "@id": "traefik:domains",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "Version": {
+      "@id": "traefik:Version",
+      "@context": {
+        "version": "schema:softwareVersion",
+        "codename": "traefik:codename",
+        "startDate": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "Overview": {
+      "@id": "traefik:Overview",
+      "@context": {
+        "http": "traefik:httpOverview",
+        "tcp": "traefik:tcpOverview",
+        "udp": "traefik:udpOverview",
+        "features": "traefik:features",
+        "providers": {
+          "@id": "traefik:providers",
+          "@container": "@set"
+        }
+      }
+    }
+  }
+}

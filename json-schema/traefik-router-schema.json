@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://traefik.io/schemas/traefik/router.json",
+  "title": "Traefik Router",
+  "description": "Represents an HTTP, TCP, or UDP router in a running Traefik instance, including its routing rule, entry points, service assignment, and middleware chain.",
+  "type": "object",
+  "required": ["name"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the router in name@provider format.",
+      "minLength": 1
+    },
+    "entryPoints": {
+      "type": "array",
+      "description": "Entry points this router is bound to.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "rule": {
+      "type": "string",
+      "description": "The routing rule expression used to match incoming requests (e.g., Host, Path, Headers matchers for HTTP; HostSNI for TCP)."
+    },
+    "ruleSyntax": {
+      "type": "string",
+      "description": "The syntax version of the rule expression."
+    },
+    "priority": {
+      "type": "integer",
+      "description": "The priority of the router when multiple routers match the same request. Higher values take precedence.",
+      "minimum": 0
+    },
+    "service": {
+      "type": "string",
+      "description": "The name of the service this router routes traffic to."
+    },
+    "middlewares": {
+      "type": "array",
+      "description": "Ordered list of middleware names applied to requests handled by this router.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "status": {
+      "type": "string",
+      "description": "The current operational status of the router.",
+      "enum": ["enabled", "disabled", "warning"]
+    },
+    "provider": {
+      "type": "string",
+      "description": "The configuration provider that created this router (e.g., docker, kubernetes, file)."
+    },
+    "protocol": {
+      "type": "string",
+      "description": "The protocol this router handles.",
+      "enum": ["http", "tcp", "udp"]
+    },
+    "tls": {
+      "$ref": "#/$defs/TLSConfig",
+      "description": "TLS configuration for this router, if TLS termination is enabled."
+    },
+    "using": {
+      "type": "array",
+      "description": "Entry points currently being used by this router.",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "$defs": {
+    "TLSConfig": {
+      "type": "object",
+      "description": "TLS configuration for a router, including certificate resolver and domain settings.",
+      "properties": {
+        "passthrough": {
+          "type": "boolean",
+          "description": "Whether TLS connections are passed through to the backend without termination (TCP only)."
+        },
+        "options": {
+          "type": "string",
+          "description": "Name of the TLS options configuration to use."
+        },
+        "certResolver": {
+          "type": "string",
+          "description": "Name of the certificate resolver to use for automatic TLS certificate provisioning."
+        },
+        "domains": {
+          "type": "array",
+          "description": "Domain configurations for certificate generation.",
+          "items": {
+            "$ref": "#/$defs/Domain"
+          }
+        }
+      }
+    },
+    "Domain": {
+      "type": "object",
+      "description": "Domain configuration for TLS certificate generation.",
+      "properties": {
+        "main": {
+          "type": "string",
+          "description": "The main domain name for the certificate."
+        },
+        "sans": {
+          "type": "array",
+          "description": "Subject Alternative Names for the certificate.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
