@@ -22,24 +22,24 @@ servers:
   - url: http://localhost:8080/api
     description: Default Traefik API endpoint (traefik entrypoint on port 8080)
 tags:
-  - name: Overview
-    description: >-
-      Overview and version information for the running Traefik instance.
-  - name: HTTP
-    description: >-
-      Endpoints for inspecting HTTP routers, services, and middlewares.
-  - name: TCP
-    description: >-
-      Endpoints for inspecting TCP routers, services, and middlewares.
-  - name: UDP
-    description: >-
-      Endpoints for inspecting UDP routers and services.
   - name: Entrypoints
     description: >-
       Endpoints for listing configured entry points.
   - name: Health
     description: >-
       Health check and ping endpoints for liveness probes.
+  - name: HTTP
+    description: >-
+      Endpoints for inspecting HTTP routers, services, and middlewares.
+  - name: Overview
+    description: >-
+      Overview and version information for the running Traefik instance.
+  - name: TCP
+    description: >-
+      Endpoints for inspecting TCP routers, services, and middlewares.
+  - name: UDP
+    description: >-
+      Endpoints for inspecting UDP routers and services.
 paths:
   /version:
     get:

@@ -8,10 +8,10 @@ type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
   - API Gateway
-  - Reverse Proxy
-  - Load Balancer
   - Kubernetes
+  - Load Balancer
   - Open Source
+  - Reverse Proxy
 url: >-
   https://raw.githubusercontent.com/api-evangelist/traefik/refs/heads/main/apis.yml
 created: '2026-03-18'
@@ -27,8 +27,8 @@ apis:
     humanURL: https://traefik.io/traefik/
     tags:
       - API Gateway
-      - Reverse Proxy
       - Kubernetes
+      - Reverse Proxy
     properties:
       - type: Documentation
         url: https://doc.traefik.io/traefik/
@@ -51,10 +51,10 @@ apis:
       before use in production.
     humanURL: https://doc.traefik.io/traefik/operations/api/
     tags:
-      - REST
-      - Management
       - Configuration
+      - Management
       - Observability
+      - REST
     properties:
       - type: Documentation
         url: https://doc.traefik.io/traefik/operations/api/
@@ -88,8 +88,8 @@ apis:
     humanURL: https://doc.traefik.io/traefik/operations/dashboard/
     tags:
       - Dashboard
-      - Observability
       - Management
+      - Observability
       - UI
     properties:
       - type: Documentation
