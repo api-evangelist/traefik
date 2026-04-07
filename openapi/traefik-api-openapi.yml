@@ -60,7 +60,7 @@ paths:
   /overview:
     get:
       operationId: getOverview
-      summary: Get overview statistics
+      summary: Traefik Get overview statistics
       description: >-
         Returns an overview of the current Traefik configuration including
         counts of HTTP, TCP, and UDP routers, services, and middlewares, as well
@@ -77,7 +77,7 @@ paths:
   /rawdata:
     get:
       operationId: getRawData
-      summary: Get raw configuration data
+      summary: Traefik Get raw configuration data
       description: >-
         Returns the complete raw dynamic configuration data for all routers,
         services, middlewares, and transports currently loaded from all
@@ -95,7 +95,7 @@ paths:
   /entrypoints:
     get:
       operationId: listEntryPoints
-      summary: List all entry points
+      summary: Traefik List all entry points
       description: >-
         Returns a list of all configured entry points for the Traefik instance,
         including their names, addresses, and transport configuration.
@@ -113,7 +113,7 @@ paths:
   /entrypoints/{name}:
     get:
       operationId: getEntryPoint
-      summary: Get a specific entry point
+      summary: Traefik Get a specific entry point
       description: >-
         Returns the configuration of a specific entry point by name.
       tags:
@@ -137,7 +137,7 @@ paths:
   /http/routers:
     get:
       operationId: listHTTPRouters
-      summary: List all HTTP routers
+      summary: Traefik List all HTTP routers
       description: >-
         Returns a list of all HTTP routers configured in the running Traefik
         instance, including their rules, entry points, middlewares, and service
@@ -161,7 +161,7 @@ paths:
   /http/routers/{name}:
     get:
       operationId: getHTTPRouter
-      summary: Get a specific HTTP router
+      summary: Traefik Get a specific HTTP router
       description: >-
         Returns the configuration of a specific HTTP router by its name,
         including the rule, priority, entry points, service, and middlewares.
@@ -187,7 +187,7 @@ paths:
   /http/services:
     get:
       operationId: listHTTPServices
-      summary: List all HTTP services
+      summary: Traefik List all HTTP services
       description: >-
         Returns a list of all HTTP services configured in the running Traefik
         instance, including their load balancer configuration and server details.
@@ -210,7 +210,7 @@ paths:
   /http/services/{name}:
     get:
       operationId: getHTTPService
-      summary: Get a specific HTTP service
+      summary: Traefik Get a specific HTTP service
       description: >-
         Returns the configuration of a specific HTTP service by its name,
         including the load balancer servers and health check status.
@@ -236,7 +236,7 @@ paths:
   /http/middlewares:
     get:
       operationId: listHTTPMiddlewares
-      summary: List all HTTP middlewares
+      summary: Traefik List all HTTP middlewares
       description: >-
         Returns a list of all HTTP middlewares configured in the running Traefik
         instance, including their type and configuration details.
@@ -259,7 +259,7 @@ paths:
   /http/middlewares/{name}:
     get:
       operationId: getHTTPMiddleware
-      summary: Get a specific HTTP middleware
+      summary: Traefik Get a specific HTTP middleware
       description: >-
         Returns the configuration of a specific HTTP middleware by its name.
       tags:
@@ -284,7 +284,7 @@ paths:
   /tcp/routers:
     get:
       operationId: listTCPRouters
-      summary: List all TCP routers
+      summary: Traefik List all TCP routers
       description: >-
         Returns a list of all TCP routers configured in the running Traefik
         instance.
@@ -307,7 +307,7 @@ paths:
   /tcp/routers/{name}:
     get:
       operationId: getTCPRouter
-      summary: Get a specific TCP router
+      summary: Traefik Get a specific TCP router
       description: >-
         Returns the configuration of a specific TCP router by its name.
       tags:
@@ -332,7 +332,7 @@ paths:
   /tcp/services:
     get:
       operationId: listTCPServices
-      summary: List all TCP services
+      summary: Traefik List all TCP services
       description: >-
         Returns a list of all TCP services configured in the running Traefik
         instance.
@@ -355,7 +355,7 @@ paths:
   /tcp/services/{name}:
     get:
       operationId: getTCPService
-      summary: Get a specific TCP service
+      summary: Traefik Get a specific TCP service
       description: >-
         Returns the configuration of a specific TCP service by its name.
       tags:
@@ -380,7 +380,7 @@ paths:
   /tcp/middlewares:
     get:
       operationId: listTCPMiddlewares
-      summary: List all TCP middlewares
+      summary: Traefik List all TCP middlewares
       description: >-
         Returns a list of all TCP middlewares configured in the running Traefik
         instance.
@@ -403,7 +403,7 @@ paths:
   /tcp/middlewares/{name}:
     get:
       operationId: getTCPMiddleware
-      summary: Get a specific TCP middleware
+      summary: Traefik Get a specific TCP middleware
       description: >-
         Returns the configuration of a specific TCP middleware by its name.
       tags:
@@ -428,7 +428,7 @@ paths:
   /udp/routers:
     get:
       operationId: listUDPRouters
-      summary: List all UDP routers
+      summary: Traefik List all UDP routers
       description: >-
         Returns a list of all UDP routers configured in the running Traefik
         instance.
@@ -451,7 +451,7 @@ paths:
   /udp/routers/{name}:
     get:
       operationId: getUDPRouter
-      summary: Get a specific UDP router
+      summary: Traefik Get a specific UDP router
       description: >-
         Returns the configuration of a specific UDP router by its name.
       tags:
@@ -476,7 +476,7 @@ paths:
   /udp/services:
     get:
       operationId: listUDPServices
-      summary: List all UDP services
+      summary: Traefik List all UDP services
       description: >-
         Returns a list of all UDP services configured in the running Traefik
         instance.
@@ -499,7 +499,7 @@ paths:
   /udp/services/{name}:
     get:
       operationId: getUDPService
-      summary: Get a specific UDP service
+      summary: Traefik Get a specific UDP service
       description: >-
         Returns the configuration of a specific UDP service by its name.
       tags:
@@ -524,7 +524,7 @@ paths:
   /ping:
     get:
       operationId: ping
-      summary: Health check ping
+      summary: Traefik Health check ping
       description: >-
         Returns HTTP 200 with body "OK" when the Traefik process is alive and
         ready. Used for liveness probes in container orchestration. Note that
