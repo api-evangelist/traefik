@@ -1,0 +1,27 @@
+[
+  {
+    "entryPoints": ["web", "websecure"],
+    "middlewares": ["redirect-to-https@docker"],
+    "service": "my-app@docker",
+    "rule": "Host(`example.com`)",
+    "tls": {
+      "certResolver": "letsencrypt"
+    },
+    "status": "enabled",
+    "using": ["web", "websecure"],
+    "name": "my-app-router@docker",
+    "provider": "docker",
+    "priority": 1
+  },
+  {
+    "entryPoints": ["websecure"],
+    "service": "api@internal",
+    "rule": "Host(`traefik.example.com`) && PathPrefix(`/dashboard`)",
+    "tls": {},
+    "status": "enabled",
+    "using": ["websecure"],
+    "name": "traefik-dashboard@internal",
+    "provider": "internal",
+    "priority": 0
+  }
+]

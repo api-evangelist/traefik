@@ -15,7 +15,7 @@ tags:
 url: >-
   https://raw.githubusercontent.com/api-evangelist/traefik/refs/heads/main/apis.yml
 created: '2026-03-18'
-modified: '2026-03-26'
+modified: '2026-05-03'
 specificationVersion: '0.19'
 apis:
   - aid: traefik:traefik
@@ -121,6 +121,12 @@ common:
     url: https://community.traefik.io/
   - type: Stack Overflow
     url: https://stackoverflow.com/questions/tagged/traefik
+  - type: Spectral
+    url: rules/traefik-api-rules.yml
+  - type: Vocabulary
+    url: vocabulary/traefik-vocabulary.yml
+  - type: JSONStructure
+    url: json-structure/traefik-router-structure.json
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

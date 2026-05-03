@@ -1,0 +1,65 @@
+rules:
+  info-title-required:
+    severity: error
+    given: $.info
+    then: {field: title, function: truthy}
+  info-title-format:
+    severity: warn
+    given: $.info.title
+    then: {function: pattern, functionOptions: {match: "^Traefik "}}
+  info-description-required:
+    severity: error
+    given: $.info
+    then: {field: description, function: truthy}
+  info-version-required:
+    severity: error
+    given: $.info
+    then: {field: version, function: truthy}
+  servers-defined:
+    severity: error
+    given: $
+    then: {field: servers, function: truthy}
+  paths-no-trailing-slash:
+    severity: error
+    given: $.paths
+    then: {field: "@key", function: pattern, functionOptions: {notMatch: "\\/$"}}
+  operation-operationId-required:
+    severity: error
+    given: $.paths[*][*]
+    then: {field: operationId, function: truthy}
+  operation-summary-required:
+    severity: error
+    given: $.paths[*][*]
+    then: {field: summary, function: truthy}
+  operation-summary-title-case:
+    severity: warn
+    given: $.paths[*][*].summary
+    then: {function: pattern, functionOptions: {match: "^[A-Z][a-z]"}}
+  operation-description-required:
+    severity: warn
+    given: $.paths[*][*]
+    then: {field: description, function: truthy}
+  operation-tags-required:
+    severity: warn
+    given: $.paths[*][*]
+    then: {field: tags, function: truthy}
+  response-200-defined:
+    severity: error
+    given: $.paths[*][get]
+    then: {field: responses, function: truthy}
+  path-name-pattern:
+    severity: warn
+    given: $.paths
+    then: {field: "@key", function: pattern, functionOptions: {match: "^\\/[a-z\\/{]"}}
+  parameter-description-required:
+    severity: warn
+    given: $.paths[*][*].parameters[*]
+    then: {field: description, function: truthy}
+  schema-description-required:
+    severity: warn
+    given: $.components.schemas[*]
+    then: {field: description, function: truthy}
+  get-responses-json:
+    severity: warn
+    given: $.paths[*].get.responses[200].content
+    then: {field: "application/json", function: truthy}

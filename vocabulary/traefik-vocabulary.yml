@@ -1,0 +1,88 @@
+vocabulary: 1.0.0
+info:
+  provider: Traefik
+  description: Vocabulary for Traefik reverse proxy and API gateway covering routing, services, middlewares, entry points, and provider-based configuration.
+  created: '2026-05-03'
+  modified: '2026-05-03'
+operational:
+  apis:
+    - name: Traefik REST API
+      namespace: traefik-api
+      status: active
+  resources:
+    - name: routers
+      description: HTTP, TCP, or UDP routing rules that match incoming requests and forward them to services.
+    - name: services
+      description: Backend service definitions with load balancing, health checks, and server configuration.
+    - name: middlewares
+      description: Request/response transformation plugins applied in a chain before routing to services.
+    - name: entry-points
+      description: Network listener definitions specifying ports and protocols that Traefik accepts traffic on.
+    - name: version
+      description: Running Traefik instance version and metadata.
+    - name: overview
+      description: Aggregated statistics about all routing configuration components.
+  operations:
+    - name: getVersion
+      description: Get current Traefik version and codename.
+    - name: getOverview
+      description: Get aggregated routing configuration statistics.
+    - name: listHTTPRouters
+      description: List all HTTP routing rules.
+    - name: getHTTPRouter
+      description: Get a specific HTTP router by name.
+    - name: listHTTPServices
+      description: List all HTTP backend services.
+    - name: listHTTPMiddlewares
+      description: List all HTTP middlewares.
+    - name: listEntryPoints
+      description: List all configured entry points.
+    - name: listTCPRouters
+      description: List all TCP routing rules.
+    - name: listTCPServices
+      description: List all TCP backend services.
+    - name: listUDPRouters
+      description: List all UDP routing rules.
+    - name: ping
+      description: Health check liveness probe.
+domain:
+  terms:
+    - term: Router
+      definition: A rule that matches incoming requests based on host, path, headers, or other criteria and forwards them to a service.
+    - term: Service
+      definition: A backend destination for routed traffic, configured with load balancing across one or more servers.
+    - term: Middleware
+      definition: A processing plugin applied to requests before they reach a service, enabling auth, rate limiting, redirects, and transformations.
+    - term: Entry Point
+      definition: A network listener on a specific port and protocol (HTTP, HTTPS, TCP, UDP) that receives incoming connections.
+    - term: Provider
+      definition: A configuration source for Traefik (Docker, Kubernetes, file, etc.) that dynamically supplies routing rules.
+    - term: Rule
+      definition: A logical expression (Host, PathPrefix, Headers, etc.) that determines which requests a router handles.
+    - term: Load Balancer
+      definition: Traefik service configuration that distributes requests across multiple backend servers.
+    - term: TLS
+      definition: Transport Layer Security configuration for HTTPS entry points and routers.
+    - term: Certificate Resolver
+      definition: Traefik component that automatically provisions TLS certificates via ACME/Let's Encrypt.
+    - term: Dynamic Configuration
+      definition: Routing rules and service definitions loaded at runtime from providers without requiring restart.
+    - term: Static Configuration
+      definition: Core Traefik startup configuration defining entry points, providers, and global settings.
+    - term: Dashboard
+      definition: Traefik's built-in web UI for visualizing routing configuration and service status.
+    - term: Ping
+      definition: Liveness health check endpoint at /ping that returns 200 OK when Traefik is running.
+    - term: Codename
+      definition: Human-friendly release name for a Traefik version.
+  tags:
+    - API Gateway
+    - Configuration
+    - Kubernetes
+    - Load Balancer
+    - Microservices
+    - Observability
+    - Open Source
+    - Reverse Proxy
+    - TLS
+    - Traffic Management

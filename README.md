@@ -1,105 +1,100 @@
-# Traefik (traefik)
+# Traefik
+
 Traefik is a modern open-source HTTP reverse proxy and load balancer that makes deploying microservices and API gateways easy with automatic service discovery, Let's Encrypt integration, and a rich middleware ecosystem.
 
-**URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/traefik/refs/heads/main/apis.yml)
-
-## Scope
-
-- **Type:** Contract
-- **Position:** Consuming
-- **Access:** 3rd-Party
-
-## Tags:
-
- - API Gateway, Reverse Proxy, Load Balancer, Kubernetes, Open Source
-
-## Timestamps
-
-- **Created:** 2026-03-18
-- **Modified:** 2026-03-26
+**Website:** https://traefik.io/  
+**Documentation:** https://doc.traefik.io/traefik/  
+**GitHub:** https://github.com/traefik/traefik  
+**Community:** https://community.traefik.io/
 
 ## APIs
 
 ### Traefik Proxy
-Traefik is a leading modern reverse proxy and load balancer that makes deploying microservices easy with native support for Kubernetes, Docker, and automatic TLS certificate provisioning.
 
-**Human URL:** [https://traefik.io/traefik/](https://traefik.io/traefik/)
+The core Traefik reverse proxy and load balancer with native Kubernetes, Docker, and cloud provider integration.
 
-
-#### Tags:
-
- - API Gateway, Reverse Proxy, Kubernetes
-
-#### Properties
-
-- [Documentation](https://doc.traefik.io/traefik/)
-- [Getting Started](https://doc.traefik.io/traefik/getting-started/quick-start/)
-- [Reference](https://doc.traefik.io/traefik/reference/static-configuration/cli/)
-- [Change Log](https://github.com/traefik/traefik/blob/master/CHANGELOG.md)
-- [GitHubRepository](https://github.com/traefik/traefik)
+- **Documentation:** https://doc.traefik.io/traefik/
+- **Getting Started:** https://doc.traefik.io/traefik/getting-started/quick-start/
 
 ### Traefik REST API
-The Traefik REST API exposes runtime configuration and state for all routers, services, middlewares, and entry points in a running Traefik instance. It provides read-only HTTP endpoints for inspecting HTTP, TCP, and UDP routing configuration, as well as version and overview statistics. The API must be enabled in static configuration and should be secured before use in production.
 
-**Human URL:** [https://doc.traefik.io/traefik/operations/api/](https://doc.traefik.io/traefik/operations/api/)
+The Traefik REST API exposes runtime configuration and state for all routers, services, middlewares, and entry points in a running Traefik instance.
 
-
-#### Tags:
-
- - REST, Management, Configuration, Observability
-
-#### Properties
-
-- [Documentation](https://doc.traefik.io/traefik/operations/api/)
-- [Reference](https://doc.traefik.io/traefik/operations/api/#endpoints)
-- [OpenAPI](openapi/traefik-api-openapi.yml)
+- **Documentation:** https://doc.traefik.io/traefik/operations/api/
+- **OpenAPI:** [openapi/traefik-api-openapi.yml](openapi/traefik-api-openapi.yml)
 
 ### Traefik Ping API
-The Traefik Ping API provides a simple health check endpoint at `/ping` that returns HTTP 200 with the body "OK" when the Traefik process is alive and ready. It is used for liveness probes in container orchestration environments and can be configured on a dedicated entry point.
 
-**Human URL:** [https://doc.traefik.io/traefik/operations/ping/](https://doc.traefik.io/traefik/operations/ping/)
+A simple health check endpoint at `/ping` returning HTTP 200 when Traefik is alive.
 
-
-#### Tags:
-
- - Health Check, Liveness, Monitoring, Operations
-
-#### Properties
-
-- [Documentation](https://doc.traefik.io/traefik/operations/ping/)
+- **Documentation:** https://doc.traefik.io/traefik/operations/ping/
 
 ### Traefik Dashboard
-The Traefik Dashboard is a built-in web UI that provides a real-time visual overview of all configured routers, services, middlewares, and entry points. It is served from the same API handler as the REST API and can be accessed via the Traefik entry point or a custom route.
 
-**Human URL:** [https://doc.traefik.io/traefik/operations/dashboard/](https://doc.traefik.io/traefik/operations/dashboard/)
+Built-in web UI for visualizing routers, services, and middleware configuration in real time.
 
+- **Documentation:** https://doc.traefik.io/traefik/operations/dashboard/
 
-#### Tags:
+## Artifacts
 
- - Dashboard, Observability, Management, UI
+### OpenAPI Specs
 
-#### Properties
+| Spec | Description |
+|------|-------------|
+| [traefik-api-openapi.yml](openapi/traefik-api-openapi.yml) | Traefik REST API — routers, services, middlewares, entry points, health |
 
-- [Documentation](https://doc.traefik.io/traefik/operations/dashboard/)
+### Spectral Rules
 
-## Common Properties
+| File | Description |
+|------|-------------|
+| [traefik-api-rules.yml](rules/traefik-api-rules.yml) | Spectral ruleset enforcing Traefik API conventions |
 
-- [Website](https://traefik.io/)
-- [Documentation](https://doc.traefik.io/traefik/)
-- [Getting Started](https://doc.traefik.io/traefik/getting-started/quick-start/)
-- [Blog](https://traefik.io/blog/)
-- [Change Log](https://github.com/traefik/traefik/blob/master/CHANGELOG.md)
-- [GitHub Organization](https://github.com/traefik)
-- [GitHubRepository](https://github.com/traefik/traefik)
-- [Issue Tracker](https://github.com/traefik/traefik/issues)
-- [JSON-LD](json-ld/traefik-context.jsonld)
-- [JSONSchema](json-schema/traefik-router-schema.json)
-- [JSONSchema](json-schema/traefik-service-schema.json)
-- [Community](https://community.traefik.io/)
-- [Stack Overflow](https://stackoverflow.com/questions/tagged/traefik)
+### Naftiko Capabilities
+
+#### Shared Definitions
+
+| File | Description |
+|------|-------------|
+| [shared/traefik-api.yaml](capabilities/shared/traefik-api.yaml) | Per-API consumed definition for the Traefik REST API |
+
+#### Workflow Capabilities
+
+| File | Description |
+|------|-------------|
+| [proxy-operations.yaml](capabilities/proxy-operations.yaml) | Proxy operations — routing inspection, health monitoring, configuration (10 tools) |
+
+### JSON Schemas
+
+| File | Description |
+|------|-------------|
+| [traefik-router-schema.json](json-schema/traefik-router-schema.json) | Schema for HTTP router configuration |
+| [traefik-service-schema.json](json-schema/traefik-service-schema.json) | Schema for HTTP service configuration |
+
+### JSON Structure
+
+| File | Description |
+|------|-------------|
+| [traefik-router-structure.json](json-structure/traefik-router-structure.json) | Structure documentation for HTTP Router objects |
+
+### JSON-LD
+
+| File | Description |
+|------|-------------|
+| [traefik-context.jsonld](json-ld/traefik-context.jsonld) | JSON-LD context for Traefik linked data semantics |
+
+### Examples
+
+| File | Description |
+|------|-------------|
+| [traefik-get-version-example.json](examples/traefik-get-version-example.json) | Example response for GET /version |
+| [traefik-list-http-routers-example.json](examples/traefik-list-http-routers-example.json) | Example response for GET /http/routers |
+
+### Vocabulary
+
+| File | Description |
+|------|-------------|
+| [traefik-vocabulary.yml](vocabulary/traefik-vocabulary.yml) | Domain vocabulary for Traefik routing concepts |
 
 ## Maintainers
 
-**FN:** API Evangelist
-
-**Email:** info@apievangelist.com
+- **Kin Lane** (kin@apievangelist.com)

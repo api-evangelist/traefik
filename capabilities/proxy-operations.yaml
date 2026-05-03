@@ -1,0 +1,257 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Traefik Proxy Operations"
+  description: "Unified workflow capability for operating and observing Traefik reverse proxy and API gateway instances. Combines configuration inspection, routing management, health monitoring, and traffic observability for platform engineers, DevOps teams, and site reliability engineers."
+  tags:
+    - API Gateway
+    - Configuration
+    - Kubernetes
+    - Load Balancer
+    - Observability
+    - Reverse Proxy
+    - Traefik
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      TRAEFIK_API_URL: TRAEFIK_API_URL
+
+capability:
+  consumes:
+    - import: traefik-api
+      location: ./shared/traefik-api.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: traefik-proxy-operations-api
+      description: "Unified REST API for Traefik proxy configuration inspection and health monitoring."
+      resources:
+        - path: /v1/version
+          name: version
+          description: "Traefik version information."
+          operations:
+            - method: GET
+              name: get-version
+              description: "Get the current Traefik version and codename."
+              call: "traefik-api.get-version"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/overview
+          name: overview
+          description: "Traefik routing configuration overview."
+          operations:
+            - method: GET
+              name: get-overview
+              description: "Get overview statistics for all routing configuration."
+              call: "traefik-api.get-overview"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/entry-points
+          name: entry-points
+          description: "Network entry points."
+          operations:
+            - method: GET
+              name: list-entry-points
+              description: "List all configured entry points."
+              call: "traefik-api.list-entry-points"
+              outputParameters:
+                - type: array
+                  mapping: "$."
+
+        - path: /v1/http/routers
+          name: http-routers
+          description: "HTTP router rules and configuration."
+          operations:
+            - method: GET
+              name: list-http-routers
+              description: "List all HTTP routers."
+              call: "traefik-api.list-http-routers"
+              outputParameters:
+                - type: array
+                  mapping: "$."
+
+        - path: /v1/http/services
+          name: http-services
+          description: "HTTP backend services."
+          operations:
+            - method: GET
+              name: list-http-services
+              description: "List all HTTP backend services."
+              call: "traefik-api.list-http-services"
+              outputParameters:
+                - type: array
+                  mapping: "$."
+
+        - path: /v1/http/middlewares
+          name: http-middlewares
+          description: "HTTP middleware chain configurations."
+          operations:
+            - method: GET
+              name: list-http-middlewares
+              description: "List all HTTP middlewares."
+              call: "traefik-api.list-http-middlewares"
+              outputParameters:
+                - type: array
+                  mapping: "$."
+
+        - path: /v1/tcp/routers
+          name: tcp-routers
+          description: "TCP routing configuration."
+          operations:
+            - method: GET
+              name: list-tcp-routers
+              description: "List all TCP routers."
+              call: "traefik-api.list-tcp-routers"
+              outputParameters:
+                - type: array
+                  mapping: "$."
+
+        - path: /v1/tcp/services
+          name: tcp-services
+          description: "TCP backend services."
+          operations:
+            - method: GET
+              name: list-tcp-services
+              description: "List all TCP services."
+              call: "traefik-api.list-tcp-services"
+              outputParameters:
+                - type: array
+                  mapping: "$."
+
+        - path: /v1/udp/routers
+          name: udp-routers
+          description: "UDP routing configuration."
+          operations:
+            - method: GET
+              name: list-udp-routers
+              description: "List all UDP routers."
+              call: "traefik-api.list-udp-routers"
+              outputParameters:
+                - type: array
+                  mapping: "$."
+
+        - path: /v1/health
+          name: health
+          description: "Traefik health check."
+          operations:
+            - method: GET
+              name: ping
+              description: "Liveness health check."
+              call: "traefik-api.ping"
+              outputParameters:
+                - type: string
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: traefik-proxy-operations-mcp
+      transport: http
+      description: "MCP server for AI-assisted Traefik proxy management, configuration inspection, and routing analysis."
+      tools:
+        - name: get-traefik-version
+          description: "Get the current Traefik version, codename, and start date."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "traefik-api.get-version"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-routing-overview
+          description: "Get a high-level overview of all Traefik routing configuration including router and service counts."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "traefik-api.get-overview"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-entry-points
+          description: "List all configured Traefik entry points showing which ports and protocols are exposed."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "traefik-api.list-entry-points"
+          outputParameters:
+            - type: array
+              mapping: "$."
+
+        - name: list-http-routers
+          description: "List all HTTP routers with routing rules, entry points, middleware chains, and service assignments."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "traefik-api.list-http-routers"
+          outputParameters:
+            - type: array
+              mapping: "$."
+
+        - name: list-http-services
+          description: "List all HTTP backend services showing load balancer configuration and server health."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "traefik-api.list-http-services"
+          outputParameters:
+            - type: array
+              mapping: "$."
+
+        - name: list-http-middlewares
+          description: "List all HTTP middlewares showing type, configuration, and which routers use them."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "traefik-api.list-http-middlewares"
+          outputParameters:
+            - type: array
+              mapping: "$."
+
+        - name: list-tcp-routers
+          description: "List all TCP routers for non-HTTP traffic routing."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "traefik-api.list-tcp-routers"
+          outputParameters:
+            - type: array
+              mapping: "$."
+
+        - name: list-tcp-services
+          description: "List all TCP backend services."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "traefik-api.list-tcp-services"
+          outputParameters:
+            - type: array
+              mapping: "$."
+
+        - name: list-udp-routers
+          description: "List all UDP routers for UDP traffic routing."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "traefik-api.list-udp-routers"
+          outputParameters:
+            - type: array
+              mapping: "$."
+
+        - name: check-health
+          description: "Perform a liveness health check against the Traefik instance."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "traefik-api.ping"
+          outputParameters:
+            - type: string
+              mapping: "$."

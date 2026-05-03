@@ -1,0 +1,80 @@
+{
+  "title": "Traefik HTTP Router Structure",
+  "description": "JSON structure documentation for an HTTP Router object as returned by the Traefik REST API.",
+  "type": "object",
+  "fields": [
+    {
+      "name": "name",
+      "type": "string",
+      "required": true,
+      "description": "Router name in the format name@provider.",
+      "example": "my-app-router@docker"
+    },
+    {
+      "name": "rule",
+      "type": "string",
+      "required": true,
+      "description": "Traefik routing rule expression (e.g., Host, PathPrefix, Headers).",
+      "example": "Host(`example.com`)"
+    },
+    {
+      "name": "service",
+      "type": "string",
+      "required": true,
+      "description": "Name of the backend service to route traffic to.",
+      "example": "my-app@docker"
+    },
+    {
+      "name": "entryPoints",
+      "type": "array",
+      "items": "string",
+      "required": false,
+      "description": "List of entry points this router listens on.",
+      "example": ["web", "websecure"]
+    },
+    {
+      "name": "middlewares",
+      "type": "array",
+      "items": "string",
+      "required": false,
+      "description": "Ordered list of middleware names applied to requests matching this router.",
+      "example": ["redirect-to-https@docker", "auth@docker"]
+    },
+    {
+      "name": "priority",
+      "type": "integer",
+      "required": false,
+      "description": "Router priority. Higher values take precedence when multiple rules match.",
+      "example": 10
+    },
+    {
+      "name": "tls",
+      "type": "object",
+      "required": false,
+      "description": "TLS configuration for this router.",
+      "fields": [
+        {
+          "name": "certResolver",
+          "type": "string",
+          "description": "Name of the certificate resolver to use for ACME/Let's Encrypt.",
+          "example": "letsencrypt"
+        }
+      ]
+    },
+    {
+      "name": "status",
+      "type": "string",
+      "required": false,
+      "description": "Current status of the router.",
+      "enum": ["enabled", "disabled", "warning"],
+      "example": "enabled"
+    },
+    {
+      "name": "provider",
+      "type": "string",
+      "required": false,
+      "description": "Provider that created this router.",
+      "example": "docker"
+    }
+  ]
+}
