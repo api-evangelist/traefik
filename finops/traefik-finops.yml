@@ -1,5 +1,6 @@
 specification: FinOps Framework
 specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
 alignedWith:
   framework: FinOps Foundation Framework
   frameworkUrl: https://www.finops.org/framework/
@@ -8,152 +9,74 @@ alignedWith:
   dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
 provider: Traefik
 providerId: traefik
-publisherName: Traefik
-serviceCategory: API
+publisherName: Traefik Labs
+serviceCategory: API Gateway / API Management Software
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: true
 tags:
   - API Gateway
   - Kubernetes
-  - Load Balancer
-  - Open Source
   - Reverse Proxy
+  - Open Source
   - FinOps
-  - Cost Management
   - FOCUS
-description: FinOps framework definition for the Traefik API surface. Provides a FOCUS-aligned mapping
-  for cost allocation, usage measurement, and unit-economics reporting across the provider's APIs.
-principles:
-  - name: Visibility
-    description: Make API consumption costs visible to engineering, product, and finance teams in near
-      real-time.
-  - name: Allocation
-    description: Tag every chargeable API call with the consuming team, environment, application, and
-      feature so cost can be allocated.
-  - name: Optimization
-    description: Continuously evaluate request patterns, caching, batching, and tier selection to reduce
-      cost per useful unit of work.
-  - name: Accountability
-    description: Establish budget owners and chargeback or showback flows for each consuming team.
-domains:
-  - name: Understand Usage and Cost
-    capabilities:
-      - Data Ingestion
-      - Allocation
-      - Reporting and Analytics
-      - Anomaly Management
-  - name: Quantify Business Value
-    capabilities:
-      - Planning and Estimating
-      - Forecasting
-      - Budgeting
-      - Benchmarking
-      - Unit Economics
-  - name: Optimize Usage and Cost
-    capabilities:
-      - Architecting for Cloud
-      - Rate Optimization
-      - Workload Optimization
-      - Cloud Sustainability
-      - Licensing and SaaS
-  - name: Manage the FinOps Practice
-    capabilities:
-      - FinOps Practice Operations
-      - FinOps Education and Enablement
-      - Invoicing and Chargeback
-      - Onboarding Workloads
-      - Intersecting Disciplines
+description: 'FOCUS-aligned FinOps for Traefik Labs: an open-source Application Proxy with $0 license
+  cost, plus two commercial tiers (API Gateway, API Management) where pricing is contracted via sales
+  rather than published. Costs at customers consist of (a) infrastructure to run Traefik Proxy and (b)
+  any commercial Traefik Hub subscription, neither of which Traefik bills metered per-request.'
+sources:
+  - https://traefik.io/pricing/
+  - https://traefik.io/traefik-hub/
 billingModel:
-  pricingCategory: Usage-Based
-  billingFrequency: Monthly
+  pricingCategory: Open Source + Contracted Subscription
+  billingFrequency: Annual
   billingCurrency: USD
   chargeCategories:
-    - Usage
     - Purchase
-    - Tax
-    - Credit
     - Adjustment
-  chargeFrequency: Recurring
+    - Refund
 focusColumns:
   ServiceName: Traefik
-  ServiceCategory: Developer Tools / API
+  ServiceCategory: API Gateway Software
   ProviderName: Traefik
-  PublisherName: Traefik
-  InvoiceIssuerName: Traefik
-  PricingCategory: Usage-Based
-  PricingUnit: request
+  PublisherName: Traefik Labs
+  InvoiceIssuerName: Traefik Labs
   BillingCurrency: USD
-  ChargeCategory: Usage
+  ChargeCategory: Purchase
+  PricingCategory: Subscription
+  PricingUnit: contract
 meters:
-  - name: api_requests
-    description: Count of billable API requests
-    unit: request
+  - name: traefik_hub_subscription
+    description: Annualized Traefik Hub commercial subscription (API Gateway or API Management tier).
+      Quantity and price are contract-defined.
+    unit: contract
     aggregation: sum
     dimensions:
-      - api
-      - endpoint
       - tier
-      - region
-      - consumer
-  - name: data_egress
-    description: Bytes returned over the network in API responses
-    unit: GB
+      - environment
+  - name: self_hosted_infra_cost
+    description: Infrastructure cost (compute, network, storage) of running Traefik Proxy on the customer's
+      own platform. Not billed by Traefik Labs; tracked here for total-cost-of-ownership.
+    unit: varies
     aggregation: sum
     dimensions:
-      - api
+      - cloud
       - region
-      - consumer
-  - name: compute_seconds
-    description: Server-side compute consumed by the request, where applicable
-    unit: second
-    aggregation: sum
-    dimensions:
-      - api
-      - endpoint
-      - tier
-apis:
-  - name: Traefik Proxy
-    baseURL: ''
-    tags:
-      - API Gateway
-      - Kubernetes
-      - Reverse Proxy
-    serviceName: Traefik Proxy
-    serviceCategory: API
-  - name: Traefik REST API
-    baseURL: ''
-    tags:
-      - Configuration
-      - Management
-      - Observability
-      - REST
-    serviceName: Traefik REST API
-    serviceCategory: API
-  - name: Traefik Ping API
-    baseURL: ''
-    tags:
-      - Health Check
-      - Liveness
-      - Monitoring
-      - Operations
-    serviceName: Traefik Ping API
-    serviceCategory: API
-  - name: Traefik Dashboard
-    baseURL: ''
-    tags:
-      - Dashboard
-      - Management
-      - Observability
-      - UI
-    serviceName: Traefik Dashboard
-    serviceCategory: API
-unitEconomics:
-  - name: Cost per 1K Requests
-    metric: billed_cost / (api_requests / 1000)
-    target: TBD
-  - name: Cost per Active Consumer
-    metric: billed_cost / active_consumers
-    target: TBD
+      - environment
+principles:
+  - name: Visibility
+    description: Pull subscription invoices from Traefik Labs for the Hub tier; pull infrastructure cost
+      from your cloud provider's FOCUS export to see total cost of running Traefik.
+  - name: Allocation
+    description: Tag the Kubernetes namespace, cluster, or VM running Traefik Proxy with the consuming
+      product/team so the proxy's compute/egress is allocated alongside the apps it fronts.
+  - name: Optimization
+    description: Use the open-source Application Proxy where the commercial features (WAF, OIDC, mocking)
+      are not required; right-size pod replicas and node pools so the proxy scales to actual ingress volume.
+  - name: Accountability
+    description: Designate a platform-team owner for the Traefik deployment and the Hub contract; review
+      Hub seats/environments at each renewal.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
