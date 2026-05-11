@@ -127,6 +127,62 @@ common:
     url: vocabulary/traefik-vocabulary.yml
   - type: JSONStructure
     url: json-structure/traefik-router-structure.json
+  - type: Integrations
+    url: https://traefik.io/partners
+integrations:
+  - name: Traefik Proxy →
+  - name: Kubernetes Gateway API
+  - name: Knative Serving
+  - name: Ingress NGINX Provider
+  - name: OSS Support
+  - name: Traefik Hub API Gateway →
+  - name: Web Application Firewall
+  - name: AI Gateway
+  - name: MCP Gateway
+  - name: Traefik Hub API Management →
+  - name: API Governance
+  - name: Air-Gapped APIM
+  - name: API Mocking
+  - name: Kubernetes Ingress
+  - name: Modern API Gateway
+  - name: GitOps-Driven API Management
+  - name: Runtime API Governance
+  - name: Air-Gapped API Management
+  - name: Traefik & HashiCorp
+  - name: Traefik & Microsoft
+  - name: Traefik & Nutanix
+  - name: Traefik & Oracle OCI
+  - name: D2IQ
+  - name: docker
+  - name: elastic
+  - name: instana
+  - name: HashiCorp
+  - name: Jaeger
+  - name: microsoft azure
+  - name: palo alto networks
+  - name: platform 9
+  - name: Prometheus
+  - name: rancher
+  - name: splunk
+  - name: sysdig
+  - name: aws
+  - name: digital ocean
+  - name: exoscale
+  - name: google cloud
+  - name: microsoft
+  - name: packet
+  - name: Ahead
+  - name: codecentric
+  - name: data essential
+  - name: Factor Group
+  - name: KPN
+  - name: linkbynet
+  - name: neoria
+  - name: nuaware
+  - name: smartwave
+  - name: SWNetwork
+  - name: treeptik
+  - name: zenika
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
