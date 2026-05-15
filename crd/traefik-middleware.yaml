@@ -1,0 +1,214 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: middlewares.traefik.io
+spec:
+  group: traefik.io
+  scope: Namespaced
+  names:
+    kind: Middleware
+    listKind: MiddlewareList
+    singular: middleware
+    plural: middlewares
+  versions:
+    - name: v1alpha1
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          description: >-
+            Middleware is a Traefik HTTP middleware resource that tweaks
+            requests before they are sent to the backend service, or modifies
+            responses on the way back. Exactly one middleware type must be
+            configured per resource. Available types include addPrefix,
+            basicAuth, buffering, chain, circuitBreaker, compress,
+            contentType, digestAuth, encodedCharacters, errors, forwardAuth,
+            grpcWeb, headers, inFlightReq, ipAllowList, passTLSClientCert,
+            rateLimit, redirectRegex, redirectScheme, replacePath,
+            replacePathRegex, retry, stripPrefix, stripPrefixRegex, and the
+            plugin extension point.
+          properties:
+            spec:
+              type: object
+              properties:
+                addPrefix:
+                  type: object
+                  properties:
+                    prefix:
+                      type: string
+                basicAuth:
+                  type: object
+                  properties:
+                    secret:
+                      type: string
+                    realm:
+                      type: string
+                    removeHeader:
+                      type: boolean
+                buffering:
+                  type: object
+                  properties:
+                    maxRequestBodyBytes:
+                      type: integer
+                    memRequestBodyBytes:
+                      type: integer
+                    maxResponseBodyBytes:
+                      type: integer
+                    memResponseBodyBytes:
+                      type: integer
+                    retryExpression:
+                      type: string
+                chain:
+                  type: object
+                  properties:
+                    middlewares:
+                      type: array
+                      items:
+                        type: object
+                circuitBreaker:
+                  type: object
+                  properties:
+                    expression:
+                      type: string
+                    checkPeriod:
+                      type: string
+                    fallbackDuration:
+                      type: string
+                    recoveryDuration:
+                      type: string
+                compress:
+                  type: object
+                  properties:
+                    excludedContentTypes:
+                      type: array
+                      items:
+                        type: string
+                    minResponseBodyBytes:
+                      type: integer
+                contentType:
+                  type: object
+                  properties:
+                    autoDetect:
+                      type: boolean
+                digestAuth:
+                  type: object
+                  properties:
+                    secret:
+                      type: string
+                    realm:
+                      type: string
+                errors:
+                  type: object
+                  properties:
+                    status:
+                      type: array
+                      items:
+                        type: string
+                    service:
+                      type: object
+                    query:
+                      type: string
+                forwardAuth:
+                  type: object
+                  properties:
+                    address:
+                      type: string
+                    trustForwardHeader:
+                      type: boolean
+                    authResponseHeaders:
+                      type: array
+                      items:
+                        type: string
+                grpcWeb:
+                  type: object
+                  properties:
+                    allowOrigins:
+                      type: array
+                      items:
+                        type: string
+                headers:
+                  type: object
+                  description: >-
+                    Adds, removes, or transforms request/response headers and
+                    configures CORS, HSTS, content-security-policy, frame
+                    options, browser XSS filtering and more.
+                inFlightReq:
+                  type: object
+                  properties:
+                    amount:
+                      type: integer
+                ipAllowList:
+                  type: object
+                  properties:
+                    sourceRange:
+                      type: array
+                      items:
+                        type: string
+                passTLSClientCert:
+                  type: object
+                rateLimit:
+                  type: object
+                  properties:
+                    average:
+                      type: integer
+                    burst:
+                      type: integer
+                    period:
+                      type: string
+                redirectRegex:
+                  type: object
+                  properties:
+                    regex:
+                      type: string
+                    replacement:
+                      type: string
+                    permanent:
+                      type: boolean
+                redirectScheme:
+                  type: object
+                  properties:
+                    scheme:
+                      type: string
+                    port:
+                      type: string
+                    permanent:
+                      type: boolean
+                replacePath:
+                  type: object
+                  properties:
+                    path:
+                      type: string
+                replacePathRegex:
+                  type: object
+                  properties:
+                    regex:
+                      type: string
+                    replacement:
+                      type: string
+                retry:
+                  type: object
+                  properties:
+                    attempts:
+                      type: integer
+                    initialInterval:
+                      type: string
+                stripPrefix:
+                  type: object
+                  properties:
+                    prefixes:
+                      type: array
+                      items:
+                        type: string
+                stripPrefixRegex:
+                  type: object
+                  properties:
+                    regex:
+                      type: array
+                      items:
+                        type: string
+                plugin:
+                  type: object
+                  description: >-
+                    Reference a Traefik plugin from the plugin catalog with
+                    arbitrary key/value configuration.

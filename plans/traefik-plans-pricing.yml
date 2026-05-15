@@ -1,105 +1,139 @@
 specification: API Commons Plans
 specificationVersion: '0.1'
 schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
-provider: Traefik
+provider: Traefik Labs
 providerId: traefik
 created: '2026-05-04'
-modified: '2026-05-05'
-reconciled: true
+modified: '2026-05-15'
+reconciled: false
 tags:
   - API Gateway
-  - Kubernetes
-  - Reverse Proxy
-  - Open Source
   - API Management
-description: 'Traefik Labs offers three product tiers: an open-source Application Proxy (Traefik Proxy)
-  available free under the MIT license, a commercial API Gateway, and a commercial API Management product.
-  Pricing for the two commercial tiers is gated behind a "Get Pricing" / sales-contact flow on the public
-  pricing page; specific dollar amounts are not published. A free trial is available for Traefik Hub.'
+  - AI Gateway
+  - Kubernetes
+  - MCP Gateway
+  - Open Source
+  - Reverse Proxy
+description: >-
+  Traefik Labs ships an open-source Application Proxy (Traefik Proxy) under
+  the MIT license and three commercial tiers that share the same data plane:
+  Traefik Hub API Gateway, Traefik Hub API Management, and the AI / MCP
+  Gateway solutions sold as add-ons on top of the API Gateway. Pricing for
+  every commercial tier is gated behind a "Get Pricing" sales-contact form;
+  no dollar amounts are published on traefik.io/pricing. A 30-day free trial
+  is available for the API Gateway tier. `reconciled` is false because the
+  commercial prices were not visible at the time of fetch.
 sources:
   - https://traefik.io/pricing/
+  - https://traefik.io/traefik-hub-api-gateway/
   - https://traefik.io/traefik-hub/
+  - https://traefik.io/solutions/ai-gateway/
+  - https://traefik.io/solutions/mcp-gateway/
 plans:
   - id: traefik-application-proxy
     name: Application Proxy (Open Source)
     type: freemium
-    description: 'Open-source Traefik Proxy: ingress controller, reverse proxy, and load balancer with
-      services auto-discovery and support for HTTP/2/3, TCP, UDP, gRPC, and WebSockets. No license fee;
-      community support only.'
+    description: >-
+      Open-source Traefik Proxy. Ingress controller, reverse proxy, and load
+      balancer with auto service discovery, HTTP/2/3, TCP/UDP/gRPC/WebSockets,
+      real-time metrics, distributed tracing, dashboard, and Let's Encrypt
+      certificate provisioning. No license fee; community support via GitHub
+      and the community forum.
     entries:
-      - label: License
-        name: license
-        type: flat
-        metric: month
-        limit: -1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
+      - {label: License, name: license, type: flat, metric: month, limit: -1, timeFrame: month, geo: global, unit: 1, price: '0.00', userMultiplied: false}
     elements:
-      - name: Ingress Controller
-      - name: Reverse Proxy
-      - name: Load Balancer
-      - name: Services Auto-Discovery
-      - name: HTTP/2 / HTTP/3 Support
-      - name: TCP / UDP / gRPC / WebSockets Support
-      - name: Community Support
-  - id: traefik-api-gateway
-    name: API Gateway
+      - {name: Ingress Controller}
+      - {name: Reverse Proxy}
+      - {name: Load Balancer}
+      - {name: Services Auto-Discovery}
+      - {name: HTTP/2 / HTTP/3 / gRPC / WebSocket Support}
+      - {name: TCP / UDP Routing}
+      - {name: Let's Encrypt ACME Resolver}
+      - {name: Real-Time Metrics (Prometheus / Datadog / StatsD / InfluxDB)}
+      - {name: Distributed Tracing (OpenTelemetry / Jaeger / Zipkin)}
+      - {name: Plugin Catalog (Yaegi + WebAssembly)}
+      - {name: Community Support}
+  - id: traefik-hub-api-gateway
+    name: Traefik Hub API Gateway
     type: enterprise
-    description: 'Commercial API Gateway tier (Traefik Hub). Adds native WAF, advanced security controls
-      (LDAP, JWT, OAuth, OIDC), and HashiCorp Vault integration on top of the Application Proxy. Pricing
-      is gated: customers must contact sales via the "Get Pricing" CTA. A free trial is available.'
+    description: >-
+      Commercial cloud-native API gateway built on Traefik Proxy. Adds native
+      WAF (claimed 23x faster than alternatives), advanced security (LDAP,
+      JWT, HMAC, OAuth2, OIDC, OPA), HashiCorp Vault integration, multi-cluster
+      management, FIPS 140-2 compliance, and the centralized Hub control
+      plane. Pricing is gated - customers must contact sales. A 30-day free
+      trial is available.
     entries:
-      - label: License / Subscription
-        name: subscription
-        type: subscription
-        metric: varies
-        limit: -1
-        timeFrame: usage
-        geo: global
-        unit: 1
-        price: contact sales
-        userMultiplied: false
-      - label: Free Trial
-        name: free_trial
-        type: quota
-        metric: month
-        limit: 1
-        timeFrame: usage
-        geo: global
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
+      - {label: License / Subscription, name: subscription, type: subscription, metric: varies, limit: -1, timeFrame: usage, geo: global, unit: 1, price: contact sales, userMultiplied: false}
+      - {label: Free Trial,            name: free_trial,   type: quota,        metric: month,  limit: 1,  timeFrame: usage, geo: global, unit: 1, price: '0.00',     userMultiplied: false}
     elements:
-      - name: Native WAF
-      - name: LDAP / JWT / OAuth / OIDC
-      - name: HashiCorp Vault Integration
-      - name: Application Proxy Features Included
-  - id: traefik-api-management
-    name: API Management
+      - {name: All Application Proxy Features Included}
+      - {name: Native Web Application Firewall}
+      - {name: LDAP / JWT / HMAC / OAuth2 / OIDC / OPA}
+      - {name: HashiCorp Vault Integration}
+      - {name: Multi-Cluster Dashboard}
+      - {name: FIPS 140-2 Compliance}
+      - {name: Distributed Let's Encrypt}
+      - {name: 30-Day Free Trial}
+  - id: traefik-hub-api-management
+    name: Traefik Hub API Management
     type: enterprise
-    description: Top commercial tier covering API mocking, request validation, centralized control plane,
-      and developer portal in addition to all API Gateway features. Pricing is gated; customers must contact
-      sales for a quote.
+    description: >-
+      Kubernetes-native API Management built on the Hub API Gateway. Adds API
+      lifecycle CRDs (API, APIVersion, APIBundle, APIPlan, APIPortal,
+      APICatalogItem, ManagedSubscription), a fully declarative developer
+      portal with try-it consoles, GitOps-driven configuration with linting
+      and change-impact analysis, multi-cluster API inventory, OpenAPI
+      ingestion, and built-in identity provider integration. Pricing is
+      gated; contact sales.
     entries:
-      - label: License / Subscription
-        name: subscription
-        type: subscription
-        metric: varies
-        limit: -1
-        timeFrame: usage
-        geo: global
-        unit: 1
-        price: contact sales
-        userMultiplied: false
+      - {label: License / Subscription, name: subscription, type: subscription, metric: varies, limit: -1, timeFrame: usage, geo: global, unit: 1, price: contact sales, userMultiplied: false}
     elements:
-      - name: API Mocking
-      - name: Request Validation
-      - name: Centralized Control Plane
-      - name: Developer Portal
-      - name: All API Gateway Features Included
+      - {name: All API Gateway Features Included}
+      - {name: API + APIVersion + APIBundle CRDs}
+      - {name: APIPlan (Rate Limit + Quota)}
+      - {name: APIPortal (Developer Portal CRD)}
+      - {name: APICatalogItem + ManagedSubscription}
+      - {name: GitOps Configuration Linter}
+      - {name: Multi-Cluster API Inventory}
+      - {name: OpenAPI Ingestion and Rendering}
+      - {name: Built-In Identity Provider}
+  - id: traefik-ai-gateway
+    name: AI Gateway (Add-On)
+    type: enterprise
+    description: >-
+      Self-hosted, Kubernetes-native AI gateway sold as an add-on on top of
+      the Hub API Gateway. Provides an OpenAI-compatible API in front of
+      OpenAI, Anthropic, Azure OpenAI, AWS Bedrock, Cohere, Gemini, Mistral,
+      Ollama, and self-hosted models. Built-in guardrails - NVIDIA Safety NIM
+      jailbreak detection, Presidio PII redaction with 35+ recognizers, and
+      semantic caching that the vendor claims reduces cost 40-70%. Pricing
+      is gated.
+    entries:
+      - {label: License / Subscription, name: subscription, type: subscription, metric: varies, limit: -1, timeFrame: usage, geo: global, unit: 1, price: contact sales, userMultiplied: false}
+    elements:
+      - {name: OpenAI-Compatible Unified API}
+      - {name: Anthropic / Azure OpenAI / Bedrock / Cohere / Gemini / Mistral / Ollama Upstreams}
+      - {name: Jailbreak Detection (NVIDIA Safety NIM)}
+      - {name: PII Redaction (Presidio)}
+      - {name: Content Filtering (22+ Categories)}
+      - {name: Semantic Caching}
+      - {name: Identity-Based Routing}
+      - {name: Token / Cost OpenTelemetry Metrics}
+  - id: traefik-mcp-gateway
+    name: MCP Gateway (Add-On)
+    type: enterprise
+    description: >-
+      Add-on solution governing how AI agents access Model Context Protocol
+      (MCP) servers. Provides identity-aware routing, capability scoping,
+      and audit logging for agent-to-MCP traffic. Pricing is gated.
+    entries:
+      - {label: License / Subscription, name: subscription, type: subscription, metric: varies, limit: -1, timeFrame: usage, geo: global, unit: 1, price: contact sales, userMultiplied: false}
+    elements:
+      - {name: MCP Server Routing}
+      - {name: Identity-Aware Authorization}
+      - {name: Capability Scoping}
+      - {name: Audit Logging}
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

@@ -1,88 +1,99 @@
 vocabulary: 1.0.0
 info:
   provider: Traefik
-  description: Vocabulary for Traefik reverse proxy and API gateway covering routing, services, middlewares, entry points, and provider-based configuration.
+  description: Vocabulary for Traefik Labs covering the open-source Traefik Proxy reverse proxy / API gateway,
+    Traefik Hub API Gateway, Traefik Hub API Management, the AI Gateway, MCP Gateway, and the Kubernetes CRDs
+    each product exposes.
   created: '2026-05-03'
-  modified: '2026-05-03'
+  modified: '2026-05-15'
 operational:
   apis:
-    - name: Traefik REST API
-      namespace: traefik-api
+    - name: Traefik Proxy REST API
+      namespace: traefik-proxy
+      status: active
+    - name: Traefik Hub API Management Control Plane
+      namespace: traefik-hub
+      status: active
+    - name: Traefik AI Gateway (OpenAI-compatible)
+      namespace: traefik-ai-gateway
       status: active
   resources:
-    - name: routers
-      description: HTTP, TCP, or UDP routing rules that match incoming requests and forward them to services.
-    - name: services
-      description: Backend service definitions with load balancing, health checks, and server configuration.
-    - name: middlewares
-      description: Request/response transformation plugins applied in a chain before routing to services.
-    - name: entry-points
-      description: Network listener definitions specifying ports and protocols that Traefik accepts traffic on.
-    - name: version
-      description: Running Traefik instance version and metadata.
-    - name: overview
-      description: Aggregated statistics about all routing configuration components.
+    - {name: routers,        description: HTTP/TCP/UDP routing rules that match incoming requests and forward them to services.}
+    - {name: services,       description: Backend service definitions with load balancing, health checks, and server configuration.}
+    - {name: middlewares,    description: Request/response transformation plugins applied in a chain before routing to services.}
+    - {name: entry-points,   description: Network listener definitions specifying ports and protocols Traefik accepts traffic on.}
+    - {name: version,        description: Running Traefik instance version and metadata.}
+    - {name: overview,       description: Aggregated statistics about all routing configuration components.}
+    - {name: rawdata,        description: Complete unprocessed dynamic configuration data from all providers.}
+    - {name: support-dump,   description: Anonymized configuration archive for sharing with Traefik Labs support.}
+    - {name: apis,           description: Hub-managed APIs declared as Kubernetes CRDs and exposed to consumers via the developer portal.}
+    - {name: api-bundles,    description: Groups of APIs offered as a single subscribable unit.}
+    - {name: api-plans,      description: Rate-limit + quota tier definitions attached to APIs or bundles.}
+    - {name: api-portals,    description: Hub-rendered developer portals serving OpenAPI specs and try-it consoles.}
+    - {name: managed-subscriptions, description: Runtime authorization grants binding an application to APIs under a plan.}
+    - {name: ai-services,    description: AI Gateway upstreams pointing at LLM providers with guardrail and cache policy.}
   operations:
-    - name: getVersion
-      description: Get current Traefik version and codename.
-    - name: getOverview
-      description: Get aggregated routing configuration statistics.
-    - name: listHTTPRouters
-      description: List all HTTP routing rules.
-    - name: getHTTPRouter
-      description: Get a specific HTTP router by name.
-    - name: listHTTPServices
-      description: List all HTTP backend services.
-    - name: listHTTPMiddlewares
-      description: List all HTTP middlewares.
-    - name: listEntryPoints
-      description: List all configured entry points.
-    - name: listTCPRouters
-      description: List all TCP routing rules.
-    - name: listTCPServices
-      description: List all TCP backend services.
-    - name: listUDPRouters
-      description: List all UDP routing rules.
-    - name: ping
-      description: Health check liveness probe.
+    - {name: getVersion,          description: Get current Traefik version and codename.}
+    - {name: getOverview,         description: Get aggregated routing configuration statistics.}
+    - {name: getRawData,          description: Get complete dynamic configuration data from all providers.}
+    - {name: getSupportDump,      description: Get anonymized support-dump archive.}
+    - {name: listHTTPRouters,     description: List all HTTP routing rules.}
+    - {name: getHTTPRouter,       description: Get a specific HTTP router by name.}
+    - {name: listHTTPServices,    description: List all HTTP backend services.}
+    - {name: getHTTPService,      description: Get a specific HTTP service by name.}
+    - {name: listHTTPMiddlewares, description: List all HTTP middlewares.}
+    - {name: getHTTPMiddleware,   description: Get a specific HTTP middleware by name.}
+    - {name: listEntryPoints,     description: List all configured entry points.}
+    - {name: getEntryPoint,       description: Get a specific entry point by name.}
+    - {name: listTCPRouters,      description: List all TCP routing rules.}
+    - {name: listTCPServices,     description: List all TCP backend services.}
+    - {name: listUDPRouters,      description: List all UDP routing rules.}
+    - {name: listUDPServices,     description: List all UDP backend services.}
+    - {name: ping,                description: Health check liveness probe.}
 domain:
   terms:
-    - term: Router
-      definition: A rule that matches incoming requests based on host, path, headers, or other criteria and forwards them to a service.
-    - term: Service
-      definition: A backend destination for routed traffic, configured with load balancing across one or more servers.
-    - term: Middleware
-      definition: A processing plugin applied to requests before they reach a service, enabling auth, rate limiting, redirects, and transformations.
-    - term: Entry Point
-      definition: A network listener on a specific port and protocol (HTTP, HTTPS, TCP, UDP) that receives incoming connections.
-    - term: Provider
-      definition: A configuration source for Traefik (Docker, Kubernetes, file, etc.) that dynamically supplies routing rules.
-    - term: Rule
-      definition: A logical expression (Host, PathPrefix, Headers, etc.) that determines which requests a router handles.
-    - term: Load Balancer
-      definition: Traefik service configuration that distributes requests across multiple backend servers.
-    - term: TLS
-      definition: Transport Layer Security configuration for HTTPS entry points and routers.
-    - term: Certificate Resolver
-      definition: Traefik component that automatically provisions TLS certificates via ACME/Let's Encrypt.
-    - term: Dynamic Configuration
-      definition: Routing rules and service definitions loaded at runtime from providers without requiring restart.
-    - term: Static Configuration
-      definition: Core Traefik startup configuration defining entry points, providers, and global settings.
-    - term: Dashboard
-      definition: Traefik's built-in web UI for visualizing routing configuration and service status.
-    - term: Ping
-      definition: Liveness health check endpoint at /ping that returns 200 OK when Traefik is running.
-    - term: Codename
-      definition: Human-friendly release name for a Traefik version.
+    - {term: Router,                definition: A rule matching incoming requests by host/path/headers/SNI/etc. and forwarding them to a service.}
+    - {term: Service,               definition: A backend destination configured with load balancing across one or more servers.}
+    - {term: Middleware,            definition: A processing plugin applied to requests before they reach a service (auth, rate limit, retries, header rewrite, redirects).}
+    - {term: Entry Point,           definition: A network listener on a specific port and protocol (HTTP, HTTPS, TCP, UDP).}
+    - {term: Provider,              definition: A configuration source (Docker, Kubernetes CRD, Kubernetes Ingress, Kubernetes Gateway, Consul, Nomad, ECS, file) that dynamically supplies routing rules.}
+    - {term: Rule,                  definition: A logical expression (Host, PathPrefix, Headers) that determines which requests a router handles.}
+    - {term: Load Balancer,         definition: Traefik service that distributes requests across multiple backend servers using weighted round robin or mirroring.}
+    - {term: TLS,                   definition: Transport Layer Security configuration for HTTPS entry points and routers.}
+    - {term: Certificate Resolver,  definition: Traefik component that automatically provisions TLS certificates via ACME/Let's Encrypt.}
+    - {term: Dynamic Configuration, definition: Routing rules and service definitions loaded at runtime from providers without requiring a restart.}
+    - {term: Static Configuration,  definition: Core Traefik startup configuration defining entry points, providers, and global settings.}
+    - {term: Dashboard,             definition: Traefik's built-in web UI for visualizing routing configuration and service status.}
+    - {term: Ping,                  definition: Liveness health check endpoint at /ping that returns 200 OK when Traefik is alive.}
+    - {term: Codename,              definition: Human-friendly release name for a Traefik version.}
+    - {term: IngressRoute,          definition: Traefik's HTTP routing CRD - the canonical alternative to stock Kubernetes Ingress.}
+    - {term: TraefikService,        definition: A higher-order routing target that composes Kubernetes services with weighted round robin or mirroring.}
+    - {term: ServersTransport,      definition: HTTP transport settings used by Traefik when calling backend services (TLS, idle conn, timeouts).}
+    - {term: TLSOption,             definition: Reusable TLS parameters (min version, cipher suites, client auth) referenced by routers.}
+    - {term: API (Hub),             definition: A Traefik Hub managed API CRD declaring a routable service plus optional OpenAPI spec for portal rendering.}
+    - {term: APIPlan,               definition: Rate-limit + quota policy attached to managed APIs and enforced per subscription.}
+    - {term: APIBundle,             definition: A subscribable group of managed APIs offered as a single product.}
+    - {term: APIPortal,             definition: Developer portal CRD rendering OpenAPI docs and managing self-service subscriptions.}
+    - {term: ManagedSubscription,   definition: Runtime authorization binding an application identity to APIs under a specific plan.}
+    - {term: APICatalogItem,        definition: Portal-visibility scope (who can see an API), paired with ManagedSubscription (who can call it).}
+    - {term: AI Gateway,            definition: Traefik's commercial gateway for LLM providers offering OpenAI-compatible API, semantic caching, PII redaction, jailbreak detection, and observability.}
+    - {term: MCP Gateway,           definition: Traefik gateway governing how AI agents access Model Context Protocol servers.}
+    - {term: Plugin Catalog,        definition: Public registry of community Traefik middlewares written in Go (interpreted via Yaegi) or WebAssembly.}
+    - {term: Yaegi,                 definition: Traefik Labs' embedded Go interpreter that loads plugins at runtime without compiling Traefik.}
   tags:
+    - AI Gateway
     - API Gateway
+    - API Management
     - Configuration
+    - Developer Portal
+    - GitOps
     - Kubernetes
     - Load Balancer
+    - MCP Gateway
     - Microservices
     - Observability
     - Open Source
     - Reverse Proxy
     - TLS
     - Traffic Management
+    - WAF

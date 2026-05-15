@@ -1,0 +1,102 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Traefik Gateway Operations
+  description: Workflow capability for operating a Traefik reverse proxy / API gateway. Surfaces routing
+    configuration (HTTP/TCP/UDP routers, services, middlewares) so platform engineers and SREs can audit,
+    debug, and document the live gateway from a single REST surface or MCP toolset.
+  tags:
+  - API Gateway
+  - Configuration
+  - Kubernetes
+  - Load Balancer
+  - Operations
+  - Reverse Proxy
+  - Traefik
+  created: '2026-05-15'
+  modified: '2026-05-15'
+binds:
+- namespace: env
+  keys:
+    TRAEFIK_API_URL: TRAEFIK_API_URL
+capability:
+  consumes:
+  - type: http
+    namespace: traefik-api
+    baseUri: '{{env.TRAEFIK_API_URL}}'
+    description: Traefik Proxy REST API.
+    resources:
+    - name: http
+      path: /api/http
+      description: HTTP routing surface.
+      operations:
+      - {name: list-http-routers,     method: GET, description: List HTTP routers., outputRawFormat: json, outputParameters: [{name: result, type: array, value: '$.'}]}
+      - {name: get-http-router,       method: GET, description: Get an HTTP router by name., inputParameters: [{name: name, in: path, type: string, required: true, description: Router name in form name@provider.}], outputRawFormat: json, outputParameters: [{name: result, type: object, value: '$.'}]}
+      - {name: list-http-services,    method: GET, description: List HTTP services., outputRawFormat: json, outputParameters: [{name: result, type: array, value: '$.'}]}
+      - {name: get-http-service,      method: GET, description: Get an HTTP service., inputParameters: [{name: name, in: path, type: string, required: true, description: Service name.}], outputRawFormat: json, outputParameters: [{name: result, type: object, value: '$.'}]}
+      - {name: list-http-middlewares, method: GET, description: List HTTP middlewares., outputRawFormat: json, outputParameters: [{name: result, type: array, value: '$.'}]}
+      - {name: get-http-middleware,   method: GET, description: Get an HTTP middleware., inputParameters: [{name: name, in: path, type: string, required: true, description: Middleware name.}], outputRawFormat: json, outputParameters: [{name: result, type: object, value: '$.'}]}
+    - name: tcp
+      path: /api/tcp
+      description: TCP routing surface.
+      operations:
+      - {name: list-tcp-routers,     method: GET, description: List TCP routers., outputRawFormat: json, outputParameters: [{name: result, type: array, value: '$.'}]}
+      - {name: get-tcp-router,       method: GET, description: Get a TCP router., inputParameters: [{name: name, in: path, type: string, required: true, description: TCP router name.}], outputRawFormat: json, outputParameters: [{name: result, type: object, value: '$.'}]}
+      - {name: list-tcp-services,    method: GET, description: List TCP services., outputRawFormat: json, outputParameters: [{name: result, type: array, value: '$.'}]}
+      - {name: list-tcp-middlewares, method: GET, description: List TCP middlewares., outputRawFormat: json, outputParameters: [{name: result, type: array, value: '$.'}]}
+    - name: udp
+      path: /api/udp
+      description: UDP routing surface.
+      operations:
+      - {name: list-udp-routers,  method: GET, description: List UDP routers., outputRawFormat: json, outputParameters: [{name: result, type: array, value: '$.'}]}
+      - {name: list-udp-services, method: GET, description: List UDP services., outputRawFormat: json, outputParameters: [{name: result, type: array, value: '$.'}]}
+    - name: rawdata
+      path: /api/rawdata
+      description: Complete dynamic configuration.
+      operations:
+      - {name: get-rawdata, method: GET, description: Get the complete dynamic configuration data., outputRawFormat: json, outputParameters: [{name: result, type: object, value: '$.'}]}
+  exposes:
+  - type: rest
+    port: 8080
+    namespace: traefik-gateway-operations-api
+    description: Unified REST surface for inspecting Traefik routing configuration.
+    resources:
+    - path: /v1/http/routers
+      name: http-routers
+      operations:
+      - {method: GET, name: list-http-routers,     description: List HTTP routers., call: traefik-api.list-http-routers,     outputParameters: [{type: array, mapping: '$.'}]}
+      - {method: GET, name: get-http-router,       description: Get a router by name., call: traefik-api.get-http-router,       outputParameters: [{type: object, mapping: '$.'}]}
+    - path: /v1/http/services
+      name: http-services
+      operations:
+      - {method: GET, name: list-http-services,    description: List HTTP services., call: traefik-api.list-http-services,    outputParameters: [{type: array, mapping: '$.'}]}
+      - {method: GET, name: get-http-service,      description: Get a service by name., call: traefik-api.get-http-service,      outputParameters: [{type: object, mapping: '$.'}]}
+    - path: /v1/http/middlewares
+      name: http-middlewares
+      operations:
+      - {method: GET, name: list-http-middlewares, description: List HTTP middlewares., call: traefik-api.list-http-middlewares, outputParameters: [{type: array, mapping: '$.'}]}
+      - {method: GET, name: get-http-middleware,   description: Get a middleware by name., call: traefik-api.get-http-middleware,   outputParameters: [{type: object, mapping: '$.'}]}
+    - path: /v1/tcp/routers
+      name: tcp-routers
+      operations:
+      - {method: GET, name: list-tcp-routers,      description: List TCP routers., call: traefik-api.list-tcp-routers,      outputParameters: [{type: array, mapping: '$.'}]}
+    - path: /v1/udp/routers
+      name: udp-routers
+      operations:
+      - {method: GET, name: list-udp-routers,      description: List UDP routers., call: traefik-api.list-udp-routers,      outputParameters: [{type: array, mapping: '$.'}]}
+    - path: /v1/rawdata
+      name: rawdata
+      operations:
+      - {method: GET, name: get-rawdata,           description: Get raw configuration., call: traefik-api.get-rawdata,           outputParameters: [{type: object, mapping: '$.'}]}
+  - type: mcp
+    port: 9090
+    namespace: traefik-gateway-operations-mcp
+    transport: http
+    description: MCP server exposing Traefik gateway operations tools for AI agents.
+    tools:
+    - {name: list-http-routers,     description: List all HTTP routers including rules, entry points, middleware chains, and service assignments., hints: {readOnly: true, idempotent: true}, call: traefik-api.list-http-routers,     outputParameters: [{type: array, mapping: '$.'}]}
+    - {name: get-http-router,       description: Get a single HTTP router by name. Use to drill into a routing rule., hints: {readOnly: true, idempotent: true}, call: traefik-api.get-http-router,       outputParameters: [{type: object, mapping: '$.'}]}
+    - {name: list-http-services,    description: List HTTP backend services and load balancer configuration., hints: {readOnly: true, idempotent: true}, call: traefik-api.list-http-services,    outputParameters: [{type: array, mapping: '$.'}]}
+    - {name: list-http-middlewares, description: List HTTP middlewares (rate limit, auth, headers, compress, retry, etc.)., hints: {readOnly: true, idempotent: true}, call: traefik-api.list-http-middlewares, outputParameters: [{type: array, mapping: '$.'}]}
+    - {name: list-tcp-routers,      description: List TCP routers (raw TCP / TLS passthrough)., hints: {readOnly: true, idempotent: true}, call: traefik-api.list-tcp-routers,      outputParameters: [{type: array, mapping: '$.'}]}
+    - {name: list-udp-routers,      description: List UDP routers., hints: {readOnly: true, idempotent: true}, call: traefik-api.list-udp-routers,      outputParameters: [{type: array, mapping: '$.'}]}
+    - {name: get-rawdata,           description: Dump the entire dynamic Traefik configuration as a single object for audit or backup., hints: {readOnly: true, idempotent: true}, call: traefik-api.get-rawdata,           outputParameters: [{type: object, mapping: '$.'}]}

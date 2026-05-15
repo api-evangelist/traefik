@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-structure.org/draft/2025-01/schema",
+  "$id": "https://traefik.io/structures/middleware.json",
+  "name": "TraefikHTTPMiddleware",
+  "description": "JSON Structure description of a Traefik HTTP middleware as returned by /api/http/middlewares. Captures the normalized identifier, middleware type, runtime status, originating provider, and routers chaining the middleware.",
+  "type": "object",
+  "properties": {
+    "name":     { "type": "string",  "description": "Normalized identifier (name@provider)." },
+    "type":     { "type": "string",  "description": "Middleware type (e.g. ratelimit, basicauth, headers, retry)." },
+    "status":   { "type": "string",  "description": "Operational status (enabled / disabled / warning)." },
+    "provider": { "type": "string",  "description": "Configuration provider that created this middleware." },
+    "usedBy":   { "type": "array",   "items": { "type": "string" }, "description": "Routers chaining this middleware." }
+  },
+  "required": ["name", "type"]
+}

@@ -1,42 +1,84 @@
 specification: API Commons Rate Limits
 specificationVersion: '0.1'
 schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
-provider: Traefik
+provider: Traefik Labs
 providerId: traefik
 created: '2026-05-04'
-modified: '2026-05-05'
+modified: '2026-05-15'
 reconciled: false
 tags:
   - API Gateway
+  - API Management
   - Kubernetes
-  - Reverse Proxy
   - Rate Limiting
-description: Traefik Proxy is software that customers self-host; rate limits are configured by the operator
-  using Traefik's RateLimit middleware rather than imposed by a vendor service. There is no provider-side
-  rate-limit document for Traefik Proxy itself. For the commercial Traefik Hub control plane, rate-limit
-  policies are not published on the public site and are part of the commercial agreement.
+description: >-
+  Traefik Proxy is self-hosted software, so request throttling is configured
+  by the operator (via the RateLimit / InFlightReq HTTP middlewares and the
+  InFlightConn TCP middleware) rather than imposed by Traefik Labs as a
+  vendor. Traefik Hub adds the APIPlan CRD, which carries documented rate
+  and quota fields (limit, period, bucket) that operators apply per managed
+  subscription. The Hub control plane's own API-management quotas are not
+  published on the public site and are part of each customer's commercial
+  agreement.
 sources:
+  - https://doc.traefik.io/traefik-hub/api-management/api-plans
+  - https://doc.traefik.io/traefik/reference/routing-configuration/http/middlewares/overview/
   - https://traefik.io/pricing/
-  - https://traefik.io/traefik-hub/
+products:
+  - name: Traefik Proxy
+    reconciled: true
+    notes: Self-hosted; rate-limits are operator-configured policy, not a vendor quota.
+  - name: Traefik Hub API Gateway / API Management
+    reconciled: false
+    notes: Customer-tier quotas are part of the commercial agreement and not published publicly.
 limits:
-  - name: Traefik Proxy (self-hosted)
+  - name: Traefik Proxy (self-hosted) - tenant-facing
     scope: operator-configured
-    metric: varies
-    limit: configured by the operator via RateLimit middleware
-    notes: Traefik Proxy does not throttle its own management API on behalf of users; tenant-facing limits
-      are whatever the operator sets in the routing configuration.
+    metric: requests
+    limit: defined by the operator via the RateLimit middleware
+    notes: The middleware supports `average` requests-per-period, `burst` token-bucket size, and `period` window length.
+  - name: Traefik Proxy (self-hosted) - concurrent requests
+    scope: operator-configured
+    metric: in-flight requests
+    limit: defined by the operator via the InFlightReq HTTP middleware (amount field)
+  - name: Traefik Proxy (self-hosted) - concurrent TCP connections
+    scope: operator-configured
+    metric: in-flight TCP connections
+    limit: defined by the operator via the InFlightConn TCP middleware (amount field)
+  - name: Traefik Hub APIPlan default example
+    scope: managed-subscription
+    metric: requests
+    limit: 1 request / second + 10,000 requests / 750 hours (vendor-documented illustrative APIPlan)
+    notes: Documented as an example in the APIPlan CRD reference; production plans are customer-defined.
   - name: Traefik Hub control plane
     scope: account
     metric: varies
-    limit: not published; included in the commercial agreement
+    limit: not published; governed by the commercial agreement
 policies:
-  - name: Operator-Configured RateLimit Middleware
-    description: For self-hosted Traefik Proxy deployments, request throttling is implemented as a middleware
-      on routers/services, scoped per-source-IP or globally; clients should consult the deployment owner
-      for actual values.
-  - name: Contact for Hub Limits
-    description: For Traefik Hub commercial tiers, operational and management-API limits are governed
-      by the customer's contract; contact Traefik sales/support for specifics.
+  - name: HTTP RateLimit Middleware
+    description: >-
+      Configurable per router or service. Fields - average (req/period),
+      burst (token-bucket capacity), period (e.g. 1s, 1m), and optional
+      sourceCriterion to scope the limit to a header, IP, or ipStrategy.
+      Returns HTTP 429 when exceeded.
+  - name: HTTP InFlightReq Middleware
+    description: >-
+      Caps concurrent in-flight HTTP requests per source criterion. Returns
+      HTTP 429 when the configured `amount` is reached.
+  - name: TCP InFlightConn Middleware
+    description: >-
+      Caps concurrent TCP connections per remote IP. Refuses connections
+      once the configured `amount` is reached.
+  - name: Hub APIPlan
+    description: >-
+      Kubernetes CRD attached to managed subscriptions. Carries a rateLimit
+      block (limit, period, bucket) and a quota block (limit, period,
+      bucket). Bucket controls scoping - per subscription, per application,
+      or per application-API pair. Exceeding either yields HTTP 429.
+  - name: Contact Sales for Hub Quotas
+    description: >-
+      Provider-side quotas on the Hub control plane are not published; the
+      commercial contract sets the operational limits.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

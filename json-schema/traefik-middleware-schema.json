@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://traefik.io/schemas/traefik/middleware.json",
+  "title": "Traefik HTTP Middleware",
+  "description": "An HTTP middleware as exposed by the Traefik /api/http/middlewares endpoint. Each entry shows the middleware's normalized name (name@provider), the middleware type, current status, originating provider, and the routers currently chaining it.",
+  "type": "object",
+  "required": ["name", "type"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Normalized middleware identifier in the form name@provider.",
+      "minLength": 1
+    },
+    "type": {
+      "type": "string",
+      "description": "Middleware type identifier.",
+      "enum": [
+        "addprefix",
+        "basicauth",
+        "buffering",
+        "chain",
+        "circuitbreaker",
+        "compress",
+        "contenttype",
+        "digestauth",
+        "encodedcharacters",
+        "errors",
+        "forwardauth",
+        "grpcweb",
+        "headers",
+        "inflightreq",
+        "ipallowlist",
+        "passtlsclientcert",
+        "plugin",
+        "ratelimit",
+        "redirectregex",
+        "redirectscheme",
+        "replacepath",
+        "replacepathregex",
+        "retry",
+        "stripprefix",
+        "stripprefixregex"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "description": "Operational status of the middleware.",
+      "enum": ["enabled", "disabled", "warning"]
+    },
+    "provider": {
+      "type": "string",
+      "description": "Configuration provider that created the middleware (docker, kubernetescrd, kubernetesingress, file, consul, nomad, ecs, etc.)."
+    },
+    "usedBy": {
+      "type": "array",
+      "description": "List of router names that currently chain this middleware.",
+      "items": { "type": "string" }
+    }
+  }
+}

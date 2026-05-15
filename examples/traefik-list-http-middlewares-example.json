@@ -1,0 +1,23 @@
+[
+  {
+    "name": "redirect-to-https@docker",
+    "type": "redirectscheme",
+    "status": "enabled",
+    "provider": "docker",
+    "usedBy": ["my-app-router@docker"]
+  },
+  {
+    "name": "rate-limit-public@file",
+    "type": "ratelimit",
+    "status": "enabled",
+    "provider": "file",
+    "usedBy": ["public-api@file"]
+  },
+  {
+    "name": "compress@kubernetescrd",
+    "type": "compress",
+    "status": "enabled",
+    "provider": "kubernetescrd",
+    "usedBy": ["dashboard@kubernetescrd", "my-app@kubernetescrd"]
+  }
+]

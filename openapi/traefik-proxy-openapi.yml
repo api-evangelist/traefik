@@ -1,14 +1,19 @@
 openapi: 3.1.0
 info:
-  title: Traefik REST API
+  title: Traefik Proxy REST API
   description: >-
-    The Traefik REST API provides read-only HTTP endpoints for inspecting the
-    runtime configuration and state of a running Traefik instance. It exposes
-    information about HTTP, TCP, and UDP routers, services, and middlewares, as
-    well as entry points and the current Traefik version. The API must be enabled
-    in the Traefik static configuration and should be secured before exposing in
-    production environments.
-  version: '3'
+    The Traefik Proxy REST API provides read-only HTTP endpoints for inspecting
+    the runtime configuration and state of a running Traefik instance. It
+    exposes information about HTTP, TCP, and UDP routers, services, and
+    middlewares, as well as entry points, raw dynamic configuration, the
+    support-dump archive, and the current Traefik version. The API must be
+    enabled in the Traefik static configuration (`api.insecure: true` for
+    quick exploration, or by binding the `traefik` entrypoint behind an
+    `IngressRoute` with `service: api@internal` for production) and should
+    always be secured behind authentication before being exposed publicly.
+    All endpoints listed here are mounted under the `/api` path prefix on the
+    `traefik` entrypoint (default port 8080).
+  version: '3.7'
   contact:
     name: Traefik Labs
     url: https://traefik.io/
@@ -521,6 +526,25 @@ paths:
                 $ref: '#/components/schemas/UDPService'
         '404':
           description: Service not found
+  /support-dump:
+    get:
+      operationId: getSupportDump
+      summary: Get Anonymized Support Dump
+      description: >-
+        Returns an anonymized archive of the running Traefik configuration and
+        runtime metadata. Used by Traefik Labs support to reproduce reported
+        issues without exposing sensitive customer data. The endpoint returns a
+        ZIP archive.
+      tags:
+        - Overview
+      responses:
+        '200':
+          description: Support-dump archive returned successfully
+          content:
+            application/zip:
+              schema:
+                type: string
+                format: binary
   /ping:
     get:
       operationId: ping

@@ -1,0 +1,39 @@
+[
+  {
+    "name": "web",
+    "address": ":80",
+    "transport": {
+      "lifeCycle": {
+        "graceTimeOut": "10s"
+      },
+      "respondingTimeouts": {
+        "readTimeout": "60s",
+        "writeTimeout": "0s",
+        "idleTimeout": "180s"
+      }
+    }
+  },
+  {
+    "name": "websecure",
+    "address": ":443",
+    "transport": {
+      "lifeCycle": {
+        "graceTimeOut": "10s"
+      },
+      "respondingTimeouts": {
+        "readTimeout": "60s",
+        "writeTimeout": "0s",
+        "idleTimeout": "180s"
+      }
+    }
+  },
+  {
+    "name": "traefik",
+    "address": ":8080",
+    "transport": {
+      "lifeCycle": {
+        "graceTimeOut": "10s"
+      }
+    }
+  }
+]

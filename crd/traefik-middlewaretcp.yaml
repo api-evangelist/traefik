@@ -1,0 +1,39 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: middlewaretcps.traefik.io
+spec:
+  group: traefik.io
+  scope: Namespaced
+  names:
+    kind: MiddlewareTCP
+    listKind: MiddlewareTCPList
+    singular: middlewaretcp
+    plural: middlewaretcps
+  versions:
+    - name: v1alpha1
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          description: >-
+            MiddlewareTCP is a Traefik TCP middleware resource. Available TCP
+            middleware types are ipAllowList (restrict by source CIDR) and
+            inFlightConn (cap concurrent TCP connections).
+          properties:
+            spec:
+              type: object
+              properties:
+                inFlightConn:
+                  type: object
+                  properties:
+                    amount:
+                      type: integer
+                ipAllowList:
+                  type: object
+                  properties:
+                    sourceRange:
+                      type: array
+                      items:
+                        type: string

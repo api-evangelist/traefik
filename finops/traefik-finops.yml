@@ -7,27 +7,38 @@ alignedWith:
   dataSpec: FOCUS
   dataSpecVersion: '1.3'
   dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
-provider: Traefik
+provider: Traefik Labs
 providerId: traefik
 publisherName: Traefik Labs
 serviceCategory: API Gateway / API Management Software
 created: '2026-05-04'
-modified: '2026-05-05'
-reconciled: true
+modified: '2026-05-15'
+reconciled: false
 tags:
+  - AI Gateway
   - API Gateway
-  - Kubernetes
-  - Reverse Proxy
-  - Open Source
-  - FinOps
+  - API Management
   - FOCUS
-description: 'FOCUS-aligned FinOps for Traefik Labs: an open-source Application Proxy with $0 license
-  cost, plus two commercial tiers (API Gateway, API Management) where pricing is contracted via sales
-  rather than published. Costs at customers consist of (a) infrastructure to run Traefik Proxy and (b)
-  any commercial Traefik Hub subscription, neither of which Traefik bills metered per-request.'
+  - FinOps
+  - Kubernetes
+  - MCP Gateway
+  - Open Source
+  - Reverse Proxy
+description: >-
+  FOCUS 1.3 / FinOps Framework 1.0 alignment for Traefik Labs. Traefik Proxy
+  is open-source software with $0 license cost - the only customer spend is
+  the Kubernetes / VM infrastructure that runs it. The four commercial tiers
+  (Hub API Gateway, Hub API Management, AI Gateway add-on, MCP Gateway
+  add-on) are sold via annual contract; pricing is gated and not published.
+  Customer FinOps therefore tracks two cost streams - the Hub subscription
+  invoice (charge_category Purchase, pricing_category Subscription) and the
+  self-hosted infrastructure footprint exported from the cloud provider's
+  own FOCUS data. `reconciled` is false because the commercial subscription
+  unit pricing was not visible at the time of fetch.
 sources:
   - https://traefik.io/pricing/
   - https://traefik.io/traefik-hub/
+  - https://traefik.io/solutions/ai-gateway/
 billingModel:
   pricingCategory: Open Source + Contracted Subscription
   billingFrequency: Annual
@@ -37,7 +48,7 @@ billingModel:
     - Adjustment
     - Refund
 focusColumns:
-  ServiceName: Traefik
+  ServiceName: Traefik Hub
   ServiceCategory: API Gateway Software
   ProviderName: Traefik
   PublisherName: Traefik Labs
@@ -48,35 +59,78 @@ focusColumns:
   PricingUnit: contract
 meters:
   - name: traefik_hub_subscription
-    description: Annualized Traefik Hub commercial subscription (API Gateway or API Management tier).
-      Quantity and price are contract-defined.
+    description: >-
+      Annualized Traefik Hub commercial subscription (API Gateway or API
+      Management tier). Quantity and price are contract-defined.
     unit: contract
     aggregation: sum
-    dimensions:
-      - tier
-      - environment
+    dimensions: [tier, environment, region]
+  - name: traefik_hub_clusters
+    description: >-
+      Number of Kubernetes clusters connected to the Hub control plane.
+      Multi-cluster management is one axis of the Hub commercial entitlement;
+      operators should track cluster count to anticipate renewal sizing.
+    unit: cluster
+    aggregation: max
+    dimensions: [environment, cloud, region]
+  - name: traefik_hub_seats
+    description: >-
+      Hub administrative seats - portal admins, GitOps operators, multi-cluster
+      dashboard users. Often a contract input.
+    unit: seat
+    aggregation: max
+    dimensions: [role]
+  - name: traefik_hub_managed_apis
+    description: >-
+      Count of Hub-managed API CRDs deployed across all connected clusters.
+      Useful for showback against the API Management tier value.
+    unit: api
+    aggregation: max
+    dimensions: [namespace, cluster]
+  - name: traefik_ai_gateway_throughput
+    description: >-
+      Tokens proxied through the AI Gateway add-on. Even though Traefik does
+      not bill per-token, this meter is required for upstream LLM cost
+      attribution and for sizing the AI Gateway entitlement.
+    unit: tokens
+    aggregation: sum
+    dimensions: [model, upstream_provider, application]
   - name: self_hosted_infra_cost
-    description: Infrastructure cost (compute, network, storage) of running Traefik Proxy on the customer's
-      own platform. Not billed by Traefik Labs; tracked here for total-cost-of-ownership.
+    description: >-
+      Infrastructure cost (compute, network, storage) of running Traefik
+      Proxy or Hub data plane on the customer's own platform. Not billed by
+      Traefik Labs; tracked here for total-cost-of-ownership.
     unit: varies
     aggregation: sum
-    dimensions:
-      - cloud
-      - region
-      - environment
+    dimensions: [cloud, region, environment, cluster]
 principles:
   - name: Visibility
-    description: Pull subscription invoices from Traefik Labs for the Hub tier; pull infrastructure cost
-      from your cloud provider's FOCUS export to see total cost of running Traefik.
+    description: >-
+      Pull subscription invoices from Traefik Labs for the Hub tier and
+      cross-reference against the cloud-provider FOCUS export covering the
+      Kubernetes nodes running Traefik. The combined view is your total cost
+      of operating Traefik.
   - name: Allocation
-    description: Tag the Kubernetes namespace, cluster, or VM running Traefik Proxy with the consuming
-      product/team so the proxy's compute/egress is allocated alongside the apps it fronts.
+    description: >-
+      Tag the Kubernetes namespace, node pool, or VM running Traefik with the
+      consuming product / team identifier so the proxy's compute and egress
+      cost can be allocated to the workloads it fronts. For Hub, allocate the
+      subscription cost across managed APIs using the traefik_hub_managed_apis
+      meter.
   - name: Optimization
-    description: Use the open-source Application Proxy where the commercial features (WAF, OIDC, mocking)
-      are not required; right-size pod replicas and node pools so the proxy scales to actual ingress volume.
+    description: >-
+      Use open-source Traefik Proxy when the commercial features (WAF, OIDC,
+      portal, AI guardrails, MCP governance) are not required. Right-size pod
+      replicas and node pools to actual ingress volume. Enable semantic
+      caching on the AI Gateway - the vendor claims a 40-70% reduction in
+      LLM cost.
   - name: Accountability
-    description: Designate a platform-team owner for the Traefik deployment and the Hub contract; review
-      Hub seats/environments at each renewal.
+    description: >-
+      Designate a platform-engineering owner for the Traefik deployment and
+      the Hub contract. Review Hub cluster count, seats, and subscription
+      tier at each renewal. Tag each ManagedSubscription and APIPlan with
+      its business owner so quota usage is visible to FinOps and product
+      stakeholders.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

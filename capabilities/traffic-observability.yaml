@@ -1,0 +1,84 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Traefik Traffic Observability
+  description: Workflow capability focused on observing the health, version, and runtime state of a Traefik
+    proxy or API gateway. Covers version reporting, overview statistics (router/service/middleware counts),
+    entry point inspection, and the liveness ping. Designed for SRE dashboards, status pages, and
+    AI-assisted incident response.
+  tags:
+  - API Gateway
+  - Health Check
+  - Liveness
+  - Monitoring
+  - Observability
+  - Operations
+  - Traefik
+  created: '2026-05-15'
+  modified: '2026-05-15'
+binds:
+- namespace: env
+  keys:
+    TRAEFIK_API_URL: TRAEFIK_API_URL
+capability:
+  consumes:
+  - type: http
+    namespace: traefik-api
+    baseUri: '{{env.TRAEFIK_API_URL}}'
+    description: Traefik Proxy REST API.
+    resources:
+    - name: overview
+      path: /api
+      description: Version and overview information.
+      operations:
+      - {name: get-version,      method: GET, description: Get Traefik version., outputRawFormat: json, outputParameters: [{name: result, type: object, value: '$.'}]}
+      - {name: get-overview,     method: GET, description: Overview counts for HTTP/TCP/UDP., outputRawFormat: json, outputParameters: [{name: result, type: object, value: '$.'}]}
+      - {name: get-support-dump, method: GET, description: Anonymized configuration archive for support escalation., outputRawFormat: binary, outputParameters: [{name: result, type: object, value: '$.'}]}
+    - name: entrypoints
+      path: /api/entrypoints
+      description: Network entry points configured on Traefik.
+      operations:
+      - {name: list-entry-points, method: GET, description: List entry points., outputRawFormat: json, outputParameters: [{name: result, type: array, value: '$.'}]}
+      - {name: get-entry-point,   method: GET, description: Get a single entry point., inputParameters: [{name: name, in: path, type: string, required: true, description: Entry point name.}], outputRawFormat: json, outputParameters: [{name: result, type: object, value: '$.'}]}
+    - name: health
+      path: /ping
+      description: Liveness endpoint.
+      operations:
+      - {name: ping, method: GET, description: Liveness probe returning 200 OK., outputRawFormat: text, outputParameters: [{name: result, type: string, value: '$.'}]}
+  exposes:
+  - type: rest
+    port: 8081
+    namespace: traefik-traffic-observability-api
+    description: Read-only REST surface for Traefik health and overview metrics.
+    resources:
+    - path: /v1/version
+      name: version
+      operations:
+      - {method: GET, name: get-version,     description: Traefik version., call: traefik-api.get-version,     outputParameters: [{type: object, mapping: '$.'}]}
+    - path: /v1/overview
+      name: overview
+      operations:
+      - {method: GET, name: get-overview,    description: Configuration overview., call: traefik-api.get-overview,    outputParameters: [{type: object, mapping: '$.'}]}
+    - path: /v1/entry-points
+      name: entry-points
+      operations:
+      - {method: GET, name: list-entry-points, description: List entry points., call: traefik-api.list-entry-points, outputParameters: [{type: array, mapping: '$.'}]}
+      - {method: GET, name: get-entry-point,   description: Get entry point by name., call: traefik-api.get-entry-point, outputParameters: [{type: object, mapping: '$.'}]}
+    - path: /v1/health
+      name: health
+      operations:
+      - {method: GET, name: ping, description: Liveness probe., call: traefik-api.ping, outputParameters: [{type: string, mapping: '$.'}]}
+    - path: /v1/support-dump
+      name: support-dump
+      operations:
+      - {method: GET, name: get-support-dump, description: Anonymized configuration archive., call: traefik-api.get-support-dump, outputParameters: [{type: object, mapping: '$.'}]}
+  - type: mcp
+    port: 9091
+    namespace: traefik-traffic-observability-mcp
+    transport: http
+    description: MCP server for AI-assisted Traefik health monitoring and overview reporting.
+    tools:
+    - {name: get-traefik-version,    description: Get the Traefik version and codename. Useful for incident response and release-correlation., hints: {readOnly: true, idempotent: true}, call: traefik-api.get-version,      outputParameters: [{type: object, mapping: '$.'}]}
+    - {name: get-routing-overview,   description: Get the count of routers, services, and middlewares across HTTP/TCP/UDP and the enabled features., hints: {readOnly: true, idempotent: true}, call: traefik-api.get-overview,     outputParameters: [{type: object, mapping: '$.'}]}
+    - {name: list-entry-points,      description: List configured entry points and the ports they listen on., hints: {readOnly: true, idempotent: true}, call: traefik-api.list-entry-points,  outputParameters: [{type: array,  mapping: '$.'}]}
+    - {name: check-traefik-health,   description: Hit the /ping endpoint to verify Traefik is alive., hints: {readOnly: true, idempotent: true}, call: traefik-api.ping,              outputParameters: [{type: string, mapping: '$.'}]}
+    - {name: get-traefik-support-dump, description: Fetch an anonymized support-dump archive of the running Traefik configuration for sharing with Traefik Labs support., hints: {readOnly: true, idempotent: true}, call: traefik-api.get-support-dump, outputParameters: [{type: object, mapping: '$.'}]}

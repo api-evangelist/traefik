@@ -1,0 +1,32 @@
+[
+  {
+    "name": "my-app@docker",
+    "type": "loadBalancer",
+    "status": "enabled",
+    "provider": "docker",
+    "loadBalancer": {
+      "servers": [
+        { "url": "http://10.0.0.12:8080" },
+        { "url": "http://10.0.0.13:8080" }
+      ],
+      "passHostHeader": true,
+      "healthCheck": {
+        "scheme": "http",
+        "path": "/health",
+        "port": 8080,
+        "interval": "30s",
+        "timeout": "5s"
+      }
+    },
+    "serverStatus": {
+      "http://10.0.0.12:8080": "UP",
+      "http://10.0.0.13:8080": "UP"
+    }
+  },
+  {
+    "name": "api@internal",
+    "type": "internal",
+    "status": "enabled",
+    "provider": "internal"
+  }
+]

@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://traefik.io/schemas/traefik/entrypoint.json",
+  "title": "Traefik Entry Point",
+  "description": "A configured network entry point on a running Traefik instance, describing the listen address, transport-layer behaviour, and lifecycle timeouts.",
+  "type": "object",
+  "required": ["name", "address"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Entry point name (e.g. web, websecure, traefik)."
+    },
+    "address": {
+      "type": "string",
+      "description": "Address Traefik binds the entry point to (e.g. :80, :443, :8080)."
+    },
+    "transport": {
+      "type": "object",
+      "description": "Transport-layer behaviour for connections accepted on this entry point.",
+      "properties": {
+        "lifeCycle": {
+          "type": "object",
+          "properties": {
+            "requestAcceptGraceTimeout": { "type": "string" },
+            "graceTimeOut": { "type": "string" }
+          }
+        },
+        "respondingTimeouts": {
+          "type": "object",
+          "properties": {
+            "readTimeout":  { "type": "string" },
+            "writeTimeout": { "type": "string" },
+            "idleTimeout":  { "type": "string" }
+          }
+        }
+      }
+    },
+    "http": {
+      "type": "object",
+      "description": "HTTP-level entry point overrides such as default TLS configuration and redirections.",
+      "properties": {
+        "tls": { "type": "object" },
+        "middlewares": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "proxyProtocol": {
+      "type": "object",
+      "description": "PROXY protocol settings - permits trusted upstream proxies to convey client information.",
+      "properties": {
+        "trustedIPs": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "insecure": { "type": "boolean" }
+      }
+    }
+  }
+}

@@ -1,0 +1,60 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: apiplans.hub.traefik.io
+spec:
+  group: hub.traefik.io
+  scope: Namespaced
+  names:
+    kind: APIPlan
+    listKind: APIPlanList
+    singular: apiplan
+    plural: apiplans
+  versions:
+    - name: v1alpha1
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          description: >-
+            APIPlan unifies rate-limit and quota policy for an API or
+            APIBundle. The rate-limit cap is enforced over a short window
+            (default 1 second) while the quota is enforced over a longer
+            window (e.g. monthly). Plans can be scoped per subscription, per
+            application, or per application-API pair via the bucket field.
+            Exceeding either limit yields HTTP 429 Too Many Requests.
+          properties:
+            spec:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                rateLimit:
+                  type: object
+                  properties:
+                    limit:
+                      type: integer
+                    period:
+                      type: string
+                    bucket:
+                      type: string
+                      enum:
+                        - subscription
+                        - application
+                        - application-api
+                quota:
+                  type: object
+                  properties:
+                    limit:
+                      type: integer
+                    period:
+                      type: string
+                    bucket:
+                      type: string
+                      enum:
+                        - subscription
+                        - application
+                        - application-api

@@ -1,0 +1,60 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: apiversions.hub.traefik.io
+spec:
+  group: hub.traefik.io
+  scope: Namespaced
+  names:
+    kind: APIVersion
+    listKind: APIVersionList
+    singular: apiversion
+    plural: apiversions
+  versions:
+    - name: v1alpha1
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          description: >-
+            APIVersion declares a specific version of an API (e.g. v1, v2,
+            v2-beta) and points to the backend service that implements it.
+            Multiple APIVersions can be attached to a single API for blue/green
+            rollouts, deprecation flows, and version-scoped access policies.
+          properties:
+            spec:
+              type: object
+              properties:
+                title:
+                  type: string
+                release:
+                  type: string
+                  description: Stable / beta / deprecated lifecycle stage label.
+                service:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    namespace:
+                      type: string
+                    port:
+                      oneOf:
+                        - type: integer
+                        - type: string
+                openApiSpec:
+                  type: object
+                  properties:
+                    url:
+                      type: string
+                    path:
+                      type: string
+                routes:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      pathPrefix:
+                        type: string
+                      headers:
+                        type: object

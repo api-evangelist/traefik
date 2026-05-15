@@ -1,0 +1,53 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: ingressrouteudps.traefik.io
+spec:
+  group: traefik.io
+  scope: Namespaced
+  names:
+    kind: IngressRouteUDP
+    listKind: IngressRouteUDPList
+    singular: ingressrouteudp
+    plural: ingressrouteudps
+  versions:
+    - name: v1alpha1
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          description: >-
+            IngressRouteUDP is a Traefik UDP routing resource that forwards
+            UDP datagrams arriving on the specified entryPoints to a set of
+            backend UDP services. Because UDP is connectionless and has no
+            host header, routing is purely by entry point and weighted
+            service set.
+          properties:
+            spec:
+              type: object
+              properties:
+                entryPoints:
+                  type: array
+                  items:
+                    type: string
+                routes:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      services:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            namespace:
+                              type: string
+                            port:
+                              oneOf:
+                                - type: integer
+                                - type: string
+                            weight:
+                              type: integer

@@ -1,0 +1,50 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: apicatalogitems.hub.traefik.io
+spec:
+  group: hub.traefik.io
+  scope: Namespaced
+  names:
+    kind: APICatalogItem
+    listKind: APICatalogItemList
+    singular: apicatalogitem
+    plural: apicatalogitems
+  versions:
+    - name: v1alpha1
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          description: >-
+            APICatalogItem controls developer-portal visibility of an API or
+            APIBundle, scoping discovery to designated user groups in the
+            connected IdP. APICatalogItem is paired with ManagedSubscription
+            to express "who can see it" vs. "who can call it" - this split
+            replaces the deprecated APIAccess CRD.
+          properties:
+            spec:
+              type: object
+              properties:
+                apis:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      namespace:
+                        type: string
+                apiBundles:
+                  type: array
+                  items:
+                    type: object
+                operationFilter:
+                  type: object
+                groups:
+                  type: array
+                  items:
+                    type: string
+                everyone:
+                  type: boolean
