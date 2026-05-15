@@ -1,0 +1,146 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  title: Traefik Rate Limit Sync
+  description: >-
+    Synchronizes Naftiko expose-side rate-limit declarations with Traefik
+    RateLimit middlewares so the Traefik edge enforces exactly what the
+    Naftiko spec declared — no drift between "what the capability says
+    its limits are" and "what the proxy actually enforces."
+  tags:
+    - Naftiko
+    - Traefik
+    - Partnership
+    - Rate-Limit
+    - Middleware
+    - Policy-Sync
+  created: '2026-05-15'
+  modified: '2026-05-15'
+
+binds:
+  - namespace: k8s-env
+    description: Kubernetes API server + bearer token (Naftiko engine's service account).
+    keys:
+      K8S_API_BASE: K8S_API_BASE
+      K8S_TOKEN: K8S_TOKEN
+
+capability:
+  consumes:
+    - namespace: k8s
+      type: http
+      baseUri: '{{K8S_API_BASE}}'
+      authentication:
+        type: bearer
+        token: '{{K8S_TOKEN}}'
+      resources:
+        - name: list-rate-limit-middlewares
+          path: '/apis/traefik.io/v1alpha1/namespaces/{{namespace}}/middlewares'
+          operations:
+            - name: list-rate-limit-middlewares
+              method: GET
+              inputParameters:
+                - name: namespace
+                  in: path
+                  required: true
+                - name: labelSelector
+                  in: query
+                  type: string
+                  required: false
+            - name: create-rate-limit-middleware
+              method: POST
+              inputParameters:
+                - name: namespace
+                  in: path
+                  required: true
+        - name: rate-limit-middleware
+          path: '/apis/traefik.io/v1alpha1/namespaces/{{namespace}}/middlewares/{{name}}'
+          operations:
+            - name: get-rate-limit-middleware
+              method: GET
+              inputParameters:
+                - name: namespace
+                  in: path
+                  required: true
+                - name: name
+                  in: path
+                  required: true
+            - name: replace-rate-limit-middleware
+              method: PUT
+              inputParameters:
+                - name: namespace
+                  in: path
+                  required: true
+                - name: name
+                  in: path
+                  required: true
+
+  exposes:
+    - type: rest
+      address: 0.0.0.0
+      port: 8080
+      namespace: traefik-rate-limit-sync-rest
+      description: REST surface for syncing Naftiko rate-limit declarations into Traefik middlewares.
+      resources:
+        - name: list-rate-limit-middlewares
+          path: '/rate-limits/{namespace}'
+          operations:
+            - name: list-rate-limit-middlewares
+              method: GET
+              inputParameters:
+                - { name: namespace, in: path, type: string, required: true }
+                - { name: labelSelector, in: query, type: string, required: false }
+              call: k8s.list-rate-limit-middlewares
+            - name: create-rate-limit-middleware
+              method: POST
+              inputParameters:
+                - { name: namespace, in: path, type: string, required: true }
+              call: k8s.create-rate-limit-middleware
+        - name: rate-limit-middleware
+          path: '/rate-limits/{namespace}/{name}'
+          operations:
+            - name: get-rate-limit-middleware
+              method: GET
+              inputParameters:
+                - { name: namespace, in: path, type: string, required: true }
+                - { name: name, in: path, type: string, required: true }
+              call: k8s.get-rate-limit-middleware
+            - name: replace-rate-limit-middleware
+              method: PUT
+              inputParameters:
+                - { name: namespace, in: path, type: string, required: true }
+                - { name: name, in: path, type: string, required: true }
+              call: k8s.replace-rate-limit-middleware
+
+    - type: mcp
+      address: 0.0.0.0
+      port: 3010
+      namespace: traefik-rate-limit-sync-mcp
+      description: MCP server for managing Traefik rate-limit middleware as code.
+      tools:
+        - name: list-rate-limit-middlewares
+          description: List Traefik RateLimit middlewares in a namespace (optionally label-filtered).
+          hints: { readOnly: true }
+          inputParameters:
+            - { name: namespace, type: string, required: true }
+            - { name: labelSelector, type: string, required: false, description: Kubernetes label selector. }
+          call: k8s.list-rate-limit-middlewares
+        - name: create-rate-limit-middleware
+          description: Create a new Traefik RateLimit Middleware CRD synchronized from a Naftiko expose declaration.
+          hints: { destructiveHint: false }
+          inputParameters:
+            - { name: namespace, type: string, required: true }
+          call: k8s.create-rate-limit-middleware
+        - name: get-rate-limit-middleware
+          description: Get a single Traefik RateLimit Middleware CRD.
+          hints: { readOnly: true }
+          inputParameters:
+            - { name: namespace, type: string, required: true }
+            - { name: name, type: string, required: true }
+          call: k8s.get-rate-limit-middleware
+        - name: replace-rate-limit-middleware
+          description: Replace a Traefik RateLimit Middleware CRD.
+          hints: { destructiveHint: true }
+          inputParameters:
+            - { name: namespace, type: string, required: true }
+            - { name: name, type: string, required: true }
+          call: k8s.replace-rate-limit-middleware

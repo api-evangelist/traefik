@@ -1,0 +1,151 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  title: Traefik Routes Discovery
+  description: >-
+    Pulls live router, service, middleware, and entrypoint inventory from a
+    running Traefik Proxy instance and exposes it as a discovery feed for
+    Naftiko Fleet. Lets Naftiko Backstage view "every capability the proxy
+    is currently routing to" alongside the Naftiko-declared capabilities.
+  tags:
+    - Naftiko
+    - Traefik
+    - Partnership
+    - Discovery
+    - Routing
+    - Backstage
+  created: '2026-05-15'
+  modified: '2026-05-15'
+
+binds:
+  - namespace: traefik-env
+    description: Traefik Proxy API base URL (typically the dashboard endpoint).
+    keys:
+      TRAEFIK_BASE_URL: TRAEFIK_BASE_URL
+
+capability:
+  consumes:
+    - namespace: traefik
+      type: http
+      baseUri: '{{TRAEFIK_BASE_URL}}'
+      resources:
+        - name: version
+          path: '/api/version'
+          operations:
+            - name: get-version
+              method: GET
+        - name: overview
+          path: '/api/overview'
+          operations:
+            - name: get-overview
+              method: GET
+        - name: entrypoints
+          path: '/api/entrypoints'
+          operations:
+            - name: list-entrypoints
+              method: GET
+        - name: http-routers
+          path: '/api/http/routers'
+          operations:
+            - name: list-http-routers
+              method: GET
+        - name: http-services
+          path: '/api/http/services'
+          operations:
+            - name: list-http-services
+              method: GET
+        - name: http-middlewares
+          path: '/api/http/middlewares'
+          operations:
+            - name: list-http-middlewares
+              method: GET
+        - name: tcp-routers
+          path: '/api/tcp/routers'
+          operations:
+            - name: list-tcp-routers
+              method: GET
+
+  exposes:
+    - type: rest
+      address: 0.0.0.0
+      port: 8080
+      namespace: traefik-routes-discovery-rest
+      description: REST surface for Naftiko Fleet to discover what Traefik is routing.
+      resources:
+        - name: version
+          path: '/version'
+          operations:
+            - name: get-version
+              method: GET
+              call: traefik.get-version
+        - name: overview
+          path: '/overview'
+          operations:
+            - name: get-overview
+              method: GET
+              call: traefik.get-overview
+        - name: entrypoints
+          path: '/entrypoints'
+          operations:
+            - name: list-entrypoints
+              method: GET
+              call: traefik.list-entrypoints
+        - name: http-routers
+          path: '/http/routers'
+          operations:
+            - name: list-http-routers
+              method: GET
+              call: traefik.list-http-routers
+        - name: http-services
+          path: '/http/services'
+          operations:
+            - name: list-http-services
+              method: GET
+              call: traefik.list-http-services
+        - name: http-middlewares
+          path: '/http/middlewares'
+          operations:
+            - name: list-http-middlewares
+              method: GET
+              call: traefik.list-http-middlewares
+        - name: tcp-routers
+          path: '/tcp/routers'
+          operations:
+            - name: list-tcp-routers
+              method: GET
+              call: traefik.list-tcp-routers
+
+    - type: mcp
+      address: 0.0.0.0
+      port: 3010
+      namespace: traefik-routes-discovery-mcp
+      description: MCP server exposing Traefik live routing inventory to discovery agents.
+      tools:
+        - name: get-version
+          description: Get the running Traefik Proxy version, codename, and start date.
+          hints: { readOnly: true }
+          call: traefik.get-version
+        - name: get-overview
+          description: Get router/service/middleware counts across HTTP/TCP/UDP and enabled features.
+          hints: { readOnly: true }
+          call: traefik.get-overview
+        - name: list-entrypoints
+          description: List Traefik network entrypoints (port + protocol listeners).
+          hints: { readOnly: true }
+          call: traefik.list-entrypoints
+        - name: list-http-routers
+          description: List every HTTP routing rule Traefik is currently serving.
+          hints: { readOnly: true }
+          call: traefik.list-http-routers
+        - name: list-http-services
+          description: List every backend service Traefik is currently load-balancing to.
+          hints: { readOnly: true }
+          call: traefik.list-http-services
+        - name: list-http-middlewares
+          description: List every HTTP middleware currently applied in any chain.
+          hints: { readOnly: true }
+          call: traefik.list-http-middlewares
+        - name: list-tcp-routers
+          description: List every TCP routing rule Traefik is currently serving.
+          hints: { readOnly: true }
+          call: traefik.list-tcp-routers

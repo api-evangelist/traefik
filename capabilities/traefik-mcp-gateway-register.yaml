@@ -1,0 +1,163 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  title: Traefik MCP Gateway Register
+  description: >-
+    Registers a Naftiko-built MCP server with Traefik Hub's MCP Gateway so
+    Traefik does identity-aware routing, capability scoping, and audit
+    logging on agent-to-MCP traffic in front of it. Round-trips the
+    Traefik MCP server entry back into the Naftiko capability metadata so
+    Backstage can show the gated path.
+  tags:
+    - Naftiko
+    - Traefik
+    - Partnership
+    - MCP
+    - MCP-Gateway
+    - Routing
+  created: '2026-05-15'
+  modified: '2026-05-15'
+
+binds:
+  - namespace: k8s-env
+    description: Kubernetes API server + bearer token (Naftiko engine's service account).
+    keys:
+      K8S_API_BASE: K8S_API_BASE
+      K8S_TOKEN: K8S_TOKEN
+
+capability:
+  consumes:
+    - namespace: k8s
+      type: http
+      baseUri: '{{K8S_API_BASE}}'
+      authentication:
+        type: bearer
+        token: '{{K8S_TOKEN}}'
+      resources:
+        - name: list-mcp-servers
+          path: '/apis/hub.traefik.io/v1alpha1/namespaces/{{namespace}}/mcpservers'
+          operations:
+            - name: list-mcp-servers
+              method: GET
+              inputParameters:
+                - name: namespace
+                  in: path
+                  required: true
+            - name: create-mcp-server
+              method: POST
+              inputParameters:
+                - name: namespace
+                  in: path
+                  required: true
+        - name: mcp-server
+          path: '/apis/hub.traefik.io/v1alpha1/namespaces/{{namespace}}/mcpservers/{{name}}'
+          operations:
+            - name: get-mcp-server
+              method: GET
+              inputParameters:
+                - name: namespace
+                  in: path
+                  required: true
+                - name: name
+                  in: path
+                  required: true
+            - name: replace-mcp-server
+              method: PUT
+              inputParameters:
+                - name: namespace
+                  in: path
+                  required: true
+                - name: name
+                  in: path
+                  required: true
+            - name: delete-mcp-server
+              method: DELETE
+              inputParameters:
+                - name: namespace
+                  in: path
+                  required: true
+                - name: name
+                  in: path
+                  required: true
+
+  exposes:
+    - type: rest
+      address: 0.0.0.0
+      port: 8080
+      namespace: traefik-mcp-gateway-register-rest
+      description: REST surface for managing the Traefik Hub MCP Gateway server registry.
+      resources:
+        - name: mcp-servers
+          path: '/mcp-servers/{namespace}'
+          operations:
+            - name: list-mcp-servers
+              method: GET
+              inputParameters:
+                - { name: namespace, in: path, type: string, required: true }
+              call: k8s.list-mcp-servers
+            - name: create-mcp-server
+              method: POST
+              inputParameters:
+                - { name: namespace, in: path, type: string, required: true }
+              call: k8s.create-mcp-server
+        - name: mcp-server
+          path: '/mcp-servers/{namespace}/{name}'
+          operations:
+            - name: get-mcp-server
+              method: GET
+              inputParameters:
+                - { name: namespace, in: path, type: string, required: true }
+                - { name: name, in: path, type: string, required: true }
+              call: k8s.get-mcp-server
+            - name: replace-mcp-server
+              method: PUT
+              inputParameters:
+                - { name: namespace, in: path, type: string, required: true }
+                - { name: name, in: path, type: string, required: true }
+              call: k8s.replace-mcp-server
+            - name: delete-mcp-server
+              method: DELETE
+              inputParameters:
+                - { name: namespace, in: path, type: string, required: true }
+                - { name: name, in: path, type: string, required: true }
+              call: k8s.delete-mcp-server
+
+    - type: mcp
+      address: 0.0.0.0
+      port: 3010
+      namespace: traefik-mcp-gateway-register-mcp
+      description: MCP server for managing Traefik Hub MCP Gateway server registrations.
+      tools:
+        - name: list-mcp-servers
+          description: List Traefik Hub MCP Gateway server registrations in a namespace.
+          hints: { readOnly: true }
+          inputParameters:
+            - { name: namespace, type: string, required: true }
+          call: k8s.list-mcp-servers
+        - name: create-mcp-server
+          description: Register a new MCP server with Traefik Hub MCP Gateway.
+          hints: { destructiveHint: false }
+          inputParameters:
+            - { name: namespace, type: string, required: true }
+          call: k8s.create-mcp-server
+        - name: get-mcp-server
+          description: Get a single Traefik Hub MCP Gateway server registration.
+          hints: { readOnly: true }
+          inputParameters:
+            - { name: namespace, type: string, required: true }
+            - { name: name, type: string, required: true }
+          call: k8s.get-mcp-server
+        - name: replace-mcp-server
+          description: Replace a Traefik Hub MCP Gateway server registration.
+          hints: { destructiveHint: true }
+          inputParameters:
+            - { name: namespace, type: string, required: true }
+            - { name: name, type: string, required: true }
+          call: k8s.replace-mcp-server
+        - name: delete-mcp-server
+          description: Deregister an MCP server from Traefik Hub MCP Gateway.
+          hints: { destructiveHint: true }
+          inputParameters:
+            - { name: namespace, type: string, required: true }
+            - { name: name, type: string, required: true }
+          call: k8s.delete-mcp-server

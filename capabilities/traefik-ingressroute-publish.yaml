@@ -1,0 +1,202 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  title: Traefik IngressRoute Publish
+  description: >-
+    When a Naftiko capability ships a REST or MCP expose, this capability
+    publishes the matching Traefik IngressRoute (or IngressRouteTCP) so
+    the proxy starts routing traffic to it on the same release. One
+    Naftiko capability deploy → one IngressRoute up → traffic flowing.
+  tags:
+    - Naftiko
+    - Traefik
+    - Partnership
+    - IngressRoute
+    - Routing
+    - Publish
+  created: '2026-05-15'
+  modified: '2026-05-15'
+
+binds:
+  - namespace: k8s-env
+    description: Kubernetes API server + bearer token (Naftiko engine's service account).
+    keys:
+      K8S_API_BASE: K8S_API_BASE
+      K8S_TOKEN: K8S_TOKEN
+
+capability:
+  consumes:
+    - namespace: k8s
+      type: http
+      baseUri: '{{K8S_API_BASE}}'
+      authentication:
+        type: bearer
+        token: '{{K8S_TOKEN}}'
+      resources:
+        - name: ingress-routes
+          path: '/apis/traefik.io/v1alpha1/namespaces/{{namespace}}/ingressroutes'
+          operations:
+            - name: list-ingress-routes
+              method: GET
+              inputParameters:
+                - name: namespace
+                  in: path
+                  required: true
+            - name: create-ingress-route
+              method: POST
+              inputParameters:
+                - name: namespace
+                  in: path
+                  required: true
+        - name: ingress-route
+          path: '/apis/traefik.io/v1alpha1/namespaces/{{namespace}}/ingressroutes/{{name}}'
+          operations:
+            - name: get-ingress-route
+              method: GET
+              inputParameters:
+                - name: namespace
+                  in: path
+                  required: true
+                - name: name
+                  in: path
+                  required: true
+            - name: replace-ingress-route
+              method: PUT
+              inputParameters:
+                - name: namespace
+                  in: path
+                  required: true
+                - name: name
+                  in: path
+                  required: true
+            - name: delete-ingress-route
+              method: DELETE
+              inputParameters:
+                - name: namespace
+                  in: path
+                  required: true
+                - name: name
+                  in: path
+                  required: true
+        - name: ingress-routes-tcp
+          path: '/apis/traefik.io/v1alpha1/namespaces/{{namespace}}/ingressroutetcps'
+          operations:
+            - name: list-ingress-routes-tcp
+              method: GET
+              inputParameters:
+                - name: namespace
+                  in: path
+                  required: true
+            - name: create-ingress-route-tcp
+              method: POST
+              inputParameters:
+                - name: namespace
+                  in: path
+                  required: true
+
+  exposes:
+    - type: rest
+      address: 0.0.0.0
+      port: 8080
+      namespace: traefik-ingressroute-publish-rest
+      description: REST surface for publishing Traefik IngressRoutes from Naftiko exposes.
+      resources:
+        - name: ingress-routes
+          path: '/ingress-routes/{namespace}'
+          operations:
+            - name: list-ingress-routes
+              method: GET
+              inputParameters:
+                - { name: namespace, in: path, type: string, required: true }
+              call: k8s.list-ingress-routes
+            - name: create-ingress-route
+              method: POST
+              inputParameters:
+                - { name: namespace, in: path, type: string, required: true }
+              call: k8s.create-ingress-route
+        - name: ingress-route
+          path: '/ingress-routes/{namespace}/{name}'
+          operations:
+            - name: get-ingress-route
+              method: GET
+              inputParameters:
+                - { name: namespace, in: path, type: string, required: true }
+                - { name: name, in: path, type: string, required: true }
+              call: k8s.get-ingress-route
+            - name: replace-ingress-route
+              method: PUT
+              inputParameters:
+                - { name: namespace, in: path, type: string, required: true }
+                - { name: name, in: path, type: string, required: true }
+              call: k8s.replace-ingress-route
+            - name: delete-ingress-route
+              method: DELETE
+              inputParameters:
+                - { name: namespace, in: path, type: string, required: true }
+                - { name: name, in: path, type: string, required: true }
+              call: k8s.delete-ingress-route
+        - name: ingress-routes-tcp
+          path: '/ingress-routes-tcp/{namespace}'
+          operations:
+            - name: list-ingress-routes-tcp
+              method: GET
+              inputParameters:
+                - { name: namespace, in: path, type: string, required: true }
+              call: k8s.list-ingress-routes-tcp
+            - name: create-ingress-route-tcp
+              method: POST
+              inputParameters:
+                - { name: namespace, in: path, type: string, required: true }
+              call: k8s.create-ingress-route-tcp
+
+    - type: mcp
+      address: 0.0.0.0
+      port: 3010
+      namespace: traefik-ingressroute-publish-mcp
+      description: MCP server for publishing Traefik IngressRoutes from agent workflows.
+      tools:
+        - name: list-ingress-routes
+          description: List Traefik IngressRoute CRDs in a namespace.
+          hints: { readOnly: true }
+          inputParameters:
+            - { name: namespace, type: string, required: true }
+          call: k8s.list-ingress-routes
+        - name: create-ingress-route
+          description: Publish a new Traefik IngressRoute CRD (typically pointing at a Naftiko capability service).
+          hints: { destructiveHint: false }
+          inputParameters:
+            - { name: namespace, type: string, required: true }
+          call: k8s.create-ingress-route
+        - name: get-ingress-route
+          description: Get a single Traefik IngressRoute CRD.
+          hints: { readOnly: true }
+          inputParameters:
+            - { name: namespace, type: string, required: true }
+            - { name: name, type: string, required: true }
+          call: k8s.get-ingress-route
+        - name: replace-ingress-route
+          description: Replace a Traefik IngressRoute CRD.
+          hints: { destructiveHint: true }
+          inputParameters:
+            - { name: namespace, type: string, required: true }
+            - { name: name, type: string, required: true }
+          call: k8s.replace-ingress-route
+        - name: delete-ingress-route
+          description: Delete a Traefik IngressRoute CRD.
+          hints: { destructiveHint: true }
+          inputParameters:
+            - { name: namespace, type: string, required: true }
+            - { name: name, type: string, required: true }
+          call: k8s.delete-ingress-route
+        - name: list-ingress-routes-tcp
+          description: List Traefik IngressRouteTCP CRDs in a namespace.
+          hints: { readOnly: true }
+          inputParameters:
+            - { name: namespace, type: string, required: true }
+          call: k8s.list-ingress-routes-tcp
+        - name: create-ingress-route-tcp
+          description: Publish a new Traefik IngressRouteTCP CRD.
+          hints: { destructiveHint: false }
+          inputParameters:
+            - { name: namespace, type: string, required: true }
+          call: k8s.create-ingress-route-tcp

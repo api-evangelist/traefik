@@ -1,0 +1,185 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  title: Traefik ACME Cert Manager
+  description: >-
+    Manages Let's Encrypt / ACME certificate state via Traefik's TLSStore
+    + TLSOption CRDs so Naftiko-built REST exposes that need TLS pick up
+    Traefik-managed certificates automatically. Removes the per-capability
+    cert plumbing burden from Naftiko engineers.
+  tags:
+    - Naftiko
+    - Traefik
+    - Partnership
+    - TLS
+    - ACME
+    - Certificates
+  created: '2026-05-15'
+  modified: '2026-05-15'
+
+binds:
+  - namespace: k8s-env
+    description: Kubernetes API server + bearer token (Naftiko engine's service account).
+    keys:
+      K8S_API_BASE: K8S_API_BASE
+      K8S_TOKEN: K8S_TOKEN
+
+capability:
+  consumes:
+    - namespace: k8s
+      type: http
+      baseUri: '{{K8S_API_BASE}}'
+      authentication:
+        type: bearer
+        token: '{{K8S_TOKEN}}'
+      resources:
+        - name: list-tls-stores
+          path: '/apis/traefik.io/v1alpha1/namespaces/{{namespace}}/tlsstores'
+          operations:
+            - name: list-tls-stores
+              method: GET
+              inputParameters:
+                - name: namespace
+                  in: path
+                  required: true
+            - name: create-tls-store
+              method: POST
+              inputParameters:
+                - name: namespace
+                  in: path
+                  required: true
+        - name: tls-store
+          path: '/apis/traefik.io/v1alpha1/namespaces/{{namespace}}/tlsstores/{{name}}'
+          operations:
+            - name: get-tls-store
+              method: GET
+              inputParameters:
+                - name: namespace
+                  in: path
+                  required: true
+                - name: name
+                  in: path
+                  required: true
+            - name: replace-tls-store
+              method: PUT
+              inputParameters:
+                - name: namespace
+                  in: path
+                  required: true
+                - name: name
+                  in: path
+                  required: true
+            - name: delete-tls-store
+              method: DELETE
+              inputParameters:
+                - name: namespace
+                  in: path
+                  required: true
+                - name: name
+                  in: path
+                  required: true
+        - name: list-tls-options
+          path: '/apis/traefik.io/v1alpha1/namespaces/{{namespace}}/tlsoptions'
+          operations:
+            - name: list-tls-options
+              method: GET
+              inputParameters:
+                - name: namespace
+                  in: path
+                  required: true
+
+  exposes:
+    - type: rest
+      address: 0.0.0.0
+      port: 8080
+      namespace: traefik-acme-cert-manager-rest
+      description: REST surface for managing Traefik ACME / TLS state.
+      resources:
+        - name: tls-stores
+          path: '/tls-stores/{namespace}'
+          operations:
+            - name: list-tls-stores
+              method: GET
+              inputParameters:
+                - { name: namespace, in: path, type: string, required: true }
+              call: k8s.list-tls-stores
+            - name: create-tls-store
+              method: POST
+              inputParameters:
+                - { name: namespace, in: path, type: string, required: true }
+              call: k8s.create-tls-store
+        - name: tls-store
+          path: '/tls-stores/{namespace}/{name}'
+          operations:
+            - name: get-tls-store
+              method: GET
+              inputParameters:
+                - { name: namespace, in: path, type: string, required: true }
+                - { name: name, in: path, type: string, required: true }
+              call: k8s.get-tls-store
+            - name: replace-tls-store
+              method: PUT
+              inputParameters:
+                - { name: namespace, in: path, type: string, required: true }
+                - { name: name, in: path, type: string, required: true }
+              call: k8s.replace-tls-store
+            - name: delete-tls-store
+              method: DELETE
+              inputParameters:
+                - { name: namespace, in: path, type: string, required: true }
+                - { name: name, in: path, type: string, required: true }
+              call: k8s.delete-tls-store
+        - name: list-tls-options
+          path: '/tls-options/{namespace}'
+          operations:
+            - name: list-tls-options
+              method: GET
+              inputParameters:
+                - { name: namespace, in: path, type: string, required: true }
+              call: k8s.list-tls-options
+
+    - type: mcp
+      address: 0.0.0.0
+      port: 3010
+      namespace: traefik-acme-cert-manager-mcp
+      description: MCP server for cert / TLS agents to manage Traefik ACME state.
+      tools:
+        - name: list-tls-stores
+          description: List Traefik TLSStore CRDs in a namespace (cert pools).
+          hints: { readOnly: true }
+          inputParameters:
+            - { name: namespace, type: string, required: true }
+          call: k8s.list-tls-stores
+        - name: create-tls-store
+          description: Create a new Traefik TLSStore CRD.
+          hints: { destructiveHint: false }
+          inputParameters:
+            - { name: namespace, type: string, required: true }
+          call: k8s.create-tls-store
+        - name: get-tls-store
+          description: Get a single Traefik TLSStore CRD.
+          hints: { readOnly: true }
+          inputParameters:
+            - { name: namespace, type: string, required: true }
+            - { name: name, type: string, required: true }
+          call: k8s.get-tls-store
+        - name: replace-tls-store
+          description: Replace a Traefik TLSStore CRD.
+          hints: { destructiveHint: true }
+          inputParameters:
+            - { name: namespace, type: string, required: true }
+            - { name: name, type: string, required: true }
+          call: k8s.replace-tls-store
+        - name: delete-tls-store
+          description: Delete a Traefik TLSStore CRD.
+          hints: { destructiveHint: true }
+          inputParameters:
+            - { name: namespace, type: string, required: true }
+            - { name: name, type: string, required: true }
+          call: k8s.delete-tls-store
+        - name: list-tls-options
+          description: List Traefik TLSOption CRDs in a namespace (TLS handshake parameters).
+          hints: { readOnly: true }
+          inputParameters:
+            - { name: namespace, type: string, required: true }
+          call: k8s.list-tls-options
