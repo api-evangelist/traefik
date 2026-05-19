@@ -1,0 +1,257 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Traefik Proxy REST API — HTTP
+  description: 'Traefik Proxy REST API — HTTP. 6 operations. Lead operation: List All HTTP Middlewares. Self-contained Naftiko
+    capability covering one Traefik business surface.'
+  tags:
+  - Traefik
+  - HTTP
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    TRAEFIK_API_KEY: TRAEFIK_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: proxy-http
+    baseUri: http://localhost:8080/api
+    description: Traefik Proxy REST API — HTTP business capability. Self-contained, no shared references.
+    resources:
+    - name: http-middlewares
+      path: /http/middlewares
+      operations:
+      - name: listhttpmiddlewares
+        method: GET
+        description: List All HTTP Middlewares
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: http-middlewares-name
+      path: /http/middlewares/{name}
+      operations:
+      - name: gethttpmiddleware
+        method: GET
+        description: Get a Specific HTTP Middleware
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          description: The name of the HTTP middleware, in the format name@provider.
+          required: true
+    - name: http-routers
+      path: /http/routers
+      operations:
+      - name: listhttprouters
+        method: GET
+        description: List All HTTP Routers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: http-routers-name
+      path: /http/routers/{name}
+      operations:
+      - name: gethttprouter
+        method: GET
+        description: Get a Specific HTTP Router
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          description: The name of the HTTP router, in the format name@provider.
+          required: true
+    - name: http-services
+      path: /http/services
+      operations:
+      - name: listhttpservices
+        method: GET
+        description: List All HTTP Services
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: http-services-name
+      path: /http/services/{name}
+      operations:
+      - name: gethttpservice
+        method: GET
+        description: Get a Specific HTTP Service
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          description: The name of the HTTP service, in the format name@provider.
+          required: true
+  exposes:
+  - type: rest
+    namespace: proxy-http-rest
+    port: 8080
+    description: REST adapter for Traefik Proxy REST API — HTTP. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/http/middlewares
+      name: http-middlewares
+      description: REST surface for http-middlewares.
+      operations:
+      - method: GET
+        name: listhttpmiddlewares
+        description: List All HTTP Middlewares
+        call: proxy-http.listhttpmiddlewares
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/http/middlewares/{name}
+      name: http-middlewares-name
+      description: REST surface for http-middlewares-name.
+      operations:
+      - method: GET
+        name: gethttpmiddleware
+        description: Get a Specific HTTP Middleware
+        call: proxy-http.gethttpmiddleware
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/http/routers
+      name: http-routers
+      description: REST surface for http-routers.
+      operations:
+      - method: GET
+        name: listhttprouters
+        description: List All HTTP Routers
+        call: proxy-http.listhttprouters
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/http/routers/{name}
+      name: http-routers-name
+      description: REST surface for http-routers-name.
+      operations:
+      - method: GET
+        name: gethttprouter
+        description: Get a Specific HTTP Router
+        call: proxy-http.gethttprouter
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/http/services
+      name: http-services
+      description: REST surface for http-services.
+      operations:
+      - method: GET
+        name: listhttpservices
+        description: List All HTTP Services
+        call: proxy-http.listhttpservices
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/http/services/{name}
+      name: http-services-name
+      description: REST surface for http-services-name.
+      operations:
+      - method: GET
+        name: gethttpservice
+        description: Get a Specific HTTP Service
+        call: proxy-http.gethttpservice
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: proxy-http-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Traefik Proxy REST API — HTTP. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: list-all-http-middlewares
+      description: List All HTTP Middlewares
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: proxy-http.listhttpmiddlewares
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-specific-http-middleware
+      description: Get a Specific HTTP Middleware
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: proxy-http.gethttpmiddleware
+      with:
+        name: tools.name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-all-http-routers
+      description: List All HTTP Routers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: proxy-http.listhttprouters
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-specific-http-router
+      description: Get a Specific HTTP Router
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: proxy-http.gethttprouter
+      with:
+        name: tools.name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-all-http-services
+      description: List All HTTP Services
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: proxy-http.listhttpservices
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-specific-http-service
+      description: Get a Specific HTTP Service
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: proxy-http.gethttpservice
+      with:
+        name: tools.name
+      outputParameters:
+      - type: object
+        mapping: $.

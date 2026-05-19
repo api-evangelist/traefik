@@ -1,0 +1,183 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Traefik Proxy REST API — UDP
+  description: 'Traefik Proxy REST API — UDP. 4 operations. Lead operation: List All UDP Routers. Self-contained Naftiko capability
+    covering one Traefik business surface.'
+  tags:
+  - Traefik
+  - UDP
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    TRAEFIK_API_KEY: TRAEFIK_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: proxy-udp
+    baseUri: http://localhost:8080/api
+    description: Traefik Proxy REST API — UDP business capability. Self-contained, no shared references.
+    resources:
+    - name: udp-routers
+      path: /udp/routers
+      operations:
+      - name: listudprouters
+        method: GET
+        description: List All UDP Routers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: udp-routers-name
+      path: /udp/routers/{name}
+      operations:
+      - name: getudprouter
+        method: GET
+        description: Get a Specific UDP Router
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          description: The name of the UDP router, in the format name@provider.
+          required: true
+    - name: udp-services
+      path: /udp/services
+      operations:
+      - name: listudpservices
+        method: GET
+        description: List All UDP Services
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: udp-services-name
+      path: /udp/services/{name}
+      operations:
+      - name: getudpservice
+        method: GET
+        description: Get a Specific UDP Service
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          description: The name of the UDP service, in the format name@provider.
+          required: true
+  exposes:
+  - type: rest
+    namespace: proxy-udp-rest
+    port: 8080
+    description: REST adapter for Traefik Proxy REST API — UDP. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/udp/routers
+      name: udp-routers
+      description: REST surface for udp-routers.
+      operations:
+      - method: GET
+        name: listudprouters
+        description: List All UDP Routers
+        call: proxy-udp.listudprouters
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/udp/routers/{name}
+      name: udp-routers-name
+      description: REST surface for udp-routers-name.
+      operations:
+      - method: GET
+        name: getudprouter
+        description: Get a Specific UDP Router
+        call: proxy-udp.getudprouter
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/udp/services
+      name: udp-services
+      description: REST surface for udp-services.
+      operations:
+      - method: GET
+        name: listudpservices
+        description: List All UDP Services
+        call: proxy-udp.listudpservices
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/udp/services/{name}
+      name: udp-services-name
+      description: REST surface for udp-services-name.
+      operations:
+      - method: GET
+        name: getudpservice
+        description: Get a Specific UDP Service
+        call: proxy-udp.getudpservice
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: proxy-udp-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Traefik Proxy REST API — UDP. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: list-all-udp-routers
+      description: List All UDP Routers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: proxy-udp.listudprouters
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-specific-udp-router
+      description: Get a Specific UDP Router
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: proxy-udp.getudprouter
+      with:
+        name: tools.name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-all-udp-services
+      description: List All UDP Services
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: proxy-udp.listudpservices
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-specific-udp-service
+      description: Get a Specific UDP Service
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: proxy-udp.getudpservice
+      with:
+        name: tools.name
+      outputParameters:
+      - type: object
+        mapping: $.

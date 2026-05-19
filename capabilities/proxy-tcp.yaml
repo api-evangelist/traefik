@@ -1,0 +1,257 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Traefik Proxy REST API — TCP
+  description: 'Traefik Proxy REST API — TCP. 6 operations. Lead operation: List All TCP Middlewares. Self-contained Naftiko
+    capability covering one Traefik business surface.'
+  tags:
+  - Traefik
+  - TCP
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    TRAEFIK_API_KEY: TRAEFIK_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: proxy-tcp
+    baseUri: http://localhost:8080/api
+    description: Traefik Proxy REST API — TCP business capability. Self-contained, no shared references.
+    resources:
+    - name: tcp-middlewares
+      path: /tcp/middlewares
+      operations:
+      - name: listtcpmiddlewares
+        method: GET
+        description: List All TCP Middlewares
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: tcp-middlewares-name
+      path: /tcp/middlewares/{name}
+      operations:
+      - name: gettcpmiddleware
+        method: GET
+        description: Get a Specific TCP Middleware
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          description: The name of the TCP middleware, in the format name@provider.
+          required: true
+    - name: tcp-routers
+      path: /tcp/routers
+      operations:
+      - name: listtcprouters
+        method: GET
+        description: List All TCP Routers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: tcp-routers-name
+      path: /tcp/routers/{name}
+      operations:
+      - name: gettcprouter
+        method: GET
+        description: Get a Specific TCP Router
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          description: The name of the TCP router, in the format name@provider.
+          required: true
+    - name: tcp-services
+      path: /tcp/services
+      operations:
+      - name: listtcpservices
+        method: GET
+        description: List All TCP Services
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: tcp-services-name
+      path: /tcp/services/{name}
+      operations:
+      - name: gettcpservice
+        method: GET
+        description: Get a Specific TCP Service
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          description: The name of the TCP service, in the format name@provider.
+          required: true
+  exposes:
+  - type: rest
+    namespace: proxy-tcp-rest
+    port: 8080
+    description: REST adapter for Traefik Proxy REST API — TCP. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/tcp/middlewares
+      name: tcp-middlewares
+      description: REST surface for tcp-middlewares.
+      operations:
+      - method: GET
+        name: listtcpmiddlewares
+        description: List All TCP Middlewares
+        call: proxy-tcp.listtcpmiddlewares
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/tcp/middlewares/{name}
+      name: tcp-middlewares-name
+      description: REST surface for tcp-middlewares-name.
+      operations:
+      - method: GET
+        name: gettcpmiddleware
+        description: Get a Specific TCP Middleware
+        call: proxy-tcp.gettcpmiddleware
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/tcp/routers
+      name: tcp-routers
+      description: REST surface for tcp-routers.
+      operations:
+      - method: GET
+        name: listtcprouters
+        description: List All TCP Routers
+        call: proxy-tcp.listtcprouters
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/tcp/routers/{name}
+      name: tcp-routers-name
+      description: REST surface for tcp-routers-name.
+      operations:
+      - method: GET
+        name: gettcprouter
+        description: Get a Specific TCP Router
+        call: proxy-tcp.gettcprouter
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/tcp/services
+      name: tcp-services
+      description: REST surface for tcp-services.
+      operations:
+      - method: GET
+        name: listtcpservices
+        description: List All TCP Services
+        call: proxy-tcp.listtcpservices
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/tcp/services/{name}
+      name: tcp-services-name
+      description: REST surface for tcp-services-name.
+      operations:
+      - method: GET
+        name: gettcpservice
+        description: Get a Specific TCP Service
+        call: proxy-tcp.gettcpservice
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: proxy-tcp-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Traefik Proxy REST API — TCP. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: list-all-tcp-middlewares
+      description: List All TCP Middlewares
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: proxy-tcp.listtcpmiddlewares
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-specific-tcp-middleware
+      description: Get a Specific TCP Middleware
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: proxy-tcp.gettcpmiddleware
+      with:
+        name: tools.name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-all-tcp-routers
+      description: List All TCP Routers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: proxy-tcp.listtcprouters
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-specific-tcp-router
+      description: Get a Specific TCP Router
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: proxy-tcp.gettcprouter
+      with:
+        name: tools.name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-all-tcp-services
+      description: List All TCP Services
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: proxy-tcp.listtcpservices
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-specific-tcp-service
+      description: Get a Specific TCP Service
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: proxy-tcp.gettcpservice
+      with:
+        name: tools.name
+      outputParameters:
+      - type: object
+        mapping: $.
