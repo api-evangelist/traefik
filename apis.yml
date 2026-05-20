@@ -8,144 +8,440 @@ description: Traefik Labs builds cloud-native traffic and API infrastructure - t
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-- AI Gateway
-- API Gateway
-- API Management
-- Developer Portal
-- GitOps
-- Kubernetes
-- Load Balancer
-- MCP Gateway
-- Open Source
-- Reverse Proxy
-- WAF
+  - AI Gateway
+  - API Gateway
+  - API Management
+  - Developer Portal
+  - GitOps
+  - Kubernetes
+  - Load Balancer
+  - MCP Gateway
+  - Open Source
+  - Reverse Proxy
+  - WAF
 url: https://raw.githubusercontent.com/api-evangelist/traefik/refs/heads/main/apis.yml
 created: '2026-03-18'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-- aid: traefik:traefik-proxy
-  name: Traefik Proxy
-  description: Traefik Proxy is the flagship open-source (MIT) cloud-native reverse proxy, ingress controller, and load balancer.
-    It auto-discovers services from Kubernetes (Ingress, Gateway API, CRD), Docker, Docker Swarm, Nomad, Amazon ECS, Consul,
-    file, and HTTP providers, and ships with native ACME (Let's Encrypt) certificate provisioning, HTTP/2, HTTP/3, gRPC, WebSockets,
-    TCP, UDP, an extensible middleware chain, and a built-in dashboard.
-  humanURL: https://traefik.io/traefik/
-  baseURL: ''
-  tags:
-  - API Gateway
-  - Ingress Controller
-  - Kubernetes
-  - Load Balancer
-  - Open Source
-  - Reverse Proxy
-  properties:
+  - aid: traefik:traefik-proxy
+    name: Traefik Proxy
+    description: Traefik Proxy is the flagship open-source (MIT) cloud-native reverse proxy, ingress controller, and load balancer.
+      It auto-discovers services from Kubernetes (Ingress, Gateway API, CRD), Docker, Docker Swarm, Nomad, Amazon ECS, Consul,
+      file, and HTTP providers, and ships with native ACME (Let's Encrypt) certificate provisioning, HTTP/2, HTTP/3, gRPC, WebSockets,
+      TCP, UDP, an extensible middleware chain, and a built-in dashboard.
+    humanURL: https://traefik.io/traefik/
+    baseURL: ''
+    tags:
+    - API Gateway
+    - Ingress Controller
+    - Kubernetes
+    - Load Balancer
+    - Open Source
+    - Reverse Proxy
+    properties:
+    - type: Documentation
+      url: https://doc.traefik.io/traefik/
+    - type: Getting Started
+      url: https://doc.traefik.io/traefik/getting-started/quick-start/
+    - type: Reference
+      url: https://doc.traefik.io/traefik/reference/static-configuration/cli/
+    - type: Change Log
+      url: https://github.com/traefik/traefik/blob/master/CHANGELOG.md
+    - type: GitHubRepository
+      url: https://github.com/traefik/traefik
+    - type: License
+      url: https://github.com/traefik/traefik/blob/master/LICENSE.md
+    - type: Helm Chart
+      url: https://github.com/traefik/traefik-helm-chart
+    - type: Docker Image
+      url: https://hub.docker.com/_/traefik
+    - type: Plugin Catalog
+      url: https://plugins.traefik.io/
+    - type: KubernetesCRD
+      url: crd/traefik-ingressroute.yaml
+    - type: KubernetesCRD
+      url: crd/traefik-ingressroutetcp.yaml
+    - type: KubernetesCRD
+      url: crd/traefik-ingressrouteudp.yaml
+    - type: KubernetesCRD
+      url: crd/traefik-middleware.yaml
+    - type: KubernetesCRD
+      url: crd/traefik-middlewaretcp.yaml
+    - type: KubernetesCRD
+      url: crd/traefik-tlsoption.yaml
+    - type: KubernetesCRD
+      url: crd/traefik-tlsstore.yaml
+    - type: KubernetesCRD
+      url: crd/traefik-traefikservice.yaml
+    - type: KubernetesCRD
+      url: crd/traefik-serverstransport.yaml
+    - type: KubernetesCRD
+      url: crd/traefik-serverstransporttcp.yaml
+    features:
+    - name: Auto Service Discovery
+      description: Discovers backends dynamically from Kubernetes
+      Docker: null
+      Swarm: null
+      Nomad: null
+      ECS: null
+      Consul: null
+      Etcd: null
+      and file.: null
+    - name: Let's Encrypt / ACME
+      description: Automatic TLS certificate provisioning including wildcard and DNS-01 challenges across 70+ DNS providers.
+    - name: Multi-Protocol
+      description: HTTP/1.1
+      HTTP/2: null
+      HTTP/3 (QUIC): null
+      TCP: null
+      UDP: null
+      gRPC: null
+      WebSocket: null
+      gRPC-Web.: null
+    - name: Middleware Catalog
+      description: 25+ built-in HTTP middlewares including BasicAuth
+      ForwardAuth: null
+      RateLimit: null
+      Headers: null
+      CircuitBreaker: null
+      Retry: null
+      Compress: null
+      Buffering: null
+      IPAllowList: null
+      RedirectScheme: null
+      ReplacePath.: null
+    - name: Kubernetes-Native
+      description: Custom Resource Definitions for HTTP/TCP/UDP routing - IngressRoute
+      IngressRouteTCP: null
+      IngressRouteUDP: null
+      Middleware: null
+      TraefikService: null
+      TLSOption: null
+      TLSStore: null
+      ServersTransport.: null
+    - name: Gateway API Support
+      description: Implements the upstream Kubernetes Gateway API.
+    - name: Dynamic Configuration
+      description: Reload routing rules at runtime with no restart.
+    - name: Observability
+      description: Prometheus
+      Datadog: null
+      InfluxDB 2.x: null
+      StatsD metrics: null
+      OpenTelemetry tracing: null
+      JSON and CLF access logs.: null
+    - name: Plugin System
+      description: Load community plugins as Yaegi-interpreted Go or WebAssembly without rebuilding Traefik.
+    - name: Built-in Dashboard
+      description: Web UI rendering the live router/service/middleware topology.
+    useCases:
+    - name: Kubernetes Ingress Controller
+    - name: Multi-Cloud Reverse Proxy
+    - name: Microservices API Gateway
+    - name: Edge Load Balancer
+    - name: Service Mesh Edge
+    - name: Ingress NGINX Migration Target
+    - name: AI Workload Ingress
+    integrations:
+    - name: Kubernetes
+    - name: Kubernetes Gateway API
+    - name: Docker
+    - name: Docker Swarm
+    - name: HashiCorp Nomad
+    - name: HashiCorp Consul
+    - name: HashiCorp Vault
+    - name: Amazon ECS
+    - name: Etcd
+    - name: Let's Encrypt
+    - name: Prometheus
+    - name: Datadog
+    - name: InfluxDB
+    - name: StatsD
+    - name: Grafana
+    - name: OpenTelemetry
+    - name: Jaeger
+    - name: Zipkin
+    - name: Elastic
+    - name: Splunk
+    - name: Sysdig
+    - name: Instana
+    - name: AWS
+    - name: Microsoft Azure
+    - name: Google Cloud
+    - name: Oracle Cloud Infrastructure
+    - name: DigitalOcean
+    - name: Exoscale
+    - name: Equinix Metal
+    - name: Rancher
+    - name: Platform9
+    - name: Nutanix
+  - aid: traefik:traefik-proxy-api
+    name: Traefik Proxy REST API
+    description: The Traefik Proxy REST API exposes runtime configuration and state for every router, service, middleware, and
+      entry point in a running Traefik instance, plus version metadata, raw dynamic configuration, and an anonymized support-dump
+      archive for vendor troubleshooting. Read-only; must be enabled in static configuration and gated behind auth before being
+      exposed.
+    humanURL: https://doc.traefik.io/traefik/reference/install-configuration/api-dashboard/
+    baseURL: http://localhost:8080/api
+    tags:
+    - Configuration
+    - Management
+    - Observability
+    - REST
+    properties:
+    - type: Documentation
+      url: https://doc.traefik.io/traefik/reference/install-configuration/api-dashboard/
+    - type: OpenAPI
+      url: openapi/traefik-proxy-openapi.yml
+    - type: Spectral
+      url: rules/traefik-proxy-rules.yml
+    - type: Capability
+      url: capabilities/shared/traefik-proxy.yaml
+    - type: Capability
+      url: capabilities/gateway-operations.yaml
+    - type: Capability
+      url: capabilities/traffic-observability.yaml
+    - type: NaftikoCapability
+      url: capabilities/proxy-entrypoints.yaml
+    - type: NaftikoCapability
+      url: capabilities/proxy-http.yaml
+    - type: NaftikoCapability
+      url: capabilities/proxy-health.yaml
+    - type: NaftikoCapability
+      url: capabilities/proxy-overview.yaml
+    - type: NaftikoCapability
+      url: capabilities/proxy-tcp.yaml
+    - type: NaftikoCapability
+      url: capabilities/proxy-udp.yaml
+  - aid: traefik:traefik-ping
+    name: Traefik Ping API
+    description: Lightweight liveness probe at `/ping` that returns HTTP 200 with body "OK" when the Traefik process is alive.
+      Usually mounted on a dedicated entry point for container-orchestrator liveness checks.
+    humanURL: https://doc.traefik.io/traefik/operations/ping/
+    tags:
+    - Health Check
+    - Liveness
+    - Monitoring
+    - Operations
+    properties:
+    - type: Documentation
+      url: https://doc.traefik.io/traefik/operations/ping/
+  - aid: traefik:traefik-dashboard
+    name: Traefik Dashboard
+    description: Built-in single-page web UI rendering routers, services, middlewares, entry points, providers, version, and
+      TLS configuration in real time. Shares the API handler; exposed at `/dashboard/` (trailing slash required).
+    humanURL: https://doc.traefik.io/traefik/operations/dashboard/
+    tags:
+    - Dashboard
+    - Management
+    - Observability
+    - UI
+    properties:
+    - type: Documentation
+      url: https://doc.traefik.io/traefik/operations/dashboard/
+  - aid: traefik:traefik-hub-api-gateway
+    name: Traefik Hub API Gateway
+    description: Commercial Kubernetes-native API gateway built on Traefik Proxy. Adds a native WAF (claimed 23x faster than
+      alternatives), advanced authentication (LDAP, JWT, HMAC, OAuth2, OIDC, OPA), HashiCorp Vault integration, distributed
+      Let's Encrypt, multi-cluster management, and FIPS 140-2 compliance. Pricing is contract-based; a 30-day free trial is
+      offered.
+    humanURL: https://traefik.io/traefik-hub-api-gateway/
+    tags:
+    - API Gateway
+    - Enterprise
+    - Kubernetes
+    - WAF
+    properties:
+    - type: Documentation
+      url: https://doc.traefik.io/traefik-hub/
+    - type: Pricing
+      url: https://traefik.io/pricing/
+    - type: Plans
+      url: plans/traefik-plans-pricing.yml
+  - aid: traefik:traefik-hub-api-management
+    name: Traefik Hub API Management
+    description: Kubernetes-native API management on top of the Hub API Gateway. Surfaces a declarative CRD set - API, APIVersion,
+      APIBundle, APIPlan, APIPortal, APICatalogItem, ManagedSubscription - plus a multi-cluster developer portal, OpenAPI rendering,
+      GitOps configuration linter, and built-in identity provider integration.
+    humanURL: https://traefik.io/traefik-hub/
+    tags:
+    - API Management
+    - Developer Portal
+    - GitOps
+    - Kubernetes
+    properties:
+    - type: Documentation
+      url: https://doc.traefik.io/traefik-hub/
+    - type: Reference
+      url: https://doc.traefik.io/traefik-hub/api-management/api-plans
+    - type: Pricing
+      url: https://traefik.io/pricing/
+    - type: KubernetesCRD
+      url: crd/hub-api.yaml
+    - type: KubernetesCRD
+      url: crd/hub-apiversion.yaml
+    - type: KubernetesCRD
+      url: crd/hub-apibundle.yaml
+    - type: KubernetesCRD
+      url: crd/hub-apiplan.yaml
+    - type: KubernetesCRD
+      url: crd/hub-apiportal.yaml
+    - type: KubernetesCRD
+      url: crd/hub-apicatalogitem.yaml
+    - type: KubernetesCRD
+      url: crd/hub-managedsubscription.yaml
+  - aid: traefik:traefik-ai-gateway
+    name: Traefik AI Gateway
+    description: Self-hosted Kubernetes-native gateway for LLM traffic. OpenAI-compatible unified API in front of OpenAI, Anthropic,
+      Azure OpenAI, AWS Bedrock, Cohere, Gemini, Mistral, Ollama, and self-hosted models. Built-in jailbreak detection (NVIDIA
+      Safety NIMs), PII redaction (Presidio, 35+ recognizers), 22+ content-filter categories, semantic caching (vendor-claimed
+      40-70% cost reduction), identity-based routing, and OpenTelemetry token/cost metrics.
+    humanURL: https://traefik.io/solutions/ai-gateway/
+    tags:
+    - AI Gateway
+    - LLM
+    - Guardrails
+    - Observability
+    - Enterprise
+    properties:
+    - type: Solution Page
+      url: https://traefik.io/solutions/ai-gateway/
+    - type: KubernetesCRD
+      url: crd/hub-aiservice.yaml
+  - aid: traefik:traefik-mcp-gateway
+    name: Traefik MCP Gateway
+    description: Gateway add-on that governs how AI agents access Model Context Protocol (MCP) servers. Provides identity-aware
+      routing, capability scoping, and audit logging for agent-to-MCP traffic.
+    humanURL: https://traefik.io/solutions/mcp-gateway/
+    tags:
+    - MCP
+    - Agent Governance
+    - Enterprise
+    properties:
+    - type: Solution Page
+      url: https://traefik.io/solutions/mcp-gateway/
+  - aid: traefik:traefik-plugin-catalog
+    name: Traefik Plugin Catalog
+    description: Public registry of community-built Traefik middlewares. Plugins are authored in Go (loaded at runtime through
+      Yaegi without recompiling Traefik) or in WebAssembly. Surfaces categories such as auth, observability, request transformation,
+      security, and providers.
+    humanURL: https://plugins.traefik.io/
+    tags:
+    - Plugins
+    - Extensibility
+    - Community
+    properties:
+    - type: Catalog Site
+      url: https://plugins.traefik.io/
+    - type: GitHub Topic
+      url: https://github.com/topics/traefik-plugin
+  - aid: traefik:yaegi
+    name: Yaegi (Go Interpreter)
+    description: Embeddable Go interpreter maintained by Traefik Labs. Powers the Traefik plugin system - plugins are uploaded
+      as Go source and executed at runtime without recompiling Traefik. Also usable standalone as an embeddable scripting layer.
+    humanURL: https://github.com/traefik/yaegi
+    tags:
+    - Go
+    - Interpreter
+    - Plugin Runtime
+    - Open Source
+    properties:
+    - type: GitHubRepository
+      url: https://github.com/traefik/yaegi
+    - type: License
+      url: https://github.com/traefik/yaegi/blob/master/LICENSE
+  - aid: traefik:traefik-mesh
+    name: Traefik Mesh
+    description: Lightweight service mesh built on Traefik Proxy. Offers traffic management and observability for service-to-service
+      communication inside a Kubernetes cluster.
+    humanURL: https://traefik.io/traefik-mesh/
+    tags:
+    - Service Mesh
+    - Kubernetes
+    - Open Source
+    properties:
+    - type: GitHubRepository
+      url: https://github.com/traefik/mesh
+common:
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/traefik
+  - type: Website
+    url: https://traefik.io/
   - type: Documentation
     url: https://doc.traefik.io/traefik/
   - type: Getting Started
     url: https://doc.traefik.io/traefik/getting-started/quick-start/
-  - type: Reference
-    url: https://doc.traefik.io/traefik/reference/static-configuration/cli/
+  - type: Pricing
+    url: https://traefik.io/pricing/
+  - type: Blog
+    url: https://traefik.io/blog/
   - type: Change Log
     url: https://github.com/traefik/traefik/blob/master/CHANGELOG.md
+  - type: GitHub Organization
+    url: https://github.com/traefik
   - type: GitHubRepository
     url: https://github.com/traefik/traefik
-  - type: License
-    url: https://github.com/traefik/traefik/blob/master/LICENSE.md
-  - type: Helm Chart
-    url: https://github.com/traefik/traefik-helm-chart
-  - type: Docker Image
-    url: https://hub.docker.com/_/traefik
+  - type: Issue Tracker
+    url: https://github.com/traefik/traefik/issues
+  - type: Community
+    url: https://community.traefik.io/
+  - type: Stack Overflow
+    url: https://stackoverflow.com/questions/tagged/traefik
   - type: Plugin Catalog
     url: https://plugins.traefik.io/
-  - type: KubernetesCRD
-    url: crd/traefik-ingressroute.yaml
-  - type: KubernetesCRD
-    url: crd/traefik-ingressroutetcp.yaml
-  - type: KubernetesCRD
-    url: crd/traefik-ingressrouteudp.yaml
-  - type: KubernetesCRD
-    url: crd/traefik-middleware.yaml
-  - type: KubernetesCRD
-    url: crd/traefik-middlewaretcp.yaml
-  - type: KubernetesCRD
-    url: crd/traefik-tlsoption.yaml
-  - type: KubernetesCRD
-    url: crd/traefik-tlsstore.yaml
-  - type: KubernetesCRD
-    url: crd/traefik-traefikservice.yaml
-  - type: KubernetesCRD
-    url: crd/traefik-serverstransport.yaml
-  - type: KubernetesCRD
-    url: crd/traefik-serverstransporttcp.yaml
-  features:
-  - name: Auto Service Discovery
-    description: Discovers backends dynamically from Kubernetes
-    Docker: null
-    Swarm: null
-    Nomad: null
-    ECS: null
-    Consul: null
-    Etcd: null
-    and file.: null
-  - name: Let's Encrypt / ACME
-    description: Automatic TLS certificate provisioning including wildcard and DNS-01 challenges across 70+ DNS providers.
-  - name: Multi-Protocol
-    description: HTTP/1.1
-    HTTP/2: null
-    HTTP/3 (QUIC): null
-    TCP: null
-    UDP: null
-    gRPC: null
-    WebSocket: null
-    gRPC-Web.: null
-  - name: Middleware Catalog
-    description: 25+ built-in HTTP middlewares including BasicAuth
-    ForwardAuth: null
-    RateLimit: null
-    Headers: null
-    CircuitBreaker: null
-    Retry: null
-    Compress: null
-    Buffering: null
-    IPAllowList: null
-    RedirectScheme: null
-    ReplacePath.: null
-  - name: Kubernetes-Native
-    description: Custom Resource Definitions for HTTP/TCP/UDP routing - IngressRoute
-    IngressRouteTCP: null
-    IngressRouteUDP: null
-    Middleware: null
-    TraefikService: null
-    TLSOption: null
-    TLSStore: null
-    ServersTransport.: null
-  - name: Gateway API Support
-    description: Implements the upstream Kubernetes Gateway API.
-  - name: Dynamic Configuration
-    description: Reload routing rules at runtime with no restart.
-  - name: Observability
-    description: Prometheus
-    Datadog: null
-    InfluxDB 2.x: null
-    StatsD metrics: null
-    OpenTelemetry tracing: null
-    JSON and CLF access logs.: null
-  - name: Plugin System
-    description: Load community plugins as Yaegi-interpreted Go or WebAssembly without rebuilding Traefik.
-  - name: Built-in Dashboard
-    description: Web UI rendering the live router/service/middleware topology.
-  useCases:
-  - name: Kubernetes Ingress Controller
-  - name: Multi-Cloud Reverse Proxy
-  - name: Microservices API Gateway
-  - name: Edge Load Balancer
-  - name: Service Mesh Edge
-  - name: Ingress NGINX Migration Target
-  - name: AI Workload Ingress
-  integrations:
+  - type: Helm Chart
+    url: https://github.com/traefik/traefik-helm-chart
+  - type: Integrations
+    url: https://traefik.io/partners
+  - type: JSON-LD
+    url: json-ld/traefik-context.jsonld
+  - type: JSONSchema
+    url: json-schema/traefik-router-schema.json
+  - type: JSONSchema
+    url: json-schema/traefik-service-schema.json
+  - type: JSONSchema
+    url: json-schema/traefik-middleware-schema.json
+  - type: JSONSchema
+    url: json-schema/traefik-entrypoint-schema.json
+  - type: JSONStructure
+    url: json-structure/traefik-router-structure.json
+  - type: JSONStructure
+    url: json-structure/traefik-middleware-structure.json
+  - type: Vocabulary
+    url: vocabulary/traefik-vocabulary.yml
+  - type: Spectral
+    url: rules/traefik-proxy-rules.yml
+  - type: Plans
+    url: plans/traefik-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/traefik-rate-limits.yml
+  - type: FinOps
+    url: finops/traefik-finops.yml
+solutions:
+  - name: API Gateway
+    description: Modern declarative API gateway with first-class Kubernetes integration.
+  - name: AI Gateway
+    description: Govern LLM traffic with safety guardrails and semantic caching.
+  - name: MCP Gateway
+    description: Govern AI agent access to Model Context Protocol servers.
+  - name: Web Application Firewall
+    description: Native WAF integrated into the Hub API Gateway data plane.
+  - name: API Mocking
+    description: Create and publish mock APIs with production-grade UX.
+  - name: Ingress NGINX Migration
+    description: Replace deprecated ingress-nginx with Traefik Proxy 3.7+.
+  - name: GitOps API Management
+    description: Declarative
+    CRD-driven API management workflows.: null
+  - name: Air-Gapped API Management
+    description: Run the full Hub stack in disconnected environments.
+  - name: Multi-Cluster API Inventory
+    description: Single pane of glass across federated Kubernetes clusters.
+integrations:
   - name: Kubernetes
   - name: Kubernetes Gateway API
+  - name: Knative Serving
   - name: Docker
   - name: Docker Swarm
   - name: HashiCorp Nomad
@@ -153,12 +449,23 @@ apis:
   - name: HashiCorp Vault
   - name: Amazon ECS
   - name: Etcd
+  - name: Rancher
+  - name: D2iQ
+  - name: Platform9
+  - name: Nutanix
+  - name: AWS
+  - name: Microsoft Azure
+  - name: Google Cloud
+  - name: Oracle OCI
+  - name: DigitalOcean
+  - name: Exoscale
+  - name: Equinix Metal
   - name: Let's Encrypt
   - name: Prometheus
   - name: Datadog
+  - name: Grafana
   - name: InfluxDB
   - name: StatsD
-  - name: Grafana
   - name: OpenTelemetry
   - name: Jaeger
   - name: Zipkin
@@ -166,335 +473,30 @@ apis:
   - name: Splunk
   - name: Sysdig
   - name: Instana
-  - name: AWS
-  - name: Microsoft Azure
-  - name: Google Cloud
-  - name: Oracle Cloud Infrastructure
-  - name: DigitalOcean
-  - name: Exoscale
-  - name: Equinix Metal
-  - name: Rancher
-  - name: Platform9
-  - name: Nutanix
-- aid: traefik:traefik-proxy-api
-  name: Traefik Proxy REST API
-  description: The Traefik Proxy REST API exposes runtime configuration and state for every router, service, middleware, and
-    entry point in a running Traefik instance, plus version metadata, raw dynamic configuration, and an anonymized support-dump
-    archive for vendor troubleshooting. Read-only; must be enabled in static configuration and gated behind auth before being
-    exposed.
-  humanURL: https://doc.traefik.io/traefik/reference/install-configuration/api-dashboard/
-  baseURL: http://localhost:8080/api
-  tags:
-  - Configuration
-  - Management
-  - Observability
-  - REST
-  properties:
-  - type: Documentation
-    url: https://doc.traefik.io/traefik/reference/install-configuration/api-dashboard/
-  - type: OpenAPI
-    url: openapi/traefik-proxy-openapi.yml
-  - type: Spectral
-    url: rules/traefik-proxy-rules.yml
-  - type: Capability
-    url: capabilities/shared/traefik-proxy.yaml
-  - type: Capability
-    url: capabilities/gateway-operations.yaml
-  - type: Capability
-    url: capabilities/traffic-observability.yaml
-  - type: NaftikoCapability
-    url: capabilities/proxy-entrypoints.yaml
-  - type: NaftikoCapability
-    url: capabilities/proxy-http.yaml
-  - type: NaftikoCapability
-    url: capabilities/proxy-health.yaml
-  - type: NaftikoCapability
-    url: capabilities/proxy-overview.yaml
-  - type: NaftikoCapability
-    url: capabilities/proxy-tcp.yaml
-  - type: NaftikoCapability
-    url: capabilities/proxy-udp.yaml
-- aid: traefik:traefik-ping
-  name: Traefik Ping API
-  description: Lightweight liveness probe at `/ping` that returns HTTP 200 with body "OK" when the Traefik process is alive.
-    Usually mounted on a dedicated entry point for container-orchestrator liveness checks.
-  humanURL: https://doc.traefik.io/traefik/operations/ping/
-  tags:
-  - Health Check
-  - Liveness
-  - Monitoring
-  - Operations
-  properties:
-  - type: Documentation
-    url: https://doc.traefik.io/traefik/operations/ping/
-- aid: traefik:traefik-dashboard
-  name: Traefik Dashboard
-  description: Built-in single-page web UI rendering routers, services, middlewares, entry points, providers, version, and
-    TLS configuration in real time. Shares the API handler; exposed at `/dashboard/` (trailing slash required).
-  humanURL: https://doc.traefik.io/traefik/operations/dashboard/
-  tags:
-  - Dashboard
-  - Management
-  - Observability
-  - UI
-  properties:
-  - type: Documentation
-    url: https://doc.traefik.io/traefik/operations/dashboard/
-- aid: traefik:traefik-hub-api-gateway
-  name: Traefik Hub API Gateway
-  description: Commercial Kubernetes-native API gateway built on Traefik Proxy. Adds a native WAF (claimed 23x faster than
-    alternatives), advanced authentication (LDAP, JWT, HMAC, OAuth2, OIDC, OPA), HashiCorp Vault integration, distributed
-    Let's Encrypt, multi-cluster management, and FIPS 140-2 compliance. Pricing is contract-based; a 30-day free trial is
-    offered.
-  humanURL: https://traefik.io/traefik-hub-api-gateway/
-  tags:
-  - API Gateway
-  - Enterprise
-  - Kubernetes
-  - WAF
-  properties:
-  - type: Documentation
-    url: https://doc.traefik.io/traefik-hub/
-  - type: Pricing
-    url: https://traefik.io/pricing/
-  - type: Plans
-    url: plans/traefik-plans-pricing.yml
-- aid: traefik:traefik-hub-api-management
-  name: Traefik Hub API Management
-  description: Kubernetes-native API management on top of the Hub API Gateway. Surfaces a declarative CRD set - API, APIVersion,
-    APIBundle, APIPlan, APIPortal, APICatalogItem, ManagedSubscription - plus a multi-cluster developer portal, OpenAPI rendering,
-    GitOps configuration linter, and built-in identity provider integration.
-  humanURL: https://traefik.io/traefik-hub/
-  tags:
-  - API Management
-  - Developer Portal
-  - GitOps
-  - Kubernetes
-  properties:
-  - type: Documentation
-    url: https://doc.traefik.io/traefik-hub/
-  - type: Reference
-    url: https://doc.traefik.io/traefik-hub/api-management/api-plans
-  - type: Pricing
-    url: https://traefik.io/pricing/
-  - type: KubernetesCRD
-    url: crd/hub-api.yaml
-  - type: KubernetesCRD
-    url: crd/hub-apiversion.yaml
-  - type: KubernetesCRD
-    url: crd/hub-apibundle.yaml
-  - type: KubernetesCRD
-    url: crd/hub-apiplan.yaml
-  - type: KubernetesCRD
-    url: crd/hub-apiportal.yaml
-  - type: KubernetesCRD
-    url: crd/hub-apicatalogitem.yaml
-  - type: KubernetesCRD
-    url: crd/hub-managedsubscription.yaml
-- aid: traefik:traefik-ai-gateway
-  name: Traefik AI Gateway
-  description: Self-hosted Kubernetes-native gateway for LLM traffic. OpenAI-compatible unified API in front of OpenAI, Anthropic,
-    Azure OpenAI, AWS Bedrock, Cohere, Gemini, Mistral, Ollama, and self-hosted models. Built-in jailbreak detection (NVIDIA
-    Safety NIMs), PII redaction (Presidio, 35+ recognizers), 22+ content-filter categories, semantic caching (vendor-claimed
-    40-70% cost reduction), identity-based routing, and OpenTelemetry token/cost metrics.
-  humanURL: https://traefik.io/solutions/ai-gateway/
-  tags:
-  - AI Gateway
-  - LLM
-  - Guardrails
-  - Observability
-  - Enterprise
-  properties:
-  - type: Solution Page
-    url: https://traefik.io/solutions/ai-gateway/
-  - type: KubernetesCRD
-    url: crd/hub-aiservice.yaml
-- aid: traefik:traefik-mcp-gateway
-  name: Traefik MCP Gateway
-  description: Gateway add-on that governs how AI agents access Model Context Protocol (MCP) servers. Provides identity-aware
-    routing, capability scoping, and audit logging for agent-to-MCP traffic.
-  humanURL: https://traefik.io/solutions/mcp-gateway/
-  tags:
-  - MCP
-  - Agent Governance
-  - Enterprise
-  properties:
-  - type: Solution Page
-    url: https://traefik.io/solutions/mcp-gateway/
-- aid: traefik:traefik-plugin-catalog
-  name: Traefik Plugin Catalog
-  description: Public registry of community-built Traefik middlewares. Plugins are authored in Go (loaded at runtime through
-    Yaegi without recompiling Traefik) or in WebAssembly. Surfaces categories such as auth, observability, request transformation,
-    security, and providers.
-  humanURL: https://plugins.traefik.io/
-  tags:
-  - Plugins
-  - Extensibility
-  - Community
-  properties:
-  - type: Catalog Site
-    url: https://plugins.traefik.io/
-  - type: GitHub Topic
-    url: https://github.com/topics/traefik-plugin
-- aid: traefik:yaegi
-  name: Yaegi (Go Interpreter)
-  description: Embeddable Go interpreter maintained by Traefik Labs. Powers the Traefik plugin system - plugins are uploaded
-    as Go source and executed at runtime without recompiling Traefik. Also usable standalone as an embeddable scripting layer.
-  humanURL: https://github.com/traefik/yaegi
-  tags:
-  - Go
-  - Interpreter
-  - Plugin Runtime
-  - Open Source
-  properties:
-  - type: GitHubRepository
-    url: https://github.com/traefik/yaegi
-  - type: License
-    url: https://github.com/traefik/yaegi/blob/master/LICENSE
-- aid: traefik:traefik-mesh
-  name: Traefik Mesh
-  description: Lightweight service mesh built on Traefik Proxy. Offers traffic management and observability for service-to-service
-    communication inside a Kubernetes cluster.
-  humanURL: https://traefik.io/traefik-mesh/
-  tags:
-  - Service Mesh
-  - Kubernetes
-  - Open Source
-  properties:
-  - type: GitHubRepository
-    url: https://github.com/traefik/mesh
-common:
-- type: Website
-  url: https://traefik.io/
-- type: Documentation
-  url: https://doc.traefik.io/traefik/
-- type: Getting Started
-  url: https://doc.traefik.io/traefik/getting-started/quick-start/
-- type: Pricing
-  url: https://traefik.io/pricing/
-- type: Blog
-  url: https://traefik.io/blog/
-- type: Change Log
-  url: https://github.com/traefik/traefik/blob/master/CHANGELOG.md
-- type: GitHub Organization
-  url: https://github.com/traefik
-- type: GitHubRepository
-  url: https://github.com/traefik/traefik
-- type: Issue Tracker
-  url: https://github.com/traefik/traefik/issues
-- type: Community
-  url: https://community.traefik.io/
-- type: Stack Overflow
-  url: https://stackoverflow.com/questions/tagged/traefik
-- type: Plugin Catalog
-  url: https://plugins.traefik.io/
-- type: Helm Chart
-  url: https://github.com/traefik/traefik-helm-chart
-- type: Integrations
-  url: https://traefik.io/partners
-- type: JSON-LD
-  url: json-ld/traefik-context.jsonld
-- type: JSONSchema
-  url: json-schema/traefik-router-schema.json
-- type: JSONSchema
-  url: json-schema/traefik-service-schema.json
-- type: JSONSchema
-  url: json-schema/traefik-middleware-schema.json
-- type: JSONSchema
-  url: json-schema/traefik-entrypoint-schema.json
-- type: JSONStructure
-  url: json-structure/traefik-router-structure.json
-- type: JSONStructure
-  url: json-structure/traefik-middleware-structure.json
-- type: Vocabulary
-  url: vocabulary/traefik-vocabulary.yml
-- type: Spectral
-  url: rules/traefik-proxy-rules.yml
-- type: Plans
-  url: plans/traefik-plans-pricing.yml
-- type: RateLimits
-  url: rate-limits/traefik-rate-limits.yml
-- type: FinOps
-  url: finops/traefik-finops.yml
-solutions:
-- name: API Gateway
-  description: Modern declarative API gateway with first-class Kubernetes integration.
-- name: AI Gateway
-  description: Govern LLM traffic with safety guardrails and semantic caching.
-- name: MCP Gateway
-  description: Govern AI agent access to Model Context Protocol servers.
-- name: Web Application Firewall
-  description: Native WAF integrated into the Hub API Gateway data plane.
-- name: API Mocking
-  description: Create and publish mock APIs with production-grade UX.
-- name: Ingress NGINX Migration
-  description: Replace deprecated ingress-nginx with Traefik Proxy 3.7+.
-- name: GitOps API Management
-  description: Declarative
-  CRD-driven API management workflows.: null
-- name: Air-Gapped API Management
-  description: Run the full Hub stack in disconnected environments.
-- name: Multi-Cluster API Inventory
-  description: Single pane of glass across federated Kubernetes clusters.
-integrations:
-- name: Kubernetes
-- name: Kubernetes Gateway API
-- name: Knative Serving
-- name: Docker
-- name: Docker Swarm
-- name: HashiCorp Nomad
-- name: HashiCorp Consul
-- name: HashiCorp Vault
-- name: Amazon ECS
-- name: Etcd
-- name: Rancher
-- name: D2iQ
-- name: Platform9
-- name: Nutanix
-- name: AWS
-- name: Microsoft Azure
-- name: Google Cloud
-- name: Oracle OCI
-- name: DigitalOcean
-- name: Exoscale
-- name: Equinix Metal
-- name: Let's Encrypt
-- name: Prometheus
-- name: Datadog
-- name: Grafana
-- name: InfluxDB
-- name: StatsD
-- name: OpenTelemetry
-- name: Jaeger
-- name: Zipkin
-- name: Elastic
-- name: Splunk
-- name: Sysdig
-- name: Instana
-- name: OpenAI
-- name: Anthropic
-- name: Azure OpenAI
-- name: AWS Bedrock
-- name: Cohere
-- name: Google Gemini
-- name: Mistral
-- name: Ollama
-- name: NVIDIA Safety NIM
-- name: Microsoft Presidio
-- name: Treblle
-- name: Palo Alto Networks
-- name: Ahead
-- name: codecentric
-- name: Data Essential
-- name: Factor Group
-- name: KPN
-- name: linkbynet
-- name: neoria
-- name: nuaware
-- name: smartwave
-- name: SWNetwork
-- name: treeptik
-- name: zenika
+  - name: OpenAI
+  - name: Anthropic
+  - name: Azure OpenAI
+  - name: AWS Bedrock
+  - name: Cohere
+  - name: Google Gemini
+  - name: Mistral
+  - name: Ollama
+  - name: NVIDIA Safety NIM
+  - name: Microsoft Presidio
+  - name: Treblle
+  - name: Palo Alto Networks
+  - name: Ahead
+  - name: codecentric
+  - name: Data Essential
+  - name: Factor Group
+  - name: KPN
+  - name: linkbynet
+  - name: neoria
+  - name: nuaware
+  - name: smartwave
+  - name: SWNetwork
+  - name: treeptik
+  - name: zenika
 maintainers:
-- FN: Kin Lane
-  email: kin@apievangelist.com
+  - FN: Kin Lane
+    email: kin@apievangelist.com
