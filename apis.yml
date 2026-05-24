@@ -418,6 +418,8 @@ common:
     url: rate-limits/traefik-rate-limits.yml
   - type: FinOps
     url: finops/traefik-finops.yml
+  - type: LLMsTxt
+    url: https://traefik.io/llms.txt
 solutions:
   - name: API Gateway
     description: Modern declarative API gateway with first-class Kubernetes integration.
