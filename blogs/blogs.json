@@ -2,12 +2,17 @@
   "repo": "traefik",
   "feeds": [
     {
-      "source": "https://traefik.io/blog/",
+      "source": "https://traefik.io/rss.xml",
       "feed_url": "https://traefik.io/rss.xml",
-      "title": "Run APIs Easily. Anywhere. | Traefik Labs",
-      "saved": 40
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
+      "source": "https://traefik.io/pricing/",
+      "error": "HTTPError"
     }
   ],
-  "post_count": 55,
-  "fetched": "2026-05-17T20:20:35Z"
+  "post_count": 56,
+  "fetched": "2026-06-01T23:35:02Z"
 }
