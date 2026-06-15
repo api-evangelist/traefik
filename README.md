@@ -1,171 +1,313 @@
-# Traefik Labs
+# Traefik Labs (traefik)
 
-Traefik Labs builds cloud-native traffic and API infrastructure: the open-source **Traefik Proxy** reverse proxy / ingress controller / load balancer, plus the commercial **Traefik Hub** product line (API Gateway, API Management, AI Gateway, MCP Gateway). The same Traefik binary powers every tier; Hub adds a GitOps control plane, developer portal, multi-cluster dashboard, WAF, advanced auth, and AI/agent governance.
+Traefik Labs builds cloud-native traffic and API infrastructure - the open-source Traefik Proxy (an ingress controller, reverse proxy, and load balancer for Kubernetes, Docker, Nomad, ECS, Consul, and bare metal), plus the commercial Traefik Hub product line covering API Gateway, API Management, AI Gateway, and MCP Gateway. The data plane is the same Traefik binary across every tier; the Hub control plane adds GitOps-driven CRDs, a developer portal, multi-cluster dashboards, WAF, advanced auth, and AI safety / agent-governance capabilities.
 
-- **Website:** https://traefik.io/
-- **Documentation:** https://doc.traefik.io/traefik/
-- **GitHub:** https://github.com/traefik
-- **Community:** https://community.traefik.io/
-- **Plugin Catalog:** https://plugins.traefik.io/
+**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/traefik/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/traefik/refs/heads/main/apis.yml)
 
-## Products and APIs
+## Scope
 
-### Traefik Proxy (Open Source, MIT)
+- **Type:** Index
 
-Cloud-native reverse proxy, ingress controller, and load balancer. Native Kubernetes / Docker / Nomad / ECS / Consul / file provider auto-discovery, Let's Encrypt, HTTP/2/3, gRPC, WebSockets, TCP, UDP, 25+ HTTP middlewares, a built-in dashboard, and a runtime plugin system (Yaegi + WebAssembly).
+## Tags
 
-- **Repo:** https://github.com/traefik/traefik
-- **Docs:** https://doc.traefik.io/traefik/
+- AI Gateway
+- API Gateway
+- API Management
+- Developer Portal
+- GitOps
+- Kubernetes
+- Load Balancer
+- MCP Gateway
+- Open Source
+- Reverse Proxy
+- WAF
+
+## Timestamps
+
+- **Created:** 2026-03-18
+- **Modified:** 2026-05-19
+
+## APIs
+
+### Traefik Proxy
+
+Traefik Proxy is the flagship open-source (MIT) cloud-native reverse proxy, ingress controller, and load balancer. It auto-discovers services from Kubernetes (Ingress, Gateway API, CRD), Docker, Docker Swarm, Nomad, Amazon ECS, Consul, file, and HTTP providers, and ships with native ACME (Let's Encrypt) certificate provisioning, HTTP/2, HTTP/3, gRPC, WebSockets, TCP, UDP, an extensible middleware chain, and a built-in dashboard.
+
+- **Human URL:** [https://traefik.io/traefik/](https://traefik.io/traefik/)
+
+#### Tags
+
+- API Gateway
+- Ingress Controller
+- Kubernetes
+- Load Balancer
+- Open Source
+- Reverse Proxy
+
+#### Properties
+
+- [Documentation](https://doc.traefik.io/traefik/)
+- [Getting  Started](https://doc.traefik.io/traefik/getting-started/quick-start/)
+- [Reference](https://doc.traefik.io/traefik/reference/static-configuration/cli/)
+- [Change  Log](https://github.com/traefik/traefik/blob/master/CHANGELOG.md)
+- [GitHub Repository](https://github.com/traefik/traefik)
+- [License](https://github.com/traefik/traefik/blob/master/LICENSE.md)
+- [Helm  Chart](https://github.com/traefik/traefik-helm-chart)
+- [Docker  Image](https://hub.docker.com/_/traefik)
+- [Plugin  Catalog](https://plugins.traefik.io/)
+- [Kubernetes C R D](crd/traefik-ingressroute.yaml)
+- [Kubernetes C R D](crd/traefik-ingressroutetcp.yaml)
+- [Kubernetes C R D](crd/traefik-ingressrouteudp.yaml)
+- [Kubernetes C R D](crd/traefik-middleware.yaml)
+- [Kubernetes C R D](crd/traefik-middlewaretcp.yaml)
+- [Kubernetes C R D](crd/traefik-tlsoption.yaml)
+- [Kubernetes C R D](crd/traefik-tlsstore.yaml)
+- [Kubernetes C R D](crd/traefik-traefikservice.yaml)
+- [Kubernetes C R D](crd/traefik-serverstransport.yaml)
+- [Kubernetes C R D](crd/traefik-serverstransporttcp.yaml)
+- [Postman Collection](collections/traefik-proxy.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/traefik-proxy.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
 ### Traefik Proxy REST API
 
-Read-only HTTP control surface for inspecting routers, services, middlewares, entry points, raw dynamic configuration, version, and the anonymized support-dump archive.
+The Traefik Proxy REST API exposes runtime configuration and state for every router, service, middleware, and entry point in a running Traefik instance, plus version metadata, raw dynamic configuration, and an anonymized support-dump archive for vendor troubleshooting. Read-only; must be enabled in static configuration and gated behind auth before being exposed.
 
-- **Docs:** https://doc.traefik.io/traefik/reference/install-configuration/api-dashboard/
-- **OpenAPI:** [openapi/traefik-proxy-openapi.yml](openapi/traefik-proxy-openapi.yml)
+- **Human URL:** [https://doc.traefik.io/traefik/reference/install-configuration/api-dashboard/](https://doc.traefik.io/traefik/reference/install-configuration/api-dashboard/)
+- **Base URL:** `http://localhost:8080/api`
 
-### Traefik Hub API Gateway (Commercial)
+#### Tags
 
-Enterprise-grade API gateway built on Traefik Proxy. Adds native WAF, LDAP / JWT / OAuth2 / OIDC / OPA / HMAC, HashiCorp Vault integration, distributed Let's Encrypt, multi-cluster management, and FIPS 140-2 compliance.
+- Configuration
+- Management
+- Observability
+- REST
 
-- **Page:** https://traefik.io/traefik-hub-api-gateway/
+#### Properties
 
-### Traefik Hub API Management (Commercial)
+- [Documentation](https://doc.traefik.io/traefik/reference/install-configuration/api-dashboard/)
+- [OpenAPI](openapi/traefik-proxy-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Postman Collection](collections/traefik-proxy.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/traefik-proxy.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Spectral Rules](rules/traefik-proxy-rules.yml) — [Spectral](https://docs.stoplight.io/docs/spectral)
+- [Capability](capabilities/shared/traefik-proxy.yaml)
+- [Capability](capabilities/gateway-operations.yaml)
+- [Capability](capabilities/traffic-observability.yaml)
 
-Kubernetes-native API management on top of the Hub Gateway. Declarative CRD model (`API`, `APIVersion`, `APIBundle`, `APIPlan`, `APIPortal`, `APICatalogItem`, `ManagedSubscription`) plus a multi-cluster developer portal, OpenAPI rendering, GitOps configuration linter, and built-in IdP.
+### Traefik Ping API
 
-- **Page:** https://traefik.io/traefik-hub/
-- **Docs:** https://doc.traefik.io/traefik-hub/
+Lightweight liveness probe at `/ping` that returns HTTP 200 with body "OK" when the Traefik process is alive. Usually mounted on a dedicated entry point for container-orchestrator liveness checks.
 
-### Traefik AI Gateway (Commercial Add-On)
+- **Human URL:** [https://doc.traefik.io/traefik/operations/ping/](https://doc.traefik.io/traefik/operations/ping/)
 
-OpenAI-compatible unified API in front of OpenAI / Anthropic / Azure OpenAI / AWS Bedrock / Cohere / Gemini / Mistral / Ollama / self-hosted models. Built-in jailbreak detection (NVIDIA Safety NIMs), PII redaction (Presidio), 22+ content-filter categories, semantic caching, and OpenTelemetry token/cost metrics.
+#### Tags
 
-- **Page:** https://traefik.io/solutions/ai-gateway/
+- Health Check
+- Liveness
+- Monitoring
+- Operations
 
-### Traefik MCP Gateway (Commercial Add-On)
+#### Properties
 
-Governs how AI agents access Model Context Protocol servers - identity-aware routing, capability scoping, audit logging.
+- [Documentation](https://doc.traefik.io/traefik/operations/ping/)
+- [Postman Collection](collections/traefik-proxy.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/traefik-proxy.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
-- **Page:** https://traefik.io/solutions/mcp-gateway/
+### Traefik Dashboard
+
+Built-in single-page web UI rendering routers, services, middlewares, entry points, providers, version, and TLS configuration in real time. Shares the API handler; exposed at `/dashboard/` (trailing slash required).
+
+- **Human URL:** [https://doc.traefik.io/traefik/operations/dashboard/](https://doc.traefik.io/traefik/operations/dashboard/)
+
+#### Tags
+
+- Dashboard
+- Management
+- Observability
+- UI
+
+#### Properties
+
+- [Documentation](https://doc.traefik.io/traefik/operations/dashboard/)
+- [Postman Collection](collections/traefik-proxy.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/traefik-proxy.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+
+### Traefik Hub API Gateway
+
+Commercial Kubernetes-native API gateway built on Traefik Proxy. Adds a native WAF (claimed 23x faster than alternatives), advanced authentication (LDAP, JWT, HMAC, OAuth2, OIDC, OPA), HashiCorp Vault integration, distributed Let's Encrypt, multi-cluster management, and FIPS 140-2 compliance. Pricing is contract-based; a 30-day free trial is offered.
+
+- **Human URL:** [https://traefik.io/traefik-hub-api-gateway/](https://traefik.io/traefik-hub-api-gateway/)
+
+#### Tags
+
+- API Gateway
+- Enterprise
+- Kubernetes
+- WAF
+
+#### Properties
+
+- [Documentation](https://doc.traefik.io/traefik-hub/)
+- [Pricing](https://traefik.io/pricing/)
+- [Plans](plans/traefik-plans-pricing.yml)
+- [Postman Collection](collections/traefik-proxy.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/traefik-proxy.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+
+### Traefik Hub API Management
+
+Kubernetes-native API management on top of the Hub API Gateway. Surfaces a declarative CRD set - API, APIVersion, APIBundle, APIPlan, APIPortal, APICatalogItem, ManagedSubscription - plus a multi-cluster developer portal, OpenAPI rendering, GitOps configuration linter, and built-in identity provider integration.
+
+- **Human URL:** [https://traefik.io/traefik-hub/](https://traefik.io/traefik-hub/)
+
+#### Tags
+
+- API Management
+- Developer Portal
+- GitOps
+- Kubernetes
+
+#### Properties
+
+- [Documentation](https://doc.traefik.io/traefik-hub/)
+- [Reference](https://doc.traefik.io/traefik-hub/api-management/api-plans)
+- [Pricing](https://traefik.io/pricing/)
+- [Kubernetes C R D](crd/hub-api.yaml)
+- [Kubernetes C R D](crd/hub-apiversion.yaml)
+- [Kubernetes C R D](crd/hub-apibundle.yaml)
+- [Kubernetes C R D](crd/hub-apiplan.yaml)
+- [Kubernetes C R D](crd/hub-apiportal.yaml)
+- [Kubernetes C R D](crd/hub-apicatalogitem.yaml)
+- [Kubernetes C R D](crd/hub-managedsubscription.yaml)
+- [Postman Collection](collections/traefik-proxy.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/traefik-proxy.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+
+### Traefik AI Gateway
+
+Self-hosted Kubernetes-native gateway for LLM traffic. OpenAI-compatible unified API in front of OpenAI, Anthropic, Azure OpenAI, AWS Bedrock, Cohere, Gemini, Mistral, Ollama, and self-hosted models. Built-in jailbreak detection (NVIDIA Safety NIMs), PII redaction (Presidio, 35+ recognizers), 22+ content-filter categories, semantic caching (vendor-claimed 40-70% cost reduction), identity-based routing, and OpenTelemetry token/cost metrics.
+
+- **Human URL:** [https://traefik.io/solutions/ai-gateway/](https://traefik.io/solutions/ai-gateway/)
+
+#### Tags
+
+- AI Gateway
+- LLM
+- Guardrails
+- Observability
+- Enterprise
+
+#### Properties
+
+- [Solution  Page](https://traefik.io/solutions/ai-gateway/)
+- [Kubernetes C R D](crd/hub-aiservice.yaml)
+- [Postman Collection](collections/traefik-proxy.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/traefik-proxy.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+
+### Traefik MCP Gateway
+
+Gateway add-on that governs how AI agents access Model Context Protocol (MCP) servers. Provides identity-aware routing, capability scoping, and audit logging for agent-to-MCP traffic.
+
+- **Human URL:** [https://traefik.io/solutions/mcp-gateway/](https://traefik.io/solutions/mcp-gateway/)
+
+#### Tags
+
+- MCP
+- Agent Governance
+- Enterprise
+
+#### Properties
+
+- [Solution  Page](https://traefik.io/solutions/mcp-gateway/)
+- [Postman Collection](collections/traefik-proxy.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/traefik-proxy.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
 ### Traefik Plugin Catalog
 
-Public registry of community Traefik middlewares written in Go (Yaegi-interpreted) or WebAssembly.
+Public registry of community-built Traefik middlewares. Plugins are authored in Go (loaded at runtime through Yaegi without recompiling Traefik) or in WebAssembly. Surfaces categories such as auth, observability, request transformation, security, and providers.
 
-- **Catalog:** https://plugins.traefik.io/
+- **Human URL:** [https://plugins.traefik.io/](https://plugins.traefik.io/)
 
-### Yaegi
+#### Tags
 
-Embeddable Go interpreter maintained by Traefik Labs; powers the Traefik plugin loader.
+- Plugins
+- Extensibility
+- Community
 
-- **Repo:** https://github.com/traefik/yaegi
+#### Properties
+
+- [Catalog  Site](https://plugins.traefik.io/)
+- [Git Hub  Topic](https://github.com/topics/traefik-plugin)
+- [Postman Collection](collections/traefik-proxy.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/traefik-proxy.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+
+### Yaegi (Go Interpreter)
+
+Embeddable Go interpreter maintained by Traefik Labs. Powers the Traefik plugin system - plugins are uploaded as Go source and executed at runtime without recompiling Traefik. Also usable standalone as an embeddable scripting layer.
+
+- **Human URL:** [https://github.com/traefik/yaegi](https://github.com/traefik/yaegi)
+
+#### Tags
+
+- Go
+- Interpreter
+- Plugin Runtime
+- Open Source
+
+#### Properties
+
+- [GitHub Repository](https://github.com/traefik/yaegi)
+- [License](https://github.com/traefik/yaegi/blob/master/LICENSE)
+- [Postman Collection](collections/traefik-proxy.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/traefik-proxy.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
 ### Traefik Mesh
 
-Lightweight Traefik-based service mesh for Kubernetes.
+Lightweight service mesh built on Traefik Proxy. Offers traffic management and observability for service-to-service communication inside a Kubernetes cluster.
 
-- **Repo:** https://github.com/traefik/mesh
+- **Human URL:** [https://traefik.io/traefik-mesh/](https://traefik.io/traefik-mesh/)
 
-## Artifacts
+#### Tags
 
-### OpenAPI
+- Service Mesh
+- Kubernetes
+- Open Source
 
-| Spec | Description |
-|---|---|
-| [traefik-proxy-openapi.yml](openapi/traefik-proxy-openapi.yml) | Traefik Proxy REST API - routers, services, middlewares, entry points, overview, raw data, support dump, version, ping. |
+#### Properties
 
-### Spectral Rules
+- [GitHub Repository](https://github.com/traefik/mesh)
+- [Postman Collection](collections/traefik-proxy.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/traefik-proxy.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
-| File | Description |
-|---|---|
-| [traefik-proxy-rules.yml](rules/traefik-proxy-rules.yml) | Spectral ruleset enforcing Traefik API conventions (info/version, title-case summaries, tags, response shape). |
+## Common Properties
 
-### Naftiko Capabilities
-
-| File | Description |
-|---|---|
-| [shared/traefik-proxy.yaml](capabilities/shared/traefik-proxy.yaml) | Per-API consumed definition for the full Traefik Proxy REST surface. |
-| [gateway-operations.yaml](capabilities/gateway-operations.yaml) | Workflow capability for inspecting routers, services, and middlewares (HTTP / TCP / UDP). |
-| [traffic-observability.yaml](capabilities/traffic-observability.yaml) | Workflow capability for version, overview, entry-point inspection, and ping/support-dump. |
-
-### Kubernetes CRDs
-
-Traefik Proxy (`traefik.io/v1alpha1`):
-
-| File | Kind | Purpose |
-|---|---|---|
-| [crd/traefik-ingressroute.yaml](crd/traefik-ingressroute.yaml) | `IngressRoute` | HTTP routing. |
-| [crd/traefik-ingressroutetcp.yaml](crd/traefik-ingressroutetcp.yaml) | `IngressRouteTCP` | TCP routing (HostSNI). |
-| [crd/traefik-ingressrouteudp.yaml](crd/traefik-ingressrouteudp.yaml) | `IngressRouteUDP` | UDP routing. |
-| [crd/traefik-middleware.yaml](crd/traefik-middleware.yaml) | `Middleware` | HTTP middleware (25+ types). |
-| [crd/traefik-middlewaretcp.yaml](crd/traefik-middlewaretcp.yaml) | `MiddlewareTCP` | TCP middleware (IP allow-list, in-flight conn). |
-| [crd/traefik-tlsoption.yaml](crd/traefik-tlsoption.yaml) | `TLSOption` | Reusable TLS parameters. |
-| [crd/traefik-tlsstore.yaml](crd/traefik-tlsstore.yaml) | `TLSStore` | Default TLS certificate store. |
-| [crd/traefik-traefikservice.yaml](crd/traefik-traefikservice.yaml) | `TraefikService` | Weighted / mirroring service composition. |
-| [crd/traefik-serverstransport.yaml](crd/traefik-serverstransport.yaml) | `ServersTransport` | HTTP backend transport (TLS, idle conn). |
-| [crd/traefik-serverstransporttcp.yaml](crd/traefik-serverstransporttcp.yaml) | `ServersTransportTCP` | TCP backend transport. |
-
-Traefik Hub (`hub.traefik.io/v1alpha1`):
-
-| File | Kind | Purpose |
-|---|---|---|
-| [crd/hub-api.yaml](crd/hub-api.yaml) | `API` | Hub-managed API resource. |
-| [crd/hub-apiversion.yaml](crd/hub-apiversion.yaml) | `APIVersion` | API version with lifecycle stage. |
-| [crd/hub-apibundle.yaml](crd/hub-apibundle.yaml) | `APIBundle` | Subscribable API group. |
-| [crd/hub-apiplan.yaml](crd/hub-apiplan.yaml) | `APIPlan` | Rate limit + quota policy. |
-| [crd/hub-apiportal.yaml](crd/hub-apiportal.yaml) | `APIPortal` | Developer portal. |
-| [crd/hub-apicatalogitem.yaml](crd/hub-apicatalogitem.yaml) | `APICatalogItem` | Portal visibility scope. |
-| [crd/hub-managedsubscription.yaml](crd/hub-managedsubscription.yaml) | `ManagedSubscription` | Runtime authorization binding. |
-| [crd/hub-aiservice.yaml](crd/hub-aiservice.yaml) | `AIService` | AI Gateway LLM upstream + guardrails. |
-
-### JSON Schemas
-
-| File | Description |
-|---|---|
-| [traefik-router-schema.json](json-schema/traefik-router-schema.json) | HTTP/TCP/UDP router. |
-| [traefik-service-schema.json](json-schema/traefik-service-schema.json) | Backend service. |
-| [traefik-middleware-schema.json](json-schema/traefik-middleware-schema.json) | HTTP middleware. |
-| [traefik-entrypoint-schema.json](json-schema/traefik-entrypoint-schema.json) | Network entry point. |
-
-### JSON Structure
-
-| File | Description |
-|---|---|
-| [traefik-router-structure.json](json-structure/traefik-router-structure.json) | HTTP router. |
-| [traefik-middleware-structure.json](json-structure/traefik-middleware-structure.json) | HTTP middleware. |
-
-### JSON-LD
-
-| File | Description |
-|---|---|
-| [traefik-context.jsonld](json-ld/traefik-context.jsonld) | Router, Service, Middleware, EntryPoint, LoadBalancer, Server, TLSConfig, Version, Overview. |
-
-### Examples
-
-| File | Description |
-|---|---|
-| [traefik-get-version-example.json](examples/traefik-get-version-example.json) | `GET /api/version`. |
-| [traefik-get-overview-example.json](examples/traefik-get-overview-example.json) | `GET /api/overview`. |
-| [traefik-list-entrypoints-example.json](examples/traefik-list-entrypoints-example.json) | `GET /api/entrypoints`. |
-| [traefik-list-http-routers-example.json](examples/traefik-list-http-routers-example.json) | `GET /api/http/routers`. |
-| [traefik-list-http-services-example.json](examples/traefik-list-http-services-example.json) | `GET /api/http/services`. |
-| [traefik-list-http-middlewares-example.json](examples/traefik-list-http-middlewares-example.json) | `GET /api/http/middlewares`. |
-
-### Plans, Rate Limits, FinOps
-
-| File | Description |
-|---|---|
-| [traefik-plans-pricing.yml](plans/traefik-plans-pricing.yml) | API Commons Plans 0.1 - 5 plans (OSS Proxy + 4 commercial tiers). |
-| [traefik-rate-limits.yml](rate-limits/traefik-rate-limits.yml) | API Commons Rate Limits 0.1 - operator-configured middlewares + Hub APIPlan. |
-| [traefik-finops.yml](finops/traefik-finops.yml) | FOCUS 1.3 / FinOps Framework 1.0 - subscription, clusters, seats, managed APIs, AI tokens, infra meters. |
-
-### Vocabulary
-
-| File | Description |
-|---|---|
-| [traefik-vocabulary.yml](vocabulary/traefik-vocabulary.yml) | Routing concepts plus Hub CRDs, AI Gateway, MCP Gateway, plugin runtime terms. |
+- [LinkedIn](https://www.linkedin.com/company/traefik)
+- [Website](https://traefik.io/)
+- [Documentation](https://doc.traefik.io/traefik/)
+- [Getting  Started](https://doc.traefik.io/traefik/getting-started/quick-start/)
+- [Pricing](https://traefik.io/pricing/)
+- [Blog](https://traefik.io/blog/)
+- [Change  Log](https://github.com/traefik/traefik/blob/master/CHANGELOG.md)
+- [Git Hub  Organization](https://github.com/traefik)
+- [GitHub Repository](https://github.com/traefik/traefik)
+- [Issue  Tracker](https://github.com/traefik/traefik/issues)
+- [Community](https://community.traefik.io/)
+- [Stack  Overflow](https://stackoverflow.com/questions/tagged/traefik)
+- [Plugin  Catalog](https://plugins.traefik.io/)
+- [Helm  Chart](https://github.com/traefik/traefik-helm-chart)
+- [Integrations](https://traefik.io/partners)
+- [J S O N- L D](json-ld/traefik-context.jsonld)
+- [JSON Schema](json-schema/traefik-router-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](json-schema/traefik-service-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](json-schema/traefik-middleware-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](json-schema/traefik-entrypoint-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Structure](json-structure/traefik-router-structure.json)
+- [JSON Structure](json-structure/traefik-middleware-structure.json)
+- [Vocabulary](vocabulary/traefik-vocabulary.yml)
+- [Spectral Rules](rules/traefik-proxy-rules.yml) — [Spectral](https://docs.stoplight.io/docs/spectral)
+- [Plans](plans/traefik-plans-pricing.yml)
+- [Rate Limits](rate-limits/traefik-rate-limits.yml)
+- [Fin Ops](finops/traefik-finops.yml)
+- [L L Ms Txt](https://traefik.io/llms.txt)
 
 ## Maintainers
 
-- **Kin Lane** (kin@apievangelist.com)
+**FN:** Kin Lane
+**Email:** kin@apievangelist.com

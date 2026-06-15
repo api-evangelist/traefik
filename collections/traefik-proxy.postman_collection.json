@@ -1,0 +1,2577 @@
+{
+  "item": [
+    {
+      "id": "79a8af0f-f0bf-485f-9110-c48a04272a97",
+      "name": "Entrypoints",
+      "description": {
+        "content": "Endpoints for listing configured entry points.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "03868d2e-5fe1-4cef-a25e-cbcbd7be0683",
+          "name": "List All Entry Points",
+          "request": {
+            "name": "List All Entry Points",
+            "description": {
+              "content": "Returns a list of all configured entry points for the Traefik instance, including their names, addresses, and transport configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "entrypoints"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c2cda1d7-50e8-4f35-bf49-d85e4b0babc3",
+              "name": "Entry points returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entrypoints"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"name\": \"string\",\n    \"address\": \"string\",\n    \"transport\": {\n      \"lifeCycle\": {\n        \"requestAcceptGraceTimeout\": \"string\",\n        \"graceTimeOut\": \"string\"\n      },\n      \"respondingTimeouts\": {\n        \"readTimeout\": \"string\",\n        \"writeTimeout\": \"string\",\n        \"idleTimeout\": \"string\"\n      }\n    }\n  },\n  {\n    \"name\": \"string\",\n    \"address\": \"string\",\n    \"transport\": {\n      \"lifeCycle\": {\n        \"requestAcceptGraceTimeout\": \"string\",\n        \"graceTimeOut\": \"string\"\n      },\n      \"respondingTimeouts\": {\n        \"readTimeout\": \"string\",\n        \"writeTimeout\": \"string\",\n        \"idleTimeout\": \"string\"\n      }\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bedc94df-1db0-4959-8521-9bfaeefef6d7",
+          "name": "Get a Specific Entry Point",
+          "request": {
+            "name": "Get a Specific Entry Point",
+            "description": {
+              "content": "Returns the configuration of a specific entry point by name.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "entrypoints",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the entry point."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4d942f13-c1d7-4e3a-9624-077de26d4ed2",
+              "name": "Entry point returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entrypoints",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the entry point."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"address\": \"string\",\n  \"transport\": {\n    \"lifeCycle\": {\n      \"requestAcceptGraceTimeout\": \"string\",\n      \"graceTimeOut\": \"string\"\n    },\n    \"respondingTimeouts\": {\n      \"readTimeout\": \"string\",\n      \"writeTimeout\": \"string\",\n      \"idleTimeout\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0570d7cf-7127-4926-a08f-372cf6b28b29",
+              "name": "Entry point not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entrypoints",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the entry point."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "546fc31e-8bba-4ea0-89be-2168da296603",
+      "name": "Health",
+      "description": {
+        "content": "Health check and ping endpoints for liveness probes.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c9c4fbac-4f8f-42c0-a5c2-c44a09dfba2c",
+          "name": "Health Check Ping",
+          "request": {
+            "name": "Health Check Ping",
+            "description": {
+              "content": "Returns HTTP 200 with body \"OK\" when the Traefik process is alive and ready. Used for liveness probes in container orchestration. Note that the ping endpoint is typically configured on a separate entry point or path outside the /api prefix.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ping"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ab5f25a6-2afc-4ba5-81d8-ebc7e4ce962e",
+              "name": "Traefik is alive and ready",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ping"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "OK",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "dc0aac89-26f3-4c9c-817b-dce88fb1e868",
+      "name": "HTTP",
+      "description": {
+        "content": "Endpoints for inspecting HTTP routers, services, and middlewares.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b2955a9a-0aed-44d6-a7aa-9bf683596c4c",
+          "name": "List All HTTP Routers",
+          "request": {
+            "name": "List All HTTP Routers",
+            "description": {
+              "content": "Returns a list of all HTTP routers configured in the running Traefik instance, including their rules, entry points, middlewares, and service assignments.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "http",
+                "routers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Filter results by name using a search string."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter results by status (enabled or disabled)."
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "100",
+                  "description": "Number of results per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for paginated results."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a3410aa1-b885-4d67-b163-2ae49bcd0950",
+              "name": "HTTP routers returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "http",
+                    "routers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"name\": \"string\",\n    \"entryPoints\": [\n      \"string\",\n      \"string\"\n    ],\n    \"middlewares\": [\n      \"string\",\n      \"string\"\n    ],\n    \"service\": \"string\",\n    \"rule\": \"string\",\n    \"ruleSyntax\": \"string\",\n    \"priority\": 3116,\n    \"status\": \"warning\",\n    \"using\": [\n      \"string\",\n      \"string\"\n    ],\n    \"provider\": \"string\",\n    \"tls\": {\n      \"options\": \"string\",\n      \"certResolver\": \"string\",\n      \"domains\": [\n        {\n          \"main\": \"string\",\n          \"sans\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"main\": \"string\",\n          \"sans\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ]\n    }\n  },\n  {\n    \"name\": \"string\",\n    \"entryPoints\": [\n      \"string\",\n      \"string\"\n    ],\n    \"middlewares\": [\n      \"string\",\n      \"string\"\n    ],\n    \"service\": \"string\",\n    \"rule\": \"string\",\n    \"ruleSyntax\": \"string\",\n    \"priority\": 2719,\n    \"status\": \"warning\",\n    \"using\": [\n      \"string\",\n      \"string\"\n    ],\n    \"provider\": \"string\",\n    \"tls\": {\n      \"options\": \"string\",\n      \"certResolver\": \"string\",\n      \"domains\": [\n        {\n          \"main\": \"string\",\n          \"sans\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"main\": \"string\",\n          \"sans\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ]\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ec42344c-d497-48e5-9437-3a6c4d7223e8",
+          "name": "Get a Specific HTTP Router",
+          "request": {
+            "name": "Get a Specific HTTP Router",
+            "description": {
+              "content": "Returns the configuration of a specific HTTP router by its name, including the rule, priority, entry points, service, and middlewares.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "http",
+                "routers",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the HTTP router, in the format name@provider."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "60eb4894-10a4-4205-bc02-2fde56bec6f0",
+              "name": "HTTP router returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "http",
+                    "routers",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the HTTP router, in the format name@provider."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"entryPoints\": [\n    \"string\",\n    \"string\"\n  ],\n  \"middlewares\": [\n    \"string\",\n    \"string\"\n  ],\n  \"service\": \"string\",\n  \"rule\": \"string\",\n  \"ruleSyntax\": \"string\",\n  \"priority\": 6000,\n  \"status\": \"enabled\",\n  \"using\": [\n    \"string\",\n    \"string\"\n  ],\n  \"provider\": \"string\",\n  \"tls\": {\n    \"options\": \"string\",\n    \"certResolver\": \"string\",\n    \"domains\": [\n      {\n        \"main\": \"string\",\n        \"sans\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      {\n        \"main\": \"string\",\n        \"sans\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a0dc5187-65fb-4909-8182-ed575d40bb55",
+              "name": "Router not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "http",
+                    "routers",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the HTTP router, in the format name@provider."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8f3f7c20-e5d8-4e31-8906-d026d8f35c2f",
+          "name": "List All HTTP Services",
+          "request": {
+            "name": "List All HTTP Services",
+            "description": {
+              "content": "Returns a list of all HTTP services configured in the running Traefik instance, including their load balancer configuration and server details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "http",
+                "services"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Filter results by name using a search string."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter results by status (enabled or disabled)."
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "100",
+                  "description": "Number of results per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for paginated results."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "53293a15-c3f8-4f1a-8a1c-2b45da9af751",
+              "name": "HTTP services returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "http",
+                    "services"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"name\": \"string\",\n    \"type\": \"string\",\n    \"status\": \"disabled\",\n    \"provider\": \"string\",\n    \"loadBalancer\": {\n      \"servers\": [\n        {\n          \"url\": \"string\"\n        },\n        {\n          \"url\": \"string\"\n        }\n      ],\n      \"passHostHeader\": true,\n      \"healthCheck\": {\n        \"scheme\": \"string\",\n        \"path\": \"string\",\n        \"port\": 3247,\n        \"interval\": \"string\",\n        \"timeout\": \"string\"\n      }\n    },\n    \"serverStatus\": {\n      \"key_0\": \"string\"\n    }\n  },\n  {\n    \"name\": \"string\",\n    \"type\": \"string\",\n    \"status\": \"enabled\",\n    \"provider\": \"string\",\n    \"loadBalancer\": {\n      \"servers\": [\n        {\n          \"url\": \"string\"\n        },\n        {\n          \"url\": \"string\"\n        }\n      ],\n      \"passHostHeader\": false,\n      \"healthCheck\": {\n        \"scheme\": \"string\",\n        \"path\": \"string\",\n        \"port\": 8743,\n        \"interval\": \"string\",\n        \"timeout\": \"string\"\n      }\n    },\n    \"serverStatus\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\",\n      \"key_3\": \"string\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c5089f6c-5162-46d3-b07c-52179461c1e4",
+          "name": "Get a Specific HTTP Service",
+          "request": {
+            "name": "Get a Specific HTTP Service",
+            "description": {
+              "content": "Returns the configuration of a specific HTTP service by its name, including the load balancer servers and health check status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "http",
+                "services",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the HTTP service, in the format name@provider."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a8ab4ce3-be02-4768-b0b2-0c31966b4ff8",
+              "name": "HTTP service returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "http",
+                    "services",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the HTTP service, in the format name@provider."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"type\": \"string\",\n  \"status\": \"enabled\",\n  \"provider\": \"string\",\n  \"loadBalancer\": {\n    \"servers\": [\n      {\n        \"url\": \"string\"\n      },\n      {\n        \"url\": \"string\"\n      }\n    ],\n    \"passHostHeader\": true,\n    \"healthCheck\": {\n      \"scheme\": \"string\",\n      \"path\": \"string\",\n      \"port\": 7036,\n      \"interval\": \"string\",\n      \"timeout\": \"string\"\n    }\n  },\n  \"serverStatus\": {\n    \"key_0\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "089c2a5d-f2bf-43f3-98f2-22c2534f2698",
+              "name": "Service not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "http",
+                    "services",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the HTTP service, in the format name@provider."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d1ebdd02-d7a0-4b1b-9358-a0dbcd04d4e9",
+          "name": "List All HTTP Middlewares",
+          "request": {
+            "name": "List All HTTP Middlewares",
+            "description": {
+              "content": "Returns a list of all HTTP middlewares configured in the running Traefik instance, including their type and configuration details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "http",
+                "middlewares"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Filter results by name using a search string."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter results by status (enabled or disabled)."
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "100",
+                  "description": "Number of results per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for paginated results."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9e539a16-bb32-4ef2-8af6-76e7af19c00d",
+              "name": "HTTP middlewares returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "http",
+                    "middlewares"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"name\": \"string\",\n    \"type\": \"string\",\n    \"status\": \"enabled\",\n    \"provider\": \"string\",\n    \"usedBy\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  {\n    \"name\": \"string\",\n    \"type\": \"string\",\n    \"status\": \"disabled\",\n    \"provider\": \"string\",\n    \"usedBy\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "012665b6-ff20-4edf-8f56-19d0bdd3bb82",
+          "name": "Get a Specific HTTP Middleware",
+          "request": {
+            "name": "Get a Specific HTTP Middleware",
+            "description": {
+              "content": "Returns the configuration of a specific HTTP middleware by its name.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "http",
+                "middlewares",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the HTTP middleware, in the format name@provider."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6e2f15d4-6e56-453e-979c-19ac00b19a00",
+              "name": "HTTP middleware returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "http",
+                    "middlewares",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the HTTP middleware, in the format name@provider."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"type\": \"string\",\n  \"status\": \"enabled\",\n  \"provider\": \"string\",\n  \"usedBy\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "52d7a416-9b14-4671-a525-8f99dc0a674b",
+              "name": "Middleware not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "http",
+                    "middlewares",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the HTTP middleware, in the format name@provider."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "3d02c1d2-26d6-4210-b3c2-6fe73ad1242c",
+      "name": "Overview",
+      "description": {
+        "content": "Overview and version information for the running Traefik instance.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "32c7bf0b-bd7a-44cb-8e14-5a3b39d0b8f3",
+          "name": "Get Traefik Version",
+          "request": {
+            "name": "Get Traefik Version",
+            "description": {
+              "content": "Returns the current version of the running Traefik instance, including the version string, codename, and start date.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "version"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "39055572-f6e4-48f7-817a-e31000edd9eb",
+              "name": "Version information returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Version\": \"string\",\n  \"Codename\": \"string\",\n  \"startDate\": \"2010-10-14T21:18:01.868Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "51d072d4-708e-47e6-8790-1ea274f5c472",
+          "name": "Get Overview Statistics",
+          "request": {
+            "name": "Get Overview Statistics",
+            "description": {
+              "content": "Returns an overview of the current Traefik configuration including counts of HTTP, TCP, and UDP routers, services, and middlewares, as well as enabled features and provider information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "overview"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1a8cad2b-2ba9-43af-939f-0152988957bc",
+              "name": "Overview returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "overview"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"http\": {\n    \"routers\": {\n      \"total\": 6530,\n      \"warnings\": 7537,\n      \"errors\": 2416\n    },\n    \"services\": {\n      \"total\": 4914,\n      \"warnings\": 1394,\n      \"errors\": 8468\n    },\n    \"middlewares\": {\n      \"total\": 8387,\n      \"warnings\": 7404,\n      \"errors\": 3070\n    }\n  },\n  \"tcp\": {\n    \"routers\": {\n      \"total\": 753,\n      \"warnings\": 5103,\n      \"errors\": 1197\n    },\n    \"services\": {\n      \"total\": 4159,\n      \"warnings\": 319,\n      \"errors\": 5823\n    },\n    \"middlewares\": {\n      \"total\": 1219,\n      \"warnings\": 8708,\n      \"errors\": 7484\n    }\n  },\n  \"udp\": {\n    \"routers\": {\n      \"total\": 7154,\n      \"warnings\": 5092,\n      \"errors\": 7051\n    },\n    \"services\": {\n      \"total\": 469,\n      \"warnings\": 4122,\n      \"errors\": 5897\n    }\n  },\n  \"features\": {\n    \"tracing\": \"string\",\n    \"metrics\": \"string\",\n    \"accessLog\": false\n  },\n  \"providers\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fefa8cb9-3520-4875-984c-ff39cef07367",
+          "name": "Get Raw Configuration Data",
+          "request": {
+            "name": "Get Raw Configuration Data",
+            "description": {
+              "content": "Returns the complete raw dynamic configuration data for all routers, services, middlewares, and transports currently loaded from all providers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rawdata"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "de76ba1f-dbad-43b2-9105-559acda49c2c",
+              "name": "Raw configuration data returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rawdata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f43b4213-536e-45f1-9f73-9f6d6240653d",
+          "name": "Get Anonymized Support Dump",
+          "request": {
+            "name": "Get Anonymized Support Dump",
+            "description": {
+              "content": "Returns an anonymized archive of the running Traefik configuration and runtime metadata. Used by Traefik Labs support to reproduce reported issues without exposing sensitive customer data. The endpoint returns a ZIP archive.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "support-dump"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/zip"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5350b198-b326-4426-873b-9ba20ab66501",
+              "name": "Support-dump archive returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "support-dump"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/zip"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/zip"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "0cbd2279-ba0c-420f-a713-67d83252a974",
+      "name": "TCP",
+      "description": {
+        "content": "Endpoints for inspecting TCP routers, services, and middlewares.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0736df22-dabf-4533-b69d-ec591eb7c4af",
+          "name": "List All TCP Routers",
+          "request": {
+            "name": "List All TCP Routers",
+            "description": {
+              "content": "Returns a list of all TCP routers configured in the running Traefik instance.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tcp",
+                "routers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Filter results by name using a search string."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter results by status (enabled or disabled)."
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "100",
+                  "description": "Number of results per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for paginated results."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5d70704e-4866-487e-a887-3a133080e7fb",
+              "name": "TCP routers returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tcp",
+                    "routers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"name\": \"string\",\n    \"entryPoints\": [\n      \"string\",\n      \"string\"\n    ],\n    \"service\": \"string\",\n    \"rule\": \"string\",\n    \"status\": \"enabled\",\n    \"provider\": \"string\",\n    \"tls\": {\n      \"passthrough\": true,\n      \"options\": \"string\",\n      \"certResolver\": \"string\"\n    }\n  },\n  {\n    \"name\": \"string\",\n    \"entryPoints\": [\n      \"string\",\n      \"string\"\n    ],\n    \"service\": \"string\",\n    \"rule\": \"string\",\n    \"status\": \"warning\",\n    \"provider\": \"string\",\n    \"tls\": {\n      \"passthrough\": true,\n      \"options\": \"string\",\n      \"certResolver\": \"string\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "194c3aad-3098-4b57-be4f-9582d36b5f2c",
+          "name": "Get a Specific TCP Router",
+          "request": {
+            "name": "Get a Specific TCP Router",
+            "description": {
+              "content": "Returns the configuration of a specific TCP router by its name.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tcp",
+                "routers",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the TCP router, in the format name@provider."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b228f0e3-7b26-4b6e-9aeb-adf57626b62b",
+              "name": "TCP router returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tcp",
+                    "routers",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the TCP router, in the format name@provider."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"entryPoints\": [\n    \"string\",\n    \"string\"\n  ],\n  \"service\": \"string\",\n  \"rule\": \"string\",\n  \"status\": \"warning\",\n  \"provider\": \"string\",\n  \"tls\": {\n    \"passthrough\": false,\n    \"options\": \"string\",\n    \"certResolver\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b732796a-96ec-4a18-8fcc-58c6b43b0bb4",
+              "name": "Router not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tcp",
+                    "routers",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the TCP router, in the format name@provider."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ab0be20d-e7bf-4a0d-8aed-fccd081bfc7f",
+          "name": "List All TCP Services",
+          "request": {
+            "name": "List All TCP Services",
+            "description": {
+              "content": "Returns a list of all TCP services configured in the running Traefik instance.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tcp",
+                "services"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Filter results by name using a search string."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter results by status (enabled or disabled)."
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "100",
+                  "description": "Number of results per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for paginated results."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e6fffc3c-9bb5-4034-a983-5592a94cec0d",
+              "name": "TCP services returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tcp",
+                    "services"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"name\": \"string\",\n    \"type\": \"string\",\n    \"status\": \"disabled\",\n    \"provider\": \"string\",\n    \"loadBalancer\": {\n      \"servers\": [\n        {\n          \"address\": \"string\"\n        },\n        {\n          \"address\": \"string\"\n        }\n      ]\n    }\n  },\n  {\n    \"name\": \"string\",\n    \"type\": \"string\",\n    \"status\": \"warning\",\n    \"provider\": \"string\",\n    \"loadBalancer\": {\n      \"servers\": [\n        {\n          \"address\": \"string\"\n        },\n        {\n          \"address\": \"string\"\n        }\n      ]\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "80ef8b93-069b-4ce7-920f-5fbd5a108566",
+          "name": "Get a Specific TCP Service",
+          "request": {
+            "name": "Get a Specific TCP Service",
+            "description": {
+              "content": "Returns the configuration of a specific TCP service by its name.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tcp",
+                "services",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the TCP service, in the format name@provider."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "33328bcb-6571-4c64-9ad0-5e8e6439156c",
+              "name": "TCP service returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tcp",
+                    "services",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the TCP service, in the format name@provider."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"type\": \"string\",\n  \"status\": \"disabled\",\n  \"provider\": \"string\",\n  \"loadBalancer\": {\n    \"servers\": [\n      {\n        \"address\": \"string\"\n      },\n      {\n        \"address\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a08d7178-cb3c-4090-81ad-6a28dd8f9b3e",
+              "name": "Service not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tcp",
+                    "services",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the TCP service, in the format name@provider."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7f17f613-a183-4378-8f54-0dad62cfc61a",
+          "name": "List All TCP Middlewares",
+          "request": {
+            "name": "List All TCP Middlewares",
+            "description": {
+              "content": "Returns a list of all TCP middlewares configured in the running Traefik instance.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tcp",
+                "middlewares"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Filter results by name using a search string."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter results by status (enabled or disabled)."
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "100",
+                  "description": "Number of results per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for paginated results."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "105243f3-9749-4a85-9315-47555c4063f4",
+              "name": "TCP middlewares returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tcp",
+                    "middlewares"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"name\": \"string\",\n    \"type\": \"string\",\n    \"status\": \"warning\",\n    \"provider\": \"string\"\n  },\n  {\n    \"name\": \"string\",\n    \"type\": \"string\",\n    \"status\": \"warning\",\n    \"provider\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "64fce7d7-aed8-4df5-97f5-7655112ada42",
+          "name": "Get a Specific TCP Middleware",
+          "request": {
+            "name": "Get a Specific TCP Middleware",
+            "description": {
+              "content": "Returns the configuration of a specific TCP middleware by its name.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tcp",
+                "middlewares",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the TCP middleware, in the format name@provider."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "17a483c4-f366-437a-9209-577439e2d07b",
+              "name": "TCP middleware returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tcp",
+                    "middlewares",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the TCP middleware, in the format name@provider."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"type\": \"string\",\n  \"status\": \"enabled\",\n  \"provider\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8402cd2a-fd92-482c-857d-571b412da5c6",
+              "name": "Middleware not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tcp",
+                    "middlewares",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the TCP middleware, in the format name@provider."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "297abe24-2305-49b4-aded-c0f9f0b34af6",
+      "name": "UDP",
+      "description": {
+        "content": "Endpoints for inspecting UDP routers and services.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "69a6712a-ec28-4475-b0ea-d96452999ef4",
+          "name": "List All UDP Routers",
+          "request": {
+            "name": "List All UDP Routers",
+            "description": {
+              "content": "Returns a list of all UDP routers configured in the running Traefik instance.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "udp",
+                "routers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Filter results by name using a search string."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter results by status (enabled or disabled)."
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "100",
+                  "description": "Number of results per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for paginated results."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "96077c02-d846-4cbd-ade7-c2327cf1b5f5",
+              "name": "UDP routers returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "udp",
+                    "routers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"name\": \"string\",\n    \"entryPoints\": [\n      \"string\",\n      \"string\"\n    ],\n    \"service\": \"string\",\n    \"status\": \"disabled\",\n    \"provider\": \"string\"\n  },\n  {\n    \"name\": \"string\",\n    \"entryPoints\": [\n      \"string\",\n      \"string\"\n    ],\n    \"service\": \"string\",\n    \"status\": \"disabled\",\n    \"provider\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d4a84302-47de-4e88-bdae-49a62e84b34c",
+          "name": "Get a Specific UDP Router",
+          "request": {
+            "name": "Get a Specific UDP Router",
+            "description": {
+              "content": "Returns the configuration of a specific UDP router by its name.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "udp",
+                "routers",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the UDP router, in the format name@provider."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7597d678-e58e-4afc-b787-94525ee5be00",
+              "name": "UDP router returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "udp",
+                    "routers",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the UDP router, in the format name@provider."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"entryPoints\": [\n    \"string\",\n    \"string\"\n  ],\n  \"service\": \"string\",\n  \"status\": \"enabled\",\n  \"provider\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "60b6fa02-c9b7-495a-adc0-fbdd16be175e",
+              "name": "Router not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "udp",
+                    "routers",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the UDP router, in the format name@provider."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "28508143-2388-4793-9103-ec37431b3b77",
+          "name": "List All UDP Services",
+          "request": {
+            "name": "List All UDP Services",
+            "description": {
+              "content": "Returns a list of all UDP services configured in the running Traefik instance.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "udp",
+                "services"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Filter results by name using a search string."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter results by status (enabled or disabled)."
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "100",
+                  "description": "Number of results per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for paginated results."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "258358b8-b4d2-4cfa-8d37-6d0c87b3b3b5",
+              "name": "UDP services returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "udp",
+                    "services"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"name\": \"string\",\n    \"type\": \"string\",\n    \"status\": \"disabled\",\n    \"provider\": \"string\",\n    \"loadBalancer\": {\n      \"servers\": [\n        {\n          \"address\": \"string\"\n        },\n        {\n          \"address\": \"string\"\n        }\n      ]\n    }\n  },\n  {\n    \"name\": \"string\",\n    \"type\": \"string\",\n    \"status\": \"warning\",\n    \"provider\": \"string\",\n    \"loadBalancer\": {\n      \"servers\": [\n        {\n          \"address\": \"string\"\n        },\n        {\n          \"address\": \"string\"\n        }\n      ]\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c9feebdd-7376-42a6-a145-646f075b3577",
+          "name": "Get a Specific UDP Service",
+          "request": {
+            "name": "Get a Specific UDP Service",
+            "description": {
+              "content": "Returns the configuration of a specific UDP service by its name.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "udp",
+                "services",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the UDP service, in the format name@provider."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "871f0be5-1f09-4106-8192-e6bb10c18bba",
+              "name": "UDP service returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "udp",
+                    "services",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the UDP service, in the format name@provider."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"type\": \"string\",\n  \"status\": \"disabled\",\n  \"provider\": \"string\",\n  \"loadBalancer\": {\n    \"servers\": [\n      {\n        \"address\": \"string\"\n      },\n      {\n        \"address\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "305cdd19-9ed5-491e-af9f-614ea001c13e",
+              "name": "Service not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "udp",
+                    "services",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the UDP service, in the format name@provider."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:8080/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "19b31598-1b1c-4f88-b927-de8af2dbbfed",
+    "name": "Traefik Proxy REST API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Traefik Proxy REST API provides read-only HTTP endpoints for inspecting the runtime configuration and state of a running Traefik instance. It exposes information about HTTP, TCP, and UDP routers, services, and middlewares, as well as entry points, raw dynamic configuration, the support-dump archive, and the current Traefik version. The API must be enabled in the Traefik static configuration (`api.insecure: true` for quick exploration, or by binding the `traefik` entrypoint behind an `IngressRoute` with `service: api@internal` for production) and should always be secured behind authentication before being exposed publicly. All endpoints listed here are mounted under the `/api` path prefix on the `traefik` entrypoint (default port 8080).\n\nContact Support:\n Name: Traefik Labs",
+      "type": "text/plain"
+    }
+  }
+}

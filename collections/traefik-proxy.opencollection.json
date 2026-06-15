@@ -1,0 +1,591 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Traefik Proxy REST API",
+    "version": "3.7"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Overview",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Traefik Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/version"
+          },
+          "docs": "Returns the current version of the running Traefik instance, including the version string, codename, and start date."
+        },
+        {
+          "info": {
+            "name": "Get Overview Statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/overview"
+          },
+          "docs": "Returns an overview of the current Traefik configuration including counts of HTTP, TCP, and UDP routers, services, and middlewares, as well as enabled features and provider information."
+        },
+        {
+          "info": {
+            "name": "Get Raw Configuration Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/rawdata"
+          },
+          "docs": "Returns the complete raw dynamic configuration data for all routers, services, middlewares, and transports currently loaded from all providers."
+        },
+        {
+          "info": {
+            "name": "Get Anonymized Support Dump",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/support-dump"
+          },
+          "docs": "Returns an anonymized archive of the running Traefik configuration and runtime metadata. Used by Traefik Labs support to reproduce reported issues without exposing sensitive customer data. The endpoint returns a ZIP archive."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Entrypoints",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List All Entry Points",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/entrypoints"
+          },
+          "docs": "Returns a list of all configured entry points for the Traefik instance, including their names, addresses, and transport configuration."
+        },
+        {
+          "info": {
+            "name": "Get a Specific Entry Point",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/entrypoints/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the entry point."
+              }
+            ]
+          },
+          "docs": "Returns the configuration of a specific entry point by name."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "HTTP",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List All HTTP Routers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/http/routers",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by name using a search string."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by status (enabled or disabled)."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results."
+              }
+            ]
+          },
+          "docs": "Returns a list of all HTTP routers configured in the running Traefik instance, including their rules, entry points, middlewares, and service assignments."
+        },
+        {
+          "info": {
+            "name": "Get a Specific HTTP Router",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/http/routers/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the HTTP router, in the format name@provider."
+              }
+            ]
+          },
+          "docs": "Returns the configuration of a specific HTTP router by its name, including the rule, priority, entry points, service, and middlewares."
+        },
+        {
+          "info": {
+            "name": "List All HTTP Services",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/http/services",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by name using a search string."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by status (enabled or disabled)."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results."
+              }
+            ]
+          },
+          "docs": "Returns a list of all HTTP services configured in the running Traefik instance, including their load balancer configuration and server details."
+        },
+        {
+          "info": {
+            "name": "Get a Specific HTTP Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/http/services/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the HTTP service, in the format name@provider."
+              }
+            ]
+          },
+          "docs": "Returns the configuration of a specific HTTP service by its name, including the load balancer servers and health check status."
+        },
+        {
+          "info": {
+            "name": "List All HTTP Middlewares",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/http/middlewares",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by name using a search string."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by status (enabled or disabled)."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results."
+              }
+            ]
+          },
+          "docs": "Returns a list of all HTTP middlewares configured in the running Traefik instance, including their type and configuration details."
+        },
+        {
+          "info": {
+            "name": "Get a Specific HTTP Middleware",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/http/middlewares/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the HTTP middleware, in the format name@provider."
+              }
+            ]
+          },
+          "docs": "Returns the configuration of a specific HTTP middleware by its name."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "TCP",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List All TCP Routers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/tcp/routers",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by name using a search string."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by status (enabled or disabled)."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results."
+              }
+            ]
+          },
+          "docs": "Returns a list of all TCP routers configured in the running Traefik instance."
+        },
+        {
+          "info": {
+            "name": "Get a Specific TCP Router",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/tcp/routers/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the TCP router, in the format name@provider."
+              }
+            ]
+          },
+          "docs": "Returns the configuration of a specific TCP router by its name."
+        },
+        {
+          "info": {
+            "name": "List All TCP Services",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/tcp/services",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by name using a search string."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by status (enabled or disabled)."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results."
+              }
+            ]
+          },
+          "docs": "Returns a list of all TCP services configured in the running Traefik instance."
+        },
+        {
+          "info": {
+            "name": "Get a Specific TCP Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/tcp/services/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the TCP service, in the format name@provider."
+              }
+            ]
+          },
+          "docs": "Returns the configuration of a specific TCP service by its name."
+        },
+        {
+          "info": {
+            "name": "List All TCP Middlewares",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/tcp/middlewares",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by name using a search string."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by status (enabled or disabled)."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results."
+              }
+            ]
+          },
+          "docs": "Returns a list of all TCP middlewares configured in the running Traefik instance."
+        },
+        {
+          "info": {
+            "name": "Get a Specific TCP Middleware",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/tcp/middlewares/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the TCP middleware, in the format name@provider."
+              }
+            ]
+          },
+          "docs": "Returns the configuration of a specific TCP middleware by its name."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "UDP",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List All UDP Routers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/udp/routers",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by name using a search string."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by status (enabled or disabled)."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results."
+              }
+            ]
+          },
+          "docs": "Returns a list of all UDP routers configured in the running Traefik instance."
+        },
+        {
+          "info": {
+            "name": "Get a Specific UDP Router",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/udp/routers/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the UDP router, in the format name@provider."
+              }
+            ]
+          },
+          "docs": "Returns the configuration of a specific UDP router by its name."
+        },
+        {
+          "info": {
+            "name": "List All UDP Services",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/udp/services",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by name using a search string."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by status (enabled or disabled)."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results."
+              }
+            ]
+          },
+          "docs": "Returns a list of all UDP services configured in the running Traefik instance."
+        },
+        {
+          "info": {
+            "name": "Get a Specific UDP Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/udp/services/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the UDP service, in the format name@provider."
+              }
+            ]
+          },
+          "docs": "Returns the configuration of a specific UDP service by its name."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Health",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Health Check Ping",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/ping"
+          },
+          "docs": "Returns HTTP 200 with body \"OK\" when the Traefik process is alive and ready. Used for liveness probes in container orchestration. Note that the ping endpoint is typically configured on a separate entry point or path outside the /api prefix."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
