@@ -5,14 +5,17 @@
       "source": "https://traefik.io/rss.xml",
       "feed_url": "https://traefik.io/rss.xml",
       "title": "",
-      "saved": 1,
+      "saved": 0,
       "method": "feed"
     },
     {
       "source": "https://traefik.io/pricing/",
-      "error": "HTTPError"
+      "feed_url": "https://traefik.io/pricing/",
+      "title": "",
+      "saved": 0,
+      "method": "none"
     }
   ],
   "post_count": 57,
-  "fetched": "2026-06-14T20:42:17Z"
+  "fetched": "2026-06-27T12:03:07Z"
 }

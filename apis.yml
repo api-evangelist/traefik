@@ -44,11 +44,11 @@ apis:
     properties:
       - type: Documentation
         url: https://doc.traefik.io/traefik/
-      - type: Getting Started
+      - type: GettingStarted
         url: https://doc.traefik.io/traefik/getting-started/quick-start/
       - type: Reference
         url: https://doc.traefik.io/traefik/reference/static-configuration/cli/
-      - type: Change Log
+      - type: ChangeLog
         url: https://github.com/traefik/traefik/blob/master/CHANGELOG.md
       - type: GitHubRepository
         url: https://github.com/traefik/traefik
@@ -371,15 +371,15 @@ common:
     url: https://traefik.io/
   - type: Documentation
     url: https://doc.traefik.io/traefik/
-  - type: Getting Started
+  - type: GettingStarted
     url: https://doc.traefik.io/traefik/getting-started/quick-start/
   - type: Pricing
     url: https://traefik.io/pricing/
   - type: Blog
     url: https://traefik.io/blog/
-  - type: Change Log
+  - type: ChangeLog
     url: https://github.com/traefik/traefik/blob/master/CHANGELOG.md
-  - type: GitHub Organization
+  - type: GitHubOrganization
     url: https://github.com/traefik
   - type: GitHubRepository
     url: https://github.com/traefik/traefik
@@ -387,7 +387,7 @@ common:
     url: https://github.com/traefik/traefik/issues
   - type: Community
     url: https://community.traefik.io/
-  - type: Stack Overflow
+  - type: StackOverflow
     url: https://stackoverflow.com/questions/tagged/traefik
   - type: Plugin Catalog
     url: https://plugins.traefik.io/
@@ -395,7 +395,7 @@ common:
     url: https://github.com/traefik/traefik-helm-chart
   - type: Integrations
     url: https://traefik.io/partners
-  - type: JSON-LD
+  - type: JSONLD
     url: json-ld/traefik-context.jsonld
   - type: JSONSchema
     url: json-schema/traefik-router-schema.json
@@ -419,7 +419,7 @@ common:
     url: rate-limits/traefik-rate-limits.yml
   - type: FinOps
     url: finops/traefik-finops.yml
-  - type: LLMsTxt
+  - type: LlmsText
     url: https://traefik.io/llms.txt
 solutions:
   - name: API Gateway
