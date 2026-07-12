@@ -365,6 +365,8 @@ apis:
       - type: GitHubRepository
         url: https://github.com/traefik/mesh
 common:
+  - type: DomainSecurity
+    url: security/traefik-domain-security.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/traefik
   - type: Website
