@@ -365,6 +365,8 @@ apis:
       - type: GitHubRepository
         url: https://github.com/traefik/mesh
 common:
+  - type: AgenticAccess
+    url: agentic-access/traefik-agentic-access.yml
   - type: DomainSecurity
     url: security/traefik-domain-security.yml
   - type: LinkedIn
