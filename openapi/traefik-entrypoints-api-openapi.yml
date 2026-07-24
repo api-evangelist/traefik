@@ -1,0 +1,92 @@
+openapi: 3.1.0
+info:
+  title: Traefik Proxy REST Entrypoints API
+  description: 'The Traefik Proxy REST API provides read-only HTTP endpoints for inspecting the runtime configuration and state of a running Traefik instance. It exposes information about HTTP, TCP, and UDP routers, services, and middlewares, as well as entry points, raw dynamic configuration, the support-dump archive, and the current Traefik version. The API must be enabled in the Traefik static configuration (`api.insecure: true` for quick exploration, or by binding the `traefik` entrypoint behind an `IngressRoute` with `service: api@internal` for production) and should always be secured behind authentication before being exposed publicly. All endpoints listed here are mounted under the `/api` path prefix on the `traefik` entrypoint (default port 8080).'
+  version: '3.7'
+  contact:
+    name: Traefik Labs
+    url: https://traefik.io/
+  license:
+    name: MIT
+    url: https://github.com/traefik/traefik/blob/master/LICENSE.md
+servers:
+- url: http://localhost:8080/api
+  description: Default Traefik API endpoint (traefik entrypoint on port 8080)
+tags:
+- name: Entrypoints
+  description: Endpoints for listing configured entry points.
+paths:
+  /entrypoints:
+    get:
+      operationId: listEntryPoints
+      summary: List All Entry Points
+      description: Returns a list of all configured entry points for the Traefik instance, including their names, addresses, and transport configuration.
+      tags:
+      - Entrypoints
+      responses:
+        '200':
+          description: Entry points returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EntryPoint'
+  /entrypoints/{name}:
+    get:
+      operationId: getEntryPoint
+      summary: Get a Specific Entry Point
+      description: Returns the configuration of a specific entry point by name.
+      tags:
+      - Entrypoints
+      parameters:
+      - name: name
+        in: path
+        required: true
+        description: The name of the entry point.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Entry point returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntryPoint'
+        '404':
+          description: Entry point not found
+components:
+  schemas:
+    EntryPoint:
+      type: object
+      description: A configured entry point for accepting incoming traffic.
+      properties:
+        name:
+          type: string
+          description: The name of the entry point.
+        address:
+          type: string
+          description: The address the entry point listens on (e.g., ":80", ":443").
+        transport:
+          type: object
+          description: Transport layer configuration.
+          properties:
+            lifeCycle:
+              type: object
+              properties:
+                requestAcceptGraceTimeout:
+                  type: string
+                graceTimeOut:
+                  type: string
+            respondingTimeouts:
+              type: object
+              properties:
+                readTimeout:
+                  type: string
+                writeTimeout:
+                  type: string
+                idleTimeout:
+                  type: string
+externalDocs:
+  description: Traefik API Documentation
+  url: https://doc.traefik.io/traefik/operations/api/

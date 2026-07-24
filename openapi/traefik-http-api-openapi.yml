@@ -1,0 +1,331 @@
+openapi: 3.1.0
+info:
+  title: Traefik Proxy REST Entrypoints HTTP API
+  description: 'The Traefik Proxy REST API provides read-only HTTP endpoints for inspecting the runtime configuration and state of a running Traefik instance. It exposes information about HTTP, TCP, and UDP routers, services, and middlewares, as well as entry points, raw dynamic configuration, the support-dump archive, and the current Traefik version. The API must be enabled in the Traefik static configuration (`api.insecure: true` for quick exploration, or by binding the `traefik` entrypoint behind an `IngressRoute` with `service: api@internal` for production) and should always be secured behind authentication before being exposed publicly. All endpoints listed here are mounted under the `/api` path prefix on the `traefik` entrypoint (default port 8080).'
+  version: '3.7'
+  contact:
+    name: Traefik Labs
+    url: https://traefik.io/
+  license:
+    name: MIT
+    url: https://github.com/traefik/traefik/blob/master/LICENSE.md
+servers:
+- url: http://localhost:8080/api
+  description: Default Traefik API endpoint (traefik entrypoint on port 8080)
+tags:
+- name: HTTP
+  description: Endpoints for inspecting HTTP routers, services, and middlewares.
+paths:
+  /http/routers:
+    get:
+      operationId: listHTTPRouters
+      summary: List All HTTP Routers
+      description: Returns a list of all HTTP routers configured in the running Traefik instance, including their rules, entry points, middlewares, and service assignments.
+      tags:
+      - HTTP
+      parameters:
+      - $ref: '#/components/parameters/search'
+      - $ref: '#/components/parameters/status'
+      - $ref: '#/components/parameters/per_page'
+      - $ref: '#/components/parameters/page'
+      responses:
+        '200':
+          description: HTTP routers returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HTTPRouter'
+  /http/routers/{name}:
+    get:
+      operationId: getHTTPRouter
+      summary: Get a Specific HTTP Router
+      description: Returns the configuration of a specific HTTP router by its name, including the rule, priority, entry points, service, and middlewares.
+      tags:
+      - HTTP
+      parameters:
+      - name: name
+        in: path
+        required: true
+        description: The name of the HTTP router, in the format name@provider.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: HTTP router returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPRouter'
+        '404':
+          description: Router not found
+  /http/services:
+    get:
+      operationId: listHTTPServices
+      summary: List All HTTP Services
+      description: Returns a list of all HTTP services configured in the running Traefik instance, including their load balancer configuration and server details.
+      tags:
+      - HTTP
+      parameters:
+      - $ref: '#/components/parameters/search'
+      - $ref: '#/components/parameters/status'
+      - $ref: '#/components/parameters/per_page'
+      - $ref: '#/components/parameters/page'
+      responses:
+        '200':
+          description: HTTP services returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HTTPService'
+  /http/services/{name}:
+    get:
+      operationId: getHTTPService
+      summary: Get a Specific HTTP Service
+      description: Returns the configuration of a specific HTTP service by its name, including the load balancer servers and health check status.
+      tags:
+      - HTTP
+      parameters:
+      - name: name
+        in: path
+        required: true
+        description: The name of the HTTP service, in the format name@provider.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: HTTP service returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPService'
+        '404':
+          description: Service not found
+  /http/middlewares:
+    get:
+      operationId: listHTTPMiddlewares
+      summary: List All HTTP Middlewares
+      description: Returns a list of all HTTP middlewares configured in the running Traefik instance, including their type and configuration details.
+      tags:
+      - HTTP
+      parameters:
+      - $ref: '#/components/parameters/search'
+      - $ref: '#/components/parameters/status'
+      - $ref: '#/components/parameters/per_page'
+      - $ref: '#/components/parameters/page'
+      responses:
+        '200':
+          description: HTTP middlewares returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HTTPMiddleware'
+  /http/middlewares/{name}:
+    get:
+      operationId: getHTTPMiddleware
+      summary: Get a Specific HTTP Middleware
+      description: Returns the configuration of a specific HTTP middleware by its name.
+      tags:
+      - HTTP
+      parameters:
+      - name: name
+        in: path
+        required: true
+        description: The name of the HTTP middleware, in the format name@provider.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: HTTP middleware returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPMiddleware'
+        '404':
+          description: Middleware not found
+components:
+  parameters:
+    search:
+      name: search
+      in: query
+      required: false
+      description: Filter results by name using a search string.
+      schema:
+        type: string
+    status:
+      name: status
+      in: query
+      required: false
+      description: Filter results by status (enabled or disabled).
+      schema:
+        type: string
+        enum:
+        - enabled
+        - disabled
+    per_page:
+      name: per_page
+      in: query
+      required: false
+      description: Number of results per page.
+      schema:
+        type: integer
+        default: 100
+    page:
+      name: page
+      in: query
+      required: false
+      description: Page number for paginated results.
+      schema:
+        type: integer
+        default: 1
+  schemas:
+    HTTPMiddleware:
+      type: object
+      description: An HTTP middleware that modifies requests or responses.
+      properties:
+        name:
+          type: string
+          description: The name of the middleware in name@provider format.
+        type:
+          type: string
+          description: The type of middleware (e.g., addPrefix, basicAuth, buffering, chain, circuitBreaker, compress, headers, ipAllowList, rateLimit, redirectScheme, replacePath, retry, stripPrefix).
+        status:
+          type: string
+          description: The current status of the middleware.
+          enum:
+          - enabled
+          - disabled
+          - warning
+        provider:
+          type: string
+          description: The configuration provider that created this middleware.
+        usedBy:
+          type: array
+          description: Routers currently using this middleware.
+          items:
+            type: string
+    HTTPRouter:
+      type: object
+      description: An HTTP router that matches incoming requests and routes them to services.
+      properties:
+        name:
+          type: string
+          description: The name of the router in name@provider format.
+        entryPoints:
+          type: array
+          description: Entry points this router is bound to.
+          items:
+            type: string
+        middlewares:
+          type: array
+          description: Middlewares applied to this router in order.
+          items:
+            type: string
+        service:
+          type: string
+          description: The service this router routes traffic to.
+        rule:
+          type: string
+          description: The routing rule expression (e.g., Host, Path, Headers matchers).
+        ruleSyntax:
+          type: string
+          description: The syntax version of the rule.
+        priority:
+          type: integer
+          description: The priority of the router when multiple routers match.
+        status:
+          type: string
+          description: The current status of the router.
+          enum:
+          - enabled
+          - disabled
+          - warning
+        using:
+          type: array
+          description: Entry points being used by this router.
+          items:
+            type: string
+        provider:
+          type: string
+          description: The configuration provider that created this router.
+        tls:
+          type: object
+          description: TLS configuration for this router.
+          properties:
+            options:
+              type: string
+            certResolver:
+              type: string
+            domains:
+              type: array
+              items:
+                type: object
+                properties:
+                  main:
+                    type: string
+                  sans:
+                    type: array
+                    items:
+                      type: string
+    HTTPService:
+      type: object
+      description: An HTTP service representing one or more backend servers.
+      properties:
+        name:
+          type: string
+          description: The name of the service in name@provider format.
+        type:
+          type: string
+          description: The type of service (loadBalancer, weighted, mirroring).
+        status:
+          type: string
+          description: The current status of the service.
+          enum:
+          - enabled
+          - disabled
+          - warning
+        provider:
+          type: string
+          description: The configuration provider that created this service.
+        loadBalancer:
+          type: object
+          description: Load balancer configuration with backend servers.
+          properties:
+            servers:
+              type: array
+              items:
+                type: object
+                properties:
+                  url:
+                    type: string
+                    description: The URL of the backend server.
+            passHostHeader:
+              type: boolean
+              description: Whether to pass the host header to backends.
+            healthCheck:
+              type: object
+              description: Health check configuration for the backend servers.
+              properties:
+                scheme:
+                  type: string
+                path:
+                  type: string
+                port:
+                  type: integer
+                interval:
+                  type: string
+                timeout:
+                  type: string
+        serverStatus:
+          type: object
+          description: Map of server URLs to their current health status.
+          additionalProperties:
+            type: string
+externalDocs:
+  description: Traefik API Documentation
+  url: https://doc.traefik.io/traefik/operations/api/

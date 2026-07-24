@@ -1,0 +1,36 @@
+openapi: 3.1.0
+info:
+  title: Traefik Proxy REST Entrypoints Health API
+  description: 'The Traefik Proxy REST API provides read-only HTTP endpoints for inspecting the runtime configuration and state of a running Traefik instance. It exposes information about HTTP, TCP, and UDP routers, services, and middlewares, as well as entry points, raw dynamic configuration, the support-dump archive, and the current Traefik version. The API must be enabled in the Traefik static configuration (`api.insecure: true` for quick exploration, or by binding the `traefik` entrypoint behind an `IngressRoute` with `service: api@internal` for production) and should always be secured behind authentication before being exposed publicly. All endpoints listed here are mounted under the `/api` path prefix on the `traefik` entrypoint (default port 8080).'
+  version: '3.7'
+  contact:
+    name: Traefik Labs
+    url: https://traefik.io/
+  license:
+    name: MIT
+    url: https://github.com/traefik/traefik/blob/master/LICENSE.md
+servers:
+- url: http://localhost:8080/api
+  description: Default Traefik API endpoint (traefik entrypoint on port 8080)
+tags:
+- name: Health
+  description: Health check and ping endpoints for liveness probes.
+paths:
+  /ping:
+    get:
+      operationId: ping
+      summary: Health Check Ping
+      description: Returns HTTP 200 with body "OK" when the Traefik process is alive and ready. Used for liveness probes in container orchestration. Note that the ping endpoint is typically configured on a separate entry point or path outside the /api prefix.
+      tags:
+      - Health
+      responses:
+        '200':
+          description: Traefik is alive and ready
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: OK
+externalDocs:
+  description: Traefik API Documentation
+  url: https://doc.traefik.io/traefik/operations/api/
