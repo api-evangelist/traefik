@@ -1,0 +1,24 @@
+{
+  "provider": "traefik",
+  "sources": [
+    "traefik-entrypoints-api-openapi.yml",
+    "traefik-health-api-openapi.yml",
+    "traefik-http-api-openapi.yml",
+    "traefik-overview-api-openapi.yml",
+    "traefik-tcp-api-openapi.yml",
+    "traefik-udp-api-openapi.yml"
+  ],
+  "outputs": [
+    "traefik-entrypoints-api-openapi.yml",
+    "traefik-health-api-openapi.yml",
+    "traefik-http-api-openapi.yml",
+    "traefik-overview-api-openapi.yml",
+    "traefik-tcp-api-openapi.yml",
+    "traefik-udp-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
