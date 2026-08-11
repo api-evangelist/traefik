@@ -368,12 +368,6 @@ apis:
     url: https://doc.traefik.io/traefik/reference/install-configuration/api-dashboard/
   - type: Spectral
     url: rules/traefik-proxy-rules.yml
-  - type: Capability
-    url: capabilities/shared/traefik-proxy.yaml
-  - type: Capability
-    url: capabilities/gateway-operations.yaml
-  - type: Capability
-    url: capabilities/traffic-observability.yaml
 - aid: traefik:traefik-health-api
   name: Traefik Labs Health API
   description: Health check and ping endpoints for liveness probes.
@@ -388,12 +382,6 @@ apis:
     url: https://doc.traefik.io/traefik/reference/install-configuration/api-dashboard/
   - type: Spectral
     url: rules/traefik-proxy-rules.yml
-  - type: Capability
-    url: capabilities/shared/traefik-proxy.yaml
-  - type: Capability
-    url: capabilities/gateway-operations.yaml
-  - type: Capability
-    url: capabilities/traffic-observability.yaml
 - aid: traefik:traefik-http-api
   name: Traefik Labs HTTP API
   description: Endpoints for inspecting HTTP routers, services, and middlewares.
@@ -408,12 +396,6 @@ apis:
     url: https://doc.traefik.io/traefik/reference/install-configuration/api-dashboard/
   - type: Spectral
     url: rules/traefik-proxy-rules.yml
-  - type: Capability
-    url: capabilities/shared/traefik-proxy.yaml
-  - type: Capability
-    url: capabilities/gateway-operations.yaml
-  - type: Capability
-    url: capabilities/traffic-observability.yaml
 - aid: traefik:traefik-overview-api
   name: Traefik Labs Overview API
   description: Overview and version information for the running Traefik instance.
@@ -428,12 +410,6 @@ apis:
     url: https://doc.traefik.io/traefik/reference/install-configuration/api-dashboard/
   - type: Spectral
     url: rules/traefik-proxy-rules.yml
-  - type: Capability
-    url: capabilities/shared/traefik-proxy.yaml
-  - type: Capability
-    url: capabilities/gateway-operations.yaml
-  - type: Capability
-    url: capabilities/traffic-observability.yaml
 - aid: traefik:traefik-tcp-api
   name: Traefik Labs TCP API
   description: Endpoints for inspecting TCP routers, services, and middlewares.
@@ -448,12 +424,6 @@ apis:
     url: https://doc.traefik.io/traefik/reference/install-configuration/api-dashboard/
   - type: Spectral
     url: rules/traefik-proxy-rules.yml
-  - type: Capability
-    url: capabilities/shared/traefik-proxy.yaml
-  - type: Capability
-    url: capabilities/gateway-operations.yaml
-  - type: Capability
-    url: capabilities/traffic-observability.yaml
 - aid: traefik:traefik-udp-api
   name: Traefik Labs UDP API
   description: Endpoints for inspecting UDP routers and services.
@@ -468,13 +438,11 @@ apis:
     url: https://doc.traefik.io/traefik/reference/install-configuration/api-dashboard/
   - type: Spectral
     url: rules/traefik-proxy-rules.yml
-  - type: Capability
-    url: capabilities/shared/traefik-proxy.yaml
-  - type: Capability
-    url: capabilities/gateway-operations.yaml
-  - type: Capability
-    url: capabilities/traffic-observability.yaml
 common:
+  - type: Deprecation
+    url: https://doc.traefik.io/traefik/deprecation/releases/
+  - type: PrivacyPolicy
+    url: https://traefik.io/legal/privacy-and-cookie-policy
   - type: AgenticAccess
     url: agentic-access/traefik-agentic-access.yml
   - type: DomainSecurity
