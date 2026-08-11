@@ -439,7 +439,7 @@ apis:
   - type: Spectral
     url: rules/traefik-proxy-rules.yml
 common:
-  - type: Deprecation
+  - type: DeprecationPolicy
     url: https://doc.traefik.io/traefik/deprecation/releases/
   - type: PrivacyPolicy
     url: https://traefik.io/legal/privacy-and-cookie-policy
