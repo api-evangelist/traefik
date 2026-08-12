@@ -7,6 +7,19 @@ description: >-
   is the same Traefik binary across every tier; the Hub control plane adds GitOps-driven CRDs, a developer portal,
   multi-cluster dashboards, WAF, advanced auth, and AI safety / agent-governance capabilities.
 type: Index
+deliveryModel:
+  model: unknown
+  open_source: unknown
+  commercial: true
+  callable_host: false
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - openapi
+  - pricing
+  - repository-unlicensed
+  generated: '2026-08-11'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: unknown
