@@ -1,0 +1,130 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Traefik Proxy REST Entrypoints UDP API",
+    "version": "3.7"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "UDP",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List All UDP Routers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/udp/routers",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by name using a search string."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by status (enabled or disabled)."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results."
+              }
+            ]
+          },
+          "docs": "Returns a list of all UDP routers configured in the running Traefik instance."
+        },
+        {
+          "info": {
+            "name": "Get a Specific UDP Router",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/udp/routers/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the UDP router, in the format name@provider."
+              }
+            ]
+          },
+          "docs": "Returns the configuration of a specific UDP router by its name."
+        },
+        {
+          "info": {
+            "name": "List All UDP Services",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/udp/services",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by name using a search string."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by status (enabled or disabled)."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results."
+              }
+            ]
+          },
+          "docs": "Returns a list of all UDP services configured in the running Traefik instance."
+        },
+        {
+          "info": {
+            "name": "Get a Specific UDP Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/udp/services/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the UDP service, in the format name@provider."
+              }
+            ]
+          },
+          "docs": "Returns the configuration of a specific UDP service by its name."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

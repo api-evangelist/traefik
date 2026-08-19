@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Traefik Proxy REST Entrypoints Health API",
+    "version": "3.7"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Health",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Health Check Ping",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/ping"
+          },
+          "docs": "Returns HTTP 200 with body \"OK\" when the Traefik process is alive and ready. Used for liveness probes in container orchestration. Note that the ping endpoint is typically configured on a separate entry point or path outside the /api prefix."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,312 @@
+{
+  "item": [
+    {
+      "id": "cb45ae66-dec6-4f9c-8e3b-8870cec0a8aa",
+      "name": "Overview",
+      "description": {
+        "content": "Overview and version information for the running Traefik instance.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "15409d0d-e4a4-4d4a-b663-99c0b54827cb",
+          "name": "Get Traefik Version",
+          "request": {
+            "name": "Get Traefik Version",
+            "description": {
+              "content": "Returns the current version of the running Traefik instance, including the version string, codename, and start date.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "version"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "67495074-8620-4965-81a7-3978dd61632b",
+              "name": "Version information returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Version\": \"string\",\n  \"Codename\": \"string\",\n  \"startDate\": \"1993-03-01T01:04:20.260Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2e993447-9f0d-4b32-bc01-9e2649b9a864",
+          "name": "Get Overview Statistics",
+          "request": {
+            "name": "Get Overview Statistics",
+            "description": {
+              "content": "Returns an overview of the current Traefik configuration including counts of HTTP, TCP, and UDP routers, services, and middlewares, as well as enabled features and provider information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "overview"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7a2f8c08-57c8-4f25-bdf7-5ec290f3a005",
+              "name": "Overview returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "overview"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"http\": {\n    \"routers\": {\n      \"total\": 220,\n      \"warnings\": 5258,\n      \"errors\": 5626\n    },\n    \"services\": {\n      \"total\": 7307,\n      \"warnings\": 8640,\n      \"errors\": 8705\n    },\n    \"middlewares\": {\n      \"total\": 1719,\n      \"warnings\": 4621,\n      \"errors\": 6411\n    }\n  },\n  \"tcp\": {\n    \"routers\": {\n      \"total\": 3109,\n      \"warnings\": 3682,\n      \"errors\": 6148\n    },\n    \"services\": {\n      \"total\": 8829,\n      \"warnings\": 1656,\n      \"errors\": 8871\n    },\n    \"middlewares\": {\n      \"total\": 345,\n      \"warnings\": 66,\n      \"errors\": 2722\n    }\n  },\n  \"udp\": {\n    \"routers\": {\n      \"total\": 9289,\n      \"warnings\": 2452,\n      \"errors\": 2215\n    },\n    \"services\": {\n      \"total\": 8031,\n      \"warnings\": 6379,\n      \"errors\": 9132\n    }\n  },\n  \"features\": {\n    \"tracing\": \"string\",\n    \"metrics\": \"string\",\n    \"accessLog\": false\n  },\n  \"providers\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f7ddb4b7-45cb-41d9-a884-05b6e9e5d8e4",
+          "name": "Get Raw Configuration Data",
+          "request": {
+            "name": "Get Raw Configuration Data",
+            "description": {
+              "content": "Returns the complete raw dynamic configuration data for all routers, services, middlewares, and transports currently loaded from all providers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rawdata"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3190c6ee-e74d-4f09-a572-47744e701a95",
+              "name": "Raw configuration data returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rawdata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7eb32942-7c98-426b-be0e-2e78fabcf664",
+          "name": "Get Anonymized Support Dump",
+          "request": {
+            "name": "Get Anonymized Support Dump",
+            "description": {
+              "content": "Returns an anonymized archive of the running Traefik configuration and runtime metadata. Used by Traefik Labs support to reproduce reported issues without exposing sensitive customer data. The endpoint returns a ZIP archive.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "support-dump"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/zip"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "28648536-28ba-42bb-9b2d-02a77aa34071",
+              "name": "Support-dump archive returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "support-dump"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/zip"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/zip"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:8080/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "03189036-233a-44e4-8bdc-02748fc09084",
+    "name": "Traefik Proxy REST Entrypoints Overview API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Traefik Proxy REST API provides read-only HTTP endpoints for inspecting the runtime configuration and state of a running Traefik instance. It exposes information about HTTP, TCP, and UDP routers, services, and middlewares, as well as entry points, raw dynamic configuration, the support-dump archive, and the current Traefik version. The API must be enabled in the Traefik static configuration (`api.insecure: true` for quick exploration, or by binding the `traefik` entrypoint behind an `IngressRoute` with `service: api@internal` for production) and should always be secured behind authentication before being exposed publicly. All endpoints listed here are mounted under the `/api` path prefix on the `traefik` entrypoint (default port 8080).\n\nContact Support:\n Name: Traefik Labs",
+      "type": "text/plain"
+    }
+  }
+}

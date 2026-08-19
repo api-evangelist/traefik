@@ -1,0 +1,518 @@
+{
+  "item": [
+    {
+      "id": "2f71be78-556f-419d-81a6-9b6b2a559475",
+      "name": "UDP",
+      "description": {
+        "content": "Endpoints for inspecting UDP routers and services.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c87ac6a7-1c05-4fc9-89b4-c1bf7e2327d1",
+          "name": "List All UDP Routers",
+          "request": {
+            "name": "List All UDP Routers",
+            "description": {
+              "content": "Returns a list of all UDP routers configured in the running Traefik instance.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "udp",
+                "routers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Filter results by name using a search string."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter results by status (enabled or disabled)."
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "100",
+                  "description": "Number of results per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for paginated results."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "46b38854-52bc-4682-b3cb-d01175f2fc54",
+              "name": "UDP routers returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "udp",
+                    "routers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"name\": \"string\",\n    \"entryPoints\": [\n      \"string\",\n      \"string\"\n    ],\n    \"service\": \"string\",\n    \"status\": \"disabled\",\n    \"provider\": \"string\"\n  },\n  {\n    \"name\": \"string\",\n    \"entryPoints\": [\n      \"string\",\n      \"string\"\n    ],\n    \"service\": \"string\",\n    \"status\": \"disabled\",\n    \"provider\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0f72f6f5-204a-4f11-aca2-d75b4e986b7a",
+          "name": "Get a Specific UDP Router",
+          "request": {
+            "name": "Get a Specific UDP Router",
+            "description": {
+              "content": "Returns the configuration of a specific UDP router by its name.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "udp",
+                "routers",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the UDP router, in the format name@provider."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8f98efe6-a8a9-4e44-92f1-734b4a2fb8ef",
+              "name": "UDP router returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "udp",
+                    "routers",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the UDP router, in the format name@provider."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"entryPoints\": [\n    \"string\",\n    \"string\"\n  ],\n  \"service\": \"string\",\n  \"status\": \"disabled\",\n  \"provider\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e9778dfb-46dc-4d1d-bf66-fe0f20db3221",
+              "name": "Router not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "udp",
+                    "routers",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the UDP router, in the format name@provider."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "412cea66-7137-42c2-9a97-7b0a1ec983bd",
+          "name": "List All UDP Services",
+          "request": {
+            "name": "List All UDP Services",
+            "description": {
+              "content": "Returns a list of all UDP services configured in the running Traefik instance.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "udp",
+                "services"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Filter results by name using a search string."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter results by status (enabled or disabled)."
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "100",
+                  "description": "Number of results per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for paginated results."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c43ec15b-5ad6-41dc-9894-33e5a64450a0",
+              "name": "UDP services returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "udp",
+                    "services"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"name\": \"string\",\n    \"type\": \"string\",\n    \"status\": \"disabled\",\n    \"provider\": \"string\",\n    \"loadBalancer\": {\n      \"servers\": [\n        {\n          \"address\": \"string\"\n        },\n        {\n          \"address\": \"string\"\n        }\n      ]\n    }\n  },\n  {\n    \"name\": \"string\",\n    \"type\": \"string\",\n    \"status\": \"enabled\",\n    \"provider\": \"string\",\n    \"loadBalancer\": {\n      \"servers\": [\n        {\n          \"address\": \"string\"\n        },\n        {\n          \"address\": \"string\"\n        }\n      ]\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8117885e-fafc-4058-a033-fd5e080254d0",
+          "name": "Get a Specific UDP Service",
+          "request": {
+            "name": "Get a Specific UDP Service",
+            "description": {
+              "content": "Returns the configuration of a specific UDP service by its name.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "udp",
+                "services",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the UDP service, in the format name@provider."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e8aae692-837c-47e1-aa96-5d5b0dca4626",
+              "name": "UDP service returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "udp",
+                    "services",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the UDP service, in the format name@provider."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"type\": \"string\",\n  \"status\": \"warning\",\n  \"provider\": \"string\",\n  \"loadBalancer\": {\n    \"servers\": [\n      {\n        \"address\": \"string\"\n      },\n      {\n        \"address\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dd7574b7-9a2b-45cd-8a70-1c384510c7bc",
+              "name": "Service not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "udp",
+                    "services",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the UDP service, in the format name@provider."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:8080/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "78e498d3-530e-4995-a6dd-351c0c61405b",
+    "name": "Traefik Proxy REST Entrypoints UDP API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Traefik Proxy REST API provides read-only HTTP endpoints for inspecting the runtime configuration and state of a running Traefik instance. It exposes information about HTTP, TCP, and UDP routers, services, and middlewares, as well as entry points, raw dynamic configuration, the support-dump archive, and the current Traefik version. The API must be enabled in the Traefik static configuration (`api.insecure: true` for quick exploration, or by binding the `traefik` entrypoint behind an `IngressRoute` with `service: api@internal` for production) and should always be secured behind authentication before being exposed publicly. All endpoints listed here are mounted under the `/api` path prefix on the `traefik` entrypoint (default port 8080).\n\nContact Support:\n Name: Traefik Labs",
+      "type": "text/plain"
+    }
+  }
+}

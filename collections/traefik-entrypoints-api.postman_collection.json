@@ -1,0 +1,228 @@
+{
+  "item": [
+    {
+      "id": "3607c3e6-a40f-41fb-aa81-55499e072456",
+      "name": "Entrypoints",
+      "description": {
+        "content": "Endpoints for listing configured entry points.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7026a700-50ac-4fce-a329-7c4bb542d2af",
+          "name": "List All Entry Points",
+          "request": {
+            "name": "List All Entry Points",
+            "description": {
+              "content": "Returns a list of all configured entry points for the Traefik instance, including their names, addresses, and transport configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "entrypoints"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bc096832-6a12-4686-8b0b-fd546aade24c",
+              "name": "Entry points returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entrypoints"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"name\": \"string\",\n    \"address\": \"string\",\n    \"transport\": {\n      \"lifeCycle\": {\n        \"requestAcceptGraceTimeout\": \"string\",\n        \"graceTimeOut\": \"string\"\n      },\n      \"respondingTimeouts\": {\n        \"readTimeout\": \"string\",\n        \"writeTimeout\": \"string\",\n        \"idleTimeout\": \"string\"\n      }\n    }\n  },\n  {\n    \"name\": \"string\",\n    \"address\": \"string\",\n    \"transport\": {\n      \"lifeCycle\": {\n        \"requestAcceptGraceTimeout\": \"string\",\n        \"graceTimeOut\": \"string\"\n      },\n      \"respondingTimeouts\": {\n        \"readTimeout\": \"string\",\n        \"writeTimeout\": \"string\",\n        \"idleTimeout\": \"string\"\n      }\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "425ad277-7234-45ee-b707-46c7f927ae67",
+          "name": "Get a Specific Entry Point",
+          "request": {
+            "name": "Get a Specific Entry Point",
+            "description": {
+              "content": "Returns the configuration of a specific entry point by name.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "entrypoints",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the entry point."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "43581d53-8969-4835-bfab-c54e7c61c4aa",
+              "name": "Entry point returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entrypoints",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the entry point."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"address\": \"string\",\n  \"transport\": {\n    \"lifeCycle\": {\n      \"requestAcceptGraceTimeout\": \"string\",\n      \"graceTimeOut\": \"string\"\n    },\n    \"respondingTimeouts\": {\n      \"readTimeout\": \"string\",\n      \"writeTimeout\": \"string\",\n      \"idleTimeout\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "221982d0-ac20-49a8-8533-6b17568e4a79",
+              "name": "Entry point not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entrypoints",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the entry point."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:8080/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "3f173d0e-ac63-4c2f-b6ae-ab639be3996c",
+    "name": "Traefik Proxy REST Entrypoints API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Traefik Proxy REST API provides read-only HTTP endpoints for inspecting the runtime configuration and state of a running Traefik instance. It exposes information about HTTP, TCP, and UDP routers, services, and middlewares, as well as entry points, raw dynamic configuration, the support-dump archive, and the current Traefik version. The API must be enabled in the Traefik static configuration (`api.insecure: true` for quick exploration, or by binding the `traefik` entrypoint behind an `IngressRoute` with `service: api@internal` for production) and should always be secured behind authentication before being exposed publicly. All endpoints listed here are mounted under the `/api` path prefix on the `traefik` entrypoint (default port 8080).\n\nContact Support:\n Name: Traefik Labs",
+      "type": "text/plain"
+    }
+  }
+}

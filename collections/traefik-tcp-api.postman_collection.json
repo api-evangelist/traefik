@@ -1,0 +1,761 @@
+{
+  "item": [
+    {
+      "id": "833f20df-bcaa-4bb6-93c6-0c07b3a387b1",
+      "name": "TCP",
+      "description": {
+        "content": "Endpoints for inspecting TCP routers, services, and middlewares.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b9f2cdaf-45c3-4618-ab22-997a714c8f5d",
+          "name": "List All TCP Routers",
+          "request": {
+            "name": "List All TCP Routers",
+            "description": {
+              "content": "Returns a list of all TCP routers configured in the running Traefik instance.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tcp",
+                "routers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Filter results by name using a search string."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter results by status (enabled or disabled)."
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "100",
+                  "description": "Number of results per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for paginated results."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "40ad3381-dc40-4c0b-9e8e-02e8408efdbc",
+              "name": "TCP routers returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tcp",
+                    "routers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"name\": \"string\",\n    \"entryPoints\": [\n      \"string\",\n      \"string\"\n    ],\n    \"service\": \"string\",\n    \"rule\": \"string\",\n    \"status\": \"warning\",\n    \"provider\": \"string\",\n    \"tls\": {\n      \"passthrough\": true,\n      \"options\": \"string\",\n      \"certResolver\": \"string\"\n    }\n  },\n  {\n    \"name\": \"string\",\n    \"entryPoints\": [\n      \"string\",\n      \"string\"\n    ],\n    \"service\": \"string\",\n    \"rule\": \"string\",\n    \"status\": \"warning\",\n    \"provider\": \"string\",\n    \"tls\": {\n      \"passthrough\": true,\n      \"options\": \"string\",\n      \"certResolver\": \"string\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c7d5f50e-fde3-4d39-9ecc-b38294b8b6be",
+          "name": "Get a Specific TCP Router",
+          "request": {
+            "name": "Get a Specific TCP Router",
+            "description": {
+              "content": "Returns the configuration of a specific TCP router by its name.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tcp",
+                "routers",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the TCP router, in the format name@provider."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e6244682-4e1a-4391-ab8c-0e7a966087e2",
+              "name": "TCP router returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tcp",
+                    "routers",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the TCP router, in the format name@provider."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"entryPoints\": [\n    \"string\",\n    \"string\"\n  ],\n  \"service\": \"string\",\n  \"rule\": \"string\",\n  \"status\": \"enabled\",\n  \"provider\": \"string\",\n  \"tls\": {\n    \"passthrough\": true,\n    \"options\": \"string\",\n    \"certResolver\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7b60768e-f268-4305-a6b5-fd507c08e1e8",
+              "name": "Router not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tcp",
+                    "routers",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the TCP router, in the format name@provider."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6eac8946-b332-49cc-9ef0-92129b5e61f8",
+          "name": "List All TCP Services",
+          "request": {
+            "name": "List All TCP Services",
+            "description": {
+              "content": "Returns a list of all TCP services configured in the running Traefik instance.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tcp",
+                "services"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Filter results by name using a search string."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter results by status (enabled or disabled)."
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "100",
+                  "description": "Number of results per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for paginated results."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e4006be0-d819-4686-ab96-0c14854d6fc0",
+              "name": "TCP services returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tcp",
+                    "services"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"name\": \"string\",\n    \"type\": \"string\",\n    \"status\": \"disabled\",\n    \"provider\": \"string\",\n    \"loadBalancer\": {\n      \"servers\": [\n        {\n          \"address\": \"string\"\n        },\n        {\n          \"address\": \"string\"\n        }\n      ]\n    }\n  },\n  {\n    \"name\": \"string\",\n    \"type\": \"string\",\n    \"status\": \"enabled\",\n    \"provider\": \"string\",\n    \"loadBalancer\": {\n      \"servers\": [\n        {\n          \"address\": \"string\"\n        },\n        {\n          \"address\": \"string\"\n        }\n      ]\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7f222be7-8268-4596-9930-bc3171421d4b",
+          "name": "Get a Specific TCP Service",
+          "request": {
+            "name": "Get a Specific TCP Service",
+            "description": {
+              "content": "Returns the configuration of a specific TCP service by its name.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tcp",
+                "services",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the TCP service, in the format name@provider."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cf035302-8ac9-435e-9859-9556ef464846",
+              "name": "TCP service returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tcp",
+                    "services",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the TCP service, in the format name@provider."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"type\": \"string\",\n  \"status\": \"disabled\",\n  \"provider\": \"string\",\n  \"loadBalancer\": {\n    \"servers\": [\n      {\n        \"address\": \"string\"\n      },\n      {\n        \"address\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "209f5b9c-52ed-47a8-bbda-9930a63bc1c2",
+              "name": "Service not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tcp",
+                    "services",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the TCP service, in the format name@provider."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2639593d-295c-4459-8d00-5eaa3b68a904",
+          "name": "List All TCP Middlewares",
+          "request": {
+            "name": "List All TCP Middlewares",
+            "description": {
+              "content": "Returns a list of all TCP middlewares configured in the running Traefik instance.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tcp",
+                "middlewares"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Filter results by name using a search string."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter results by status (enabled or disabled)."
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "100",
+                  "description": "Number of results per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for paginated results."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "68631ffd-1316-4c9c-8b52-c25b3a6bd8f4",
+              "name": "TCP middlewares returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tcp",
+                    "middlewares"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "100"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"name\": \"string\",\n    \"type\": \"string\",\n    \"status\": \"enabled\",\n    \"provider\": \"string\"\n  },\n  {\n    \"name\": \"string\",\n    \"type\": \"string\",\n    \"status\": \"disabled\",\n    \"provider\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dd210eab-962e-4882-bc49-0de8f8333be0",
+          "name": "Get a Specific TCP Middleware",
+          "request": {
+            "name": "Get a Specific TCP Middleware",
+            "description": {
+              "content": "Returns the configuration of a specific TCP middleware by its name.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tcp",
+                "middlewares",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The name of the TCP middleware, in the format name@provider."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8a2abacb-9014-4ba3-835d-07f8efbe7eee",
+              "name": "TCP middleware returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tcp",
+                    "middlewares",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the TCP middleware, in the format name@provider."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"type\": \"string\",\n  \"status\": \"disabled\",\n  \"provider\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5716efb9-07d4-4a2a-8ae4-69c92e427ed4",
+              "name": "Middleware not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tcp",
+                    "middlewares",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The name of the TCP middleware, in the format name@provider."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:8080/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "3a7f127e-83bf-44de-92cc-958a1ade5da6",
+    "name": "Traefik Proxy REST Entrypoints TCP API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Traefik Proxy REST API provides read-only HTTP endpoints for inspecting the runtime configuration and state of a running Traefik instance. It exposes information about HTTP, TCP, and UDP routers, services, and middlewares, as well as entry points, raw dynamic configuration, the support-dump archive, and the current Traefik version. The API must be enabled in the Traefik static configuration (`api.insecure: true` for quick exploration, or by binding the `traefik` entrypoint behind an `IngressRoute` with `service: api@internal` for production) and should always be secured behind authentication before being exposed publicly. All endpoints listed here are mounted under the `/api` path prefix on the `traefik` entrypoint (default port 8080).\n\nContact Support:\n Name: Traefik Labs",
+      "type": "text/plain"
+    }
+  }
+}

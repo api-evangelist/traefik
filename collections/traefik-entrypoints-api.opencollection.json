@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Traefik Proxy REST Entrypoints API",
+    "version": "3.7"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Entrypoints",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List All Entry Points",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/entrypoints"
+          },
+          "docs": "Returns a list of all configured entry points for the Traefik instance, including their names, addresses, and transport configuration."
+        },
+        {
+          "info": {
+            "name": "Get a Specific Entry Point",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/entrypoints/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the entry point."
+              }
+            ]
+          },
+          "docs": "Returns the configuration of a specific entry point by name."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

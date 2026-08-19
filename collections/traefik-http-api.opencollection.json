@@ -1,0 +1,186 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Traefik Proxy REST Entrypoints HTTP API",
+    "version": "3.7"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "HTTP",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List All HTTP Routers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/http/routers",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by name using a search string."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by status (enabled or disabled)."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results."
+              }
+            ]
+          },
+          "docs": "Returns a list of all HTTP routers configured in the running Traefik instance, including their rules, entry points, middlewares, and service assignments."
+        },
+        {
+          "info": {
+            "name": "Get a Specific HTTP Router",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/http/routers/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the HTTP router, in the format name@provider."
+              }
+            ]
+          },
+          "docs": "Returns the configuration of a specific HTTP router by its name, including the rule, priority, entry points, service, and middlewares."
+        },
+        {
+          "info": {
+            "name": "List All HTTP Services",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/http/services",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by name using a search string."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by status (enabled or disabled)."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results."
+              }
+            ]
+          },
+          "docs": "Returns a list of all HTTP services configured in the running Traefik instance, including their load balancer configuration and server details."
+        },
+        {
+          "info": {
+            "name": "Get a Specific HTTP Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/http/services/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the HTTP service, in the format name@provider."
+              }
+            ]
+          },
+          "docs": "Returns the configuration of a specific HTTP service by its name, including the load balancer servers and health check status."
+        },
+        {
+          "info": {
+            "name": "List All HTTP Middlewares",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/http/middlewares",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by name using a search string."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by status (enabled or disabled)."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results."
+              }
+            ]
+          },
+          "docs": "Returns a list of all HTTP middlewares configured in the running Traefik instance, including their type and configuration details."
+        },
+        {
+          "info": {
+            "name": "Get a Specific HTTP Middleware",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/http/middlewares/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the HTTP middleware, in the format name@provider."
+              }
+            ]
+          },
+          "docs": "Returns the configuration of a specific HTTP middleware by its name."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

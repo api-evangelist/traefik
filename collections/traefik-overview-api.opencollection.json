@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Traefik Proxy REST Entrypoints Overview API",
+    "version": "3.7"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Overview",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Traefik Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/version"
+          },
+          "docs": "Returns the current version of the running Traefik instance, including the version string, codename, and start date."
+        },
+        {
+          "info": {
+            "name": "Get Overview Statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/overview"
+          },
+          "docs": "Returns an overview of the current Traefik configuration including counts of HTTP, TCP, and UDP routers, services, and middlewares, as well as enabled features and provider information."
+        },
+        {
+          "info": {
+            "name": "Get Raw Configuration Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/rawdata"
+          },
+          "docs": "Returns the complete raw dynamic configuration data for all routers, services, middlewares, and transports currently loaded from all providers."
+        },
+        {
+          "info": {
+            "name": "Get Anonymized Support Dump",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/support-dump"
+          },
+          "docs": "Returns an anonymized archive of the running Traefik configuration and runtime metadata. Used by Traefik Labs support to reproduce reported issues without exposing sensitive customer data. The endpoint returns a ZIP archive."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

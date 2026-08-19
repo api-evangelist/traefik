@@ -1,0 +1,186 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Traefik Proxy REST Entrypoints TCP API",
+    "version": "3.7"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "TCP",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List All TCP Routers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/tcp/routers",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by name using a search string."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by status (enabled or disabled)."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results."
+              }
+            ]
+          },
+          "docs": "Returns a list of all TCP routers configured in the running Traefik instance."
+        },
+        {
+          "info": {
+            "name": "Get a Specific TCP Router",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/tcp/routers/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the TCP router, in the format name@provider."
+              }
+            ]
+          },
+          "docs": "Returns the configuration of a specific TCP router by its name."
+        },
+        {
+          "info": {
+            "name": "List All TCP Services",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/tcp/services",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by name using a search string."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by status (enabled or disabled)."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results."
+              }
+            ]
+          },
+          "docs": "Returns a list of all TCP services configured in the running Traefik instance."
+        },
+        {
+          "info": {
+            "name": "Get a Specific TCP Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/tcp/services/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the TCP service, in the format name@provider."
+              }
+            ]
+          },
+          "docs": "Returns the configuration of a specific TCP service by its name."
+        },
+        {
+          "info": {
+            "name": "List All TCP Middlewares",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/tcp/middlewares",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by name using a search string."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by status (enabled or disabled)."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results."
+              }
+            ]
+          },
+          "docs": "Returns a list of all TCP middlewares configured in the running Traefik instance."
+        },
+        {
+          "info": {
+            "name": "Get a Specific TCP Middleware",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/tcp/middlewares/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the TCP middleware, in the format name@provider."
+              }
+            ]
+          },
+          "docs": "Returns the configuration of a specific TCP middleware by its name."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
