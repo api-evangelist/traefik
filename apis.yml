@@ -42,6 +42,18 @@ tags:
   - Kubernetes
   - Load Balancer
   - MCP Gateway
+  - Open-Source
+  - Reverse Proxy
+  - WAF
+tags_raw:
+  - AI Gateway
+  - API Gateway
+  - API Management
+  - Developer Portal
+  - GitOps
+  - Kubernetes
+  - Load Balancer
+  - MCP Gateway
   - Open Source
   - Reverse Proxy
   - WAF
@@ -61,6 +73,13 @@ apis:
   humanURL: https://traefik.io/traefik/
   baseURL: ''
   tags:
+  - API Gateway
+  - Ingress Controller
+  - Kubernetes
+  - Load Balancer
+  - Open-Source
+  - Reverse Proxy
+  tags_raw:
   - API Gateway
   - Ingress Controller
   - Kubernetes
@@ -216,6 +235,10 @@ apis:
   - Health Check
   - Liveness
   - Monitoring
+  tags_raw:
+  - Health Check
+  - Liveness
+  - Monitoring
   - Operations
   properties:
   - type: Documentation
@@ -348,6 +371,11 @@ apis:
   - Go
   - Interpreter
   - Plugin Runtime
+  - Open-Source
+  tags_raw:
+  - Go
+  - Interpreter
+  - Plugin Runtime
   - Open Source
   properties:
   - type: GitHubRepository
@@ -361,6 +389,10 @@ apis:
     communication inside a Kubernetes cluster.
   humanURL: https://traefik.io/traefik-mesh/
   tags:
+  - Service Mesh
+  - Kubernetes
+  - Open-Source
+  tags_raw:
   - Service Mesh
   - Kubernetes
   - Open Source
