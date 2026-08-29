@@ -18,7 +18,7 @@ deliveryModel:
   - openapi
   - pricing
   - repository-unlicensed
-  generated: '2026-08-11'
+  generated: '2026-08-28'
   method: derived
 accessModel:
   pricing: freemium
@@ -484,6 +484,16 @@ apis:
   - type: Spectral
     url: rules/traefik-proxy-rules.yml
 common:
+  - type: IssueTracker
+    url: https://github.com/traefik/traefik/issues
+  - type: Releases
+    url: https://github.com/traefik/traefik/releases
+  - type: SecurityPolicy
+    url: https://github.com/traefik/traefik/blob/master/SECURITY.md
+  - type: CodeOfConduct
+    url: https://github.com/traefik/traefik/blob/master/CODE_OF_CONDUCT.md
+  - type: ContributionGuide
+    url: https://github.com/traefik/traefik/blob/master/CONTRIBUTING.md
   - type: DeprecationPolicy
     url: https://doc.traefik.io/traefik/deprecation/releases/
   - type: PrivacyPolicy
