@@ -38,7 +38,6 @@ tags:
   - API Gateway
   - API Management
   - Developer Portal
-  - Developer Tools
   - GitOps
   - Kubernetes
   - Load Balancer
@@ -400,20 +399,6 @@ apis:
   properties:
   - type: GitHubRepository
     url: https://github.com/traefik/mesh
-- aid: traefik:traefik-entrypoints-api
-  name: Traefik Labs Entrypoints API
-  description: Endpoints for listing configured entry points.
-  humanURL: https://traefik.io/traefik/
-  baseURL: http://localhost:8080/api
-  tags:
-  - Entrypoints
-  properties:
-  - type: OpenAPI
-    url: openapi/traefik-entrypoints-api-openapi.yml
-  - type: Documentation
-    url: https://doc.traefik.io/traefik/reference/install-configuration/api-dashboard/
-  - type: Spectral
-    url: rules/traefik-proxy-rules.yml
 - aid: traefik:traefik-health-api
   name: Traefik Labs Health API
   description: Health check and ping endpoints for liveness probes.
@@ -480,6 +465,20 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/traefik-udp-api-openapi.yml
+  - type: Documentation
+    url: https://doc.traefik.io/traefik/reference/install-configuration/api-dashboard/
+  - type: Spectral
+    url: rules/traefik-proxy-rules.yml
+- aid: traefik:traefik-entry-points-api
+  name: Traefik Labs Entry Points API
+  description: Endpoints for listing configured entry points.
+  humanURL: https://traefik.io/traefik/
+  baseURL: http://localhost:8080/api
+  tags:
+  - Entry Points
+  properties:
+  - type: OpenAPI
+    url: openapi/traefik-entry-points-api-openapi.yml
   - type: Documentation
     url: https://doc.traefik.io/traefik/reference/install-configuration/api-dashboard/
   - type: Spectral
