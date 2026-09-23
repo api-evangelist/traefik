@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Traefik Proxy REST Entrypoints Overview API
-  description: 'The Traefik Proxy REST API provides read-only HTTP endpoints for inspecting the runtime configuration and state of a running Traefik instance. It exposes information about HTTP, TCP, and UDP routers, services, and middlewares, as well as entry points, raw dynamic configuration, the support-dump archive, and the current Traefik version. The API must be enabled in the Traefik static configuration (`api.insecure: true` for quick exploration, or by binding the `traefik` entrypoint behind an `IngressRoute` with `service: api@internal` for production) and should always be secured behind authentication before being exposed publicly. All endpoints listed here are mounted under the `/api` path prefix on the `traefik` entrypoint (default port 8080).'
+  title: Traefik Proxy REST Overview API
+  description: The Traefik Proxy REST API provides read-only HTTP endpoints for inspecting the runtime configuration and state of a running Traefik instance.
   version: '3.7'
   contact:
     name: Traefik Labs
@@ -100,6 +100,16 @@ components:
           $ref: '#/components/schemas/StatusCount'
         middlewares:
           $ref: '#/components/schemas/StatusCount'
+    StatusCount:
+      type: object
+      description: Count of objects by status.
+      properties:
+        total:
+          type: integer
+        warnings:
+          type: integer
+        errors:
+          type: integer
     Overview:
       type: object
       description: Overview statistics of the running Traefik instance including counts of all configured objects.
@@ -133,16 +143,6 @@ components:
           $ref: '#/components/schemas/StatusCount'
         services:
           $ref: '#/components/schemas/StatusCount'
-    StatusCount:
-      type: object
-      description: Count of objects by status.
-      properties:
-        total:
-          type: integer
-        warnings:
-          type: integer
-        errors:
-          type: integer
 externalDocs:
   description: Traefik API Documentation
   url: https://doc.traefik.io/traefik/operations/api/
