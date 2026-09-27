@@ -8,17 +8,22 @@ description: >-
   multi-cluster dashboards, WAF, advanced auth, and AI safety / agent-governance capabilities.
 type: Index
 deliveryModel:
-  model: unknown
-  open_source: unknown
+  model: open-core
+  license: MIT
+  license_evidence:
+    repo: traefik/traefik
+    spdx: MIT
+    stars: 64963
+  open_source: true
   commercial: true
   callable_host: false
-  label: Delivery model not determined — needs a product licence on record
-  confidence: low
+  label: Open core · an OSS project plus a commercial hosted product
+  confidence: medium
   source:
   - openapi
   - pricing
-  - repository-unlicensed
-  generated: '2026-08-28'
+  - repository-license
+  generated: '2026-09-25'
   method: derived
 accessModel:
   pricing: freemium
@@ -42,7 +47,7 @@ tags:
   - Kubernetes
   - Load Balancer
   - MCP Gateway
-  - Open-Source
+  - Open Source
   - Reverse Proxy
   - WAF
 tags_raw:
@@ -57,6 +62,7 @@ tags_raw:
   - Open Source
   - Reverse Proxy
   - WAF
+  - Open-Source
 url: https://raw.githubusercontent.com/api-evangelist/traefik/refs/heads/main/apis.yml
 created: '2026-03-18'
 modified: '2026-05-19'
@@ -77,7 +83,7 @@ apis:
   - Ingress Controller
   - Kubernetes
   - Load Balancer
-  - Open-Source
+  - Open Source
   - Reverse Proxy
   tags_raw:
   - API Gateway
@@ -86,6 +92,7 @@ apis:
   - Load Balancer
   - Open Source
   - Reverse Proxy
+  - Open-Source
   properties:
   - type: Documentation
     url: https://doc.traefik.io/traefik/
@@ -376,12 +383,13 @@ apis:
   - Go
   - Interpreter
   - Plugin Runtime
-  - Open-Source
+  - Open Source
   tags_raw:
   - Go
   - Interpreter
   - Plugin Runtime
   - Open Source
+  - Open-Source
   properties:
   - type: GitHubRepository
     url: https://github.com/traefik/yaegi
@@ -396,11 +404,12 @@ apis:
   tags:
   - Service Mesh
   - Kubernetes
-  - Open-Source
+  - Open Source
   tags_raw:
   - Service Mesh
   - Kubernetes
   - Open Source
+  - Open-Source
   properties:
   - type: GitHubRepository
     url: https://github.com/traefik/mesh
@@ -480,8 +489,6 @@ apis:
   humanURL: https://traefik.io/traefik/
   baseURL: http://localhost:8080/api
   tags:
-  - Entrypoints
-  tags_raw:
   - Entry Points
   properties:
   - type: OpenAPI

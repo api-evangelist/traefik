@@ -90,26 +90,6 @@ components:
           type: string
           format: date-time
           description: The start time of the running Traefik process.
-    OverviewSection:
-      type: object
-      description: Counts for routers, services, and middlewares in a protocol section.
-      properties:
-        routers:
-          $ref: '#/components/schemas/StatusCount'
-        services:
-          $ref: '#/components/schemas/StatusCount'
-        middlewares:
-          $ref: '#/components/schemas/StatusCount'
-    StatusCount:
-      type: object
-      description: Count of objects by status.
-      properties:
-        total:
-          type: integer
-        warnings:
-          type: integer
-        errors:
-          type: integer
     Overview:
       type: object
       description: Overview statistics of the running Traefik instance including counts of all configured objects.
@@ -143,6 +123,26 @@ components:
           $ref: '#/components/schemas/StatusCount'
         services:
           $ref: '#/components/schemas/StatusCount'
+    OverviewSection:
+      type: object
+      description: Counts for routers, services, and middlewares in a protocol section.
+      properties:
+        routers:
+          $ref: '#/components/schemas/StatusCount'
+        services:
+          $ref: '#/components/schemas/StatusCount'
+        middlewares:
+          $ref: '#/components/schemas/StatusCount'
+    StatusCount:
+      type: object
+      description: Count of objects by status.
+      properties:
+        total:
+          type: integer
+        warnings:
+          type: integer
+        errors:
+          type: integer
 externalDocs:
   description: Traefik API Documentation
   url: https://doc.traefik.io/traefik/operations/api/
