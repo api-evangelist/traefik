@@ -76,20 +76,24 @@ paths:
                 format: binary
 components:
   schemas:
-    Version:
+    OverviewSection:
       type: object
-      description: Traefik version and build information.
+      description: Counts for routers, services, and middlewares in a protocol section.
       properties:
-        Version:
-          type: string
-          description: The semantic version string of the running Traefik instance.
-        Codename:
-          type: string
-          description: The codename for this Traefik release.
-        startDate:
-          type: string
-          format: date-time
-          description: The start time of the running Traefik process.
+        routers:
+          $ref: '#/components/schemas/StatusCount'
+        services:
+          $ref: '#/components/schemas/StatusCount'
+        middlewares:
+          $ref: '#/components/schemas/StatusCount'
+    OverviewUDPSection:
+      type: object
+      description: Counts for UDP routers and services.
+      properties:
+        routers:
+          $ref: '#/components/schemas/StatusCount'
+        services:
+          $ref: '#/components/schemas/StatusCount'
     Overview:
       type: object
       description: Overview statistics of the running Traefik instance including counts of all configured objects.
@@ -115,24 +119,6 @@ components:
           description: List of active configuration providers.
           items:
             type: string
-    OverviewUDPSection:
-      type: object
-      description: Counts for UDP routers and services.
-      properties:
-        routers:
-          $ref: '#/components/schemas/StatusCount'
-        services:
-          $ref: '#/components/schemas/StatusCount'
-    OverviewSection:
-      type: object
-      description: Counts for routers, services, and middlewares in a protocol section.
-      properties:
-        routers:
-          $ref: '#/components/schemas/StatusCount'
-        services:
-          $ref: '#/components/schemas/StatusCount'
-        middlewares:
-          $ref: '#/components/schemas/StatusCount'
     StatusCount:
       type: object
       description: Count of objects by status.
@@ -143,6 +129,20 @@ components:
           type: integer
         errors:
           type: integer
+    Version:
+      type: object
+      description: Traefik version and build information.
+      properties:
+        Version:
+          type: string
+          description: The semantic version string of the running Traefik instance.
+        Codename:
+          type: string
+          description: The codename for this Traefik release.
+        startDate:
+          type: string
+          format: date-time
+          description: The start time of the running Traefik process.
 externalDocs:
   description: Traefik API Documentation
   url: https://doc.traefik.io/traefik/operations/api/

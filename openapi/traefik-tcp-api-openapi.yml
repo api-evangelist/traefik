@@ -150,6 +150,14 @@ paths:
           description: Middleware not found
 components:
   parameters:
+    per_page:
+      name: per_page
+      in: query
+      required: false
+      description: Number of results per page.
+      schema:
+        type: integer
+        default: 100
     status:
       name: status
       in: query
@@ -175,15 +183,35 @@ components:
       description: Filter results by name using a search string.
       schema:
         type: string
-    per_page:
-      name: per_page
-      in: query
-      required: false
-      description: Number of results per page.
-      schema:
-        type: integer
-        default: 100
   schemas:
+    TCPService:
+      type: object
+      description: A TCP service representing one or more backend TCP servers.
+      properties:
+        name:
+          type: string
+          description: The name of the TCP service in name@provider format.
+        type:
+          type: string
+        status:
+          type: string
+          enum:
+          - enabled
+          - disabled
+          - warning
+        provider:
+          type: string
+        loadBalancer:
+          type: object
+          properties:
+            servers:
+              type: array
+              items:
+                type: object
+                properties:
+                  address:
+                    type: string
+                    description: The address of the backend TCP server (host:port).
     TCPRouter:
       type: object
       description: A TCP router that matches incoming TCP connections and routes them to services.
@@ -237,34 +265,6 @@ components:
           - warning
         provider:
           type: string
-    TCPService:
-      type: object
-      description: A TCP service representing one or more backend TCP servers.
-      properties:
-        name:
-          type: string
-          description: The name of the TCP service in name@provider format.
-        type:
-          type: string
-        status:
-          type: string
-          enum:
-          - enabled
-          - disabled
-          - warning
-        provider:
-          type: string
-        loadBalancer:
-          type: object
-          properties:
-            servers:
-              type: array
-              items:
-                type: object
-                properties:
-                  address:
-                    type: string
-                    description: The address of the backend TCP server (host:port).
 externalDocs:
   description: Traefik API Documentation
   url: https://doc.traefik.io/traefik/operations/api/
