@@ -489,6 +489,8 @@ apis:
   humanURL: https://traefik.io/traefik/
   baseURL: http://localhost:8080/api
   tags:
+  - Entrypoints
+  tags_raw:
   - Entry Points
   properties:
   - type: OpenAPI
