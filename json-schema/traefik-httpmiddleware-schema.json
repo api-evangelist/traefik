@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/traefik/main/json-schema/traefik-httpmiddleware-schema.json",
+  "title": "HTTPMiddleware",
+  "description": "An HTTP middleware that modifies requests or responses.",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/traefik-http-api-openapi.yml#/components/schemas/HTTPMiddleware",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the middleware in name@provider format."
+    },
+    "type": {
+      "type": "string",
+      "description": "The type of middleware (e.g., addPrefix, basicAuth, buffering, chain, circuitBreaker, compress, headers, ipAllowList, rateLimit, redirectScheme, replacePath, retry, stripPrefix)."
+    },
+    "status": {
+      "type": "string",
+      "description": "The current status of the middleware.",
+      "enum": [
+        "enabled",
+        "disabled",
+        "warning"
+      ]
+    },
+    "provider": {
+      "type": "string",
+      "description": "The configuration provider that created this middleware."
+    },
+    "usedBy": {
+      "type": "array",
+      "description": "Routers currently using this middleware.",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

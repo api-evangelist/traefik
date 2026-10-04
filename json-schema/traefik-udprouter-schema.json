@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/traefik/main/json-schema/traefik-udprouter-schema.json",
+  "title": "UDPRouter",
+  "description": "A UDP router that routes incoming UDP datagrams to services.",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/traefik-udp-api-openapi.yml#/components/schemas/UDPRouter",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the UDP router in name@provider format."
+    },
+    "entryPoints": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "service": {
+      "type": "string",
+      "description": "The UDP service this router routes traffic to."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "enabled",
+        "disabled",
+        "warning"
+      ]
+    },
+    "provider": {
+      "type": "string"
+    }
+  }
+}

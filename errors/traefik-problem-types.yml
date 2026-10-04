@@ -1,0 +1,24 @@
+generated: '2026-10-04'
+method: derived
+generator: derive-problem-types.py
+source:
+- openapi/traefik-entry-points-api-openapi.yml
+- openapi/traefik-health-api-openapi.yml
+- openapi/traefik-http-api-openapi.yml
+- openapi/traefik-overview-api-openapi.yml
+- openapi/traefik-tcp-api-openapi.yml
+- openapi/traefik-udp-api-openapi.yml
+format: custom
+envelope:
+  media_type: null
+  schema: null
+coverage:
+  operations: 23
+  statuses_declared: 1
+problems:
+- status: 404
+  title: Not Found
+  description: Router not found
+  operations: 9
+  media_types: []
+  schema: null

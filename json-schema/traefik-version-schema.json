@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/traefik/main/json-schema/traefik-version-schema.json",
+  "title": "Version",
+  "description": "Traefik version and build information.",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/traefik-overview-api-openapi.yml#/components/schemas/Version",
+  "type": "object",
+  "properties": {
+    "Version": {
+      "type": "string",
+      "description": "The semantic version string of the running Traefik instance."
+    },
+    "Codename": {
+      "type": "string",
+      "description": "The codename for this Traefik release."
+    },
+    "startDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The start time of the running Traefik process."
+    }
+  }
+}

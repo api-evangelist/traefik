@@ -106,14 +106,6 @@ paths:
           description: Service not found
 components:
   parameters:
-    per_page:
-      name: per_page
-      in: query
-      required: false
-      description: Number of results per page.
-      schema:
-        type: integer
-        default: 100
     status:
       name: status
       in: query
@@ -124,6 +116,21 @@ components:
         enum:
         - enabled
         - disabled
+    search:
+      name: search
+      in: query
+      required: false
+      description: Filter results by name using a search string.
+      schema:
+        type: string
+    per_page:
+      name: per_page
+      in: query
+      required: false
+      description: Number of results per page.
+      schema:
+        type: integer
+        default: 100
     page:
       name: page
       in: query
@@ -132,14 +139,29 @@ components:
       schema:
         type: integer
         default: 1
-    search:
-      name: search
-      in: query
-      required: false
-      description: Filter results by name using a search string.
-      schema:
-        type: string
   schemas:
+    UDPRouter:
+      type: object
+      description: A UDP router that routes incoming UDP datagrams to services.
+      properties:
+        name:
+          type: string
+          description: The name of the UDP router in name@provider format.
+        entryPoints:
+          type: array
+          items:
+            type: string
+        service:
+          type: string
+          description: The UDP service this router routes traffic to.
+        status:
+          type: string
+          enum:
+          - enabled
+          - disabled
+          - warning
+        provider:
+          type: string
     UDPService:
       type: object
       description: A UDP service representing one or more backend UDP servers.
@@ -168,28 +190,6 @@ components:
                   address:
                     type: string
                     description: The address of the backend UDP server (host:port).
-    UDPRouter:
-      type: object
-      description: A UDP router that routes incoming UDP datagrams to services.
-      properties:
-        name:
-          type: string
-          description: The name of the UDP router in name@provider format.
-        entryPoints:
-          type: array
-          items:
-            type: string
-        service:
-          type: string
-          description: The UDP service this router routes traffic to.
-        status:
-          type: string
-          enum:
-          - enabled
-          - disabled
-          - warning
-        provider:
-          type: string
 externalDocs:
   description: Traefik API Documentation
   url: https://doc.traefik.io/traefik/operations/api/

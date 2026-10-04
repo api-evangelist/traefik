@@ -1,0 +1,6 @@
+generated: '2026-10-04'
+method: probed
+generator: harvest-llms.py
+source: https://traefik.io/llms.txt
+bytes: 19802
+note: saved verbatim; the provider's own document

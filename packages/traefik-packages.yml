@@ -1,0 +1,34 @@
+generated: '2026-10-04'
+method: probed
+generator: harvest-packages.py
+source: registry metadata endpoints (registry.npmjs.org, pypi.org, rubygems.org, api.nuget.org, packagist.org, crates.io)
+ownership_rule: 'official: true only when the registry metadata (homepage, repository, author, URLs) names the provider''s domain (agentic-access/traefik-agentic-access.yml,
+  finops/traefik-finops.yml, json-ld/traefik-context.jsonld, json-schema/traefik-entrypoint-schema.json, json-schema/traefik-middleware-schema.json,
+  json-schema/traefik-router-schema.json, json-schema/traefik-service-schema.json, json-structure/traefik-middleware-structure.json, json-structure/traefik-router-structure.json,
+  linkedin.com, plans/traefik-plans-pricing.yml, rate-limits/traefik-rate-limits.yml, rules/traefik-proxy-rules.yml, security/traefik-domain-security.yml,
+  security/traefik-vulnerability-disclosure.yml, stackoverflow.com, traefik.io, vocabulary/traefik-vocabulary.yml) or its accepted GitHub org.'
+packages:
+- name: traefik
+  registry: npm
+  url: https://www.npmjs.com/package/traefik
+  language: JavaScript
+  official: true
+  version: 1.0.0
+  published: '2021-08-02'
+  evidence: metadata names traefik.io
+- name: traefik
+  registry: pypi
+  url: https://pypi.org/project/traefik/
+  language: Python
+  official: true
+  version: 1.1.0
+  published: '2026-07-26'
+  evidence: metadata names traefik.io
+- name: traefik
+  registry: nuget
+  url: https://www.nuget.org/packages/traefik
+  language: C#
+  official: false
+  version: 0.3.7
+  published: null
+  evidence: 'name match only: the metadata names neither the provider''s domain nor its GitHub org'

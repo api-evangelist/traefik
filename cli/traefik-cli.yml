@@ -1,0 +1,76 @@
+generated: '2026-10-04'
+method: searched
+generator: extract-docs-artifacts.py (local)
+source: https://doc.traefik.io/traefik/reference/install-configuration/observability/healthcheck/
+sources:
+- https://doc.traefik.io/traefik/reference/install-configuration/observability/healthcheck/
+- https://doc.traefik.io/traefik-enterprise/installing/teectl-cli/
+- https://doc.traefik.io/traefik-enterprise/references/cli/teectl/
+- https://doc.traefik.io/traefik-enterprise/references/cli/traefikee/
+install:
+- method: Verify checksum Linux
+  command: sha256sum ./teectl_v2.12.10_linux_amd64.tar.gz
+- method: Verify checksum macOS
+  command: shasum -a256 ./teectl_v2.12.10_darwin_amd64.tar.gz
+- method: Verify checksum Windows
+  command: Get-FileHash teectl_v2.12.10_windows_amd64.zip -Algorithm SHA256
+- method: Extract Linux/macOS
+  command: tar -zxvf teectl_v2.12.10_linux_amd64.tar.gz
+- method: Extract macOS
+  command: tar -zxvf ./teectl_v2.12.10_darwin_amd64.tar.gz
+- method: Extract Windows
+  command: Expand-Archive teectl_v2.12.10_windows_amd64.zip
+- method: Copy to PATH Linux/macOS
+  command: cp ./teectl /usr/local/bin/teectl
+- method: Verify binary location Linux/macOS
+  command: command -v teectl
+- method: Copy to PATH Windows
+  command: Copy-Item "teectl.exe" -Destination "C:\Program Files\teectl.exe"
+- method: Verify binary location Windows
+  command: where teectl
+commands:
+- group: traefik healthcheck
+  commands:
+  - traefik healthcheck [command] [flags] [arguments]
+  purpose: Check health of Traefik instances
+- group: teectl
+  commands:
+  - teectl apply --file="config.yaml"
+  - teectl cluster use --name="mycluster"
+  - teectl cluster get
+  - teectl cluster import --file="mycluster.yaml"
+  - teectl get acme-certs
+  - teectl get ac
+  - teectl get nodes
+  - teectl get n
+  - teectl get tls-certs
+  - teectl get tc
+  - teectl get static-config
+  - teectl get s
+  - teectl get traefikee-provider-config
+  - teectl get tpc
+  - teectl get plugins
+  - teectl get pl
+  - teectl create ...
+  - teectl delete ...
+  - teectl recover
+  - teectl setup ...
+  - teectl backup
+  - teectl restore
+  - teectl version
+  purpose: Manage Traefik Enterprise clusters
+- group: traefikee
+  commands:
+  - traefikee controller --name="controller-0" --advertise=172.17.0.2:4242 --discovery.static.peers=172.17.0.1:4242,172.17.0.3:4242,172.17.0.4:4242
+    --license="XXX" --api.bundle="./bundle.zip"
+  - traefikee proxy --name="proxy-0" --discovery.static.peers=172.17.0.1:4242,172.17.0.3:4242,172.17.0.4:4242
+  - traefikee token
+  - traefikee recover
+  - traefikee generate credentials --cluster="mycluster"
+  - traefikee plugin-registry --name="registry" --discovery.static.peers=172.17.0.1:4242,172.17.0.3:4242,172.17.0.4:4242 --token=8QHrhfoLOjcE2w
+  - traefikee healthcheck
+  - traefikee version
+  purpose: Manage Traefik Enterprise components
+binary: traefik, teectl, traefikee
+docs: https://doc.traefik.io/traefik/reference/install-configuration/observability/healthcheck/
+note: 1 extracted row(s) were dropped because their quote was not on the page.

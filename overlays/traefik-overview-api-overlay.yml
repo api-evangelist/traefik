@@ -1,0 +1,5 @@
+generated: '2026-10-04'
+method: derived
+type: Overlay
+openapi: ../openapi/traefik-overview-api-openapi.yml
+actions: []

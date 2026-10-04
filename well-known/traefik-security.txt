@@ -1,0 +1,17 @@
+# Traefik Labs security contact information.
+# https://www.rfc-editor.org/rfc/rfc9116
+
+Contact: https://security.traefik.io
+Policy: https://doc.traefik.io/traefik/contributing/submitting-security-issues/
+Policy: https://doc.traefik.io/traefik/contributing/security-decisions/
+Expires: 2027-08-24T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://traefik.io/.well-known/security.txt
+
+# The contact explains how to report a vulnerability in any Traefik Labs
+# product, open source or commercial.
+#
+# The first policy is the disclosure policy, including the threat model and what
+# we treat as a vulnerability. The second records the positions we have already
+# settled: please check a finding against it before reporting, since most of what
+# we receive is a decision we have already published.

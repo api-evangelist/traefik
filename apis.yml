@@ -1,12 +1,14 @@
 aid: traefik
+
 name: Traefik Labs
-description: >-
-  Traefik Labs builds cloud-native traffic and API infrastructure - the open-source Traefik Proxy (an ingress
-  controller, reverse proxy, and load balancer for Kubernetes, Docker, Nomad, ECS, Consul, and bare metal), plus the
-  commercial Traefik Hub product line covering API Gateway, API Management, AI Gateway, and MCP Gateway. The data plane
-  is the same Traefik binary across every tier; the Hub control plane adds GitOps-driven CRDs, a developer portal,
-  multi-cluster dashboards, WAF, advanced auth, and AI safety / agent-governance capabilities.
+
+description: Traefik Labs builds cloud-native traffic and API infrastructure - the open-source Traefik Proxy (an ingress controller, reverse proxy,
+  and load balancer for Kubernetes, Docker, Nomad, ECS, Consul, and bare metal), plus the commercial Traefik Hub product line covering API Gateway,
+  API Management, AI Gateway, and MCP Gateway. The data plane is the same Traefik binary across every tier; the Hub control plane adds GitOps-driven
+  CRDs, a developer portal, multi-cluster dashboards, WAF, advanced auth, and AI safety / agent-governance capabilities.
+
 type: Index
+
 deliveryModel:
   model: open-core
   license: MIT
@@ -25,6 +27,7 @@ deliveryModel:
   - repository-license
   generated: '2026-09-25'
   method: derived
+
 accessModel:
   pricing: freemium
   onboarding: unknown
@@ -37,36 +40,170 @@ accessModel:
   - plans
   generated: '2026-07-22'
   method: derived
+
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/traefik.png
+
+website: https://traefik.io
+
+links:
+- type: Blog
+  url: https://traefik.io/blog
+- type: Pricing
+  url: https://traefik.io/pricing
+
 tags:
-  - AI Gateway
-  - API Gateway
-  - API Management
-  - Developer Portal
-  - GitOps
-  - Kubernetes
-  - Load Balancer
-  - MCP Gateway
-  - Open Source
-  - Reverse Proxy
-  - WAF
+- AI Gateway
+- API Gateway
+- API Management
+- Developer Portal
+- GitOps
+- Kubernetes
+- Load Balancer
+- MCP Gateway
+- Open Source
+- Reverse Proxy
+- WAF
+
 tags_raw:
-  - AI Gateway
-  - API Gateway
-  - API Management
-  - Developer Portal
-  - GitOps
-  - Kubernetes
-  - Load Balancer
-  - MCP Gateway
-  - Open Source
-  - Reverse Proxy
-  - WAF
-  - Open-Source
+- AI Gateway
+- API Gateway
+- API Management
+- Developer Portal
+- GitOps
+- Kubernetes
+- Load Balancer
+- MCP Gateway
+- Open Source
+- Reverse Proxy
+- WAF
+- Open-Source
+
 url: https://raw.githubusercontent.com/api-evangelist/traefik/refs/heads/main/apis.yml
+
 created: '2026-03-18'
+
 modified: '2026-05-19'
+
 specificationVersion: '0.23'
+
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
+
+common:
+- type: Spectral
+  url: rules/traefik-rules.yml
+- type: Spectral
+  url: rules/traefik-jsonschema-spectral-rules.yml
+- type: DataModel
+  url: data-model/traefik-data-model.yml
+- type: CLI
+  url: cli/traefik-cli.yml
+- type: ErrorCatalog
+  url: errors/traefik-problem-types.yml
+- type: Conformance
+  url: conformance/traefik-conformance.yml
+- type: Overlay
+  url: overlays/traefik-overview-api-overlay.yml
+- type: LLMsTxt
+  url: llms/traefik-llms.txt
+- type: SecurityTxt
+  url: well-known/traefik-security.txt
+- type: WellKnown
+  url: well-known/traefik-well-known.yml
+- type: Hosts
+  url: hosts/traefik-hosts.yml
+- type: Vendors
+  url: vendors/traefik-vendors.yml
+- type: SDKs
+  url: packages/traefik-packages.yml
+- type: Packages
+  url: packages/traefik-packages.yml
+- type: TermsOfService
+  url: https://traefik.io/legal/terms-of-services-20190401
+- type: StatusPage
+  url: https://status.traefik.io/
+- type: Newsroom
+  url: https://traefik.io/press
+- type: APIReference
+  url: https://doc.traefik.io/traefik/reference/routing-configuration/tcp/tls/
+- type: VulnerabilityDisclosure
+  url: security/traefik-vulnerability-disclosure.yml
+- type: IssueTracker
+  url: https://github.com/traefik/traefik/issues
+- type: Releases
+  url: https://github.com/traefik/traefik/releases
+- type: SecurityPolicy
+  url: https://github.com/traefik/traefik/blob/master/SECURITY.md
+- type: CodeOfConduct
+  url: https://github.com/traefik/traefik/blob/master/CODE_OF_CONDUCT.md
+- type: ContributionGuide
+  url: https://github.com/traefik/traefik/blob/master/CONTRIBUTING.md
+- type: DeprecationPolicy
+  url: https://doc.traefik.io/traefik/deprecation/releases/
+- type: PrivacyPolicy
+  url: https://traefik.io/legal/privacy-and-cookie-policy
+- type: AgenticAccess
+  url: agentic-access/traefik-agentic-access.yml
+- type: DomainSecurity
+  url: security/traefik-domain-security.yml
+- type: LinkedIn
+  url: https://www.linkedin.com/company/traefik
+- type: Website
+  url: https://traefik.io/
+- type: Documentation
+  url: https://doc.traefik.io/traefik/
+- type: GettingStarted
+  url: https://doc.traefik.io/traefik/getting-started/quick-start/
+- type: Pricing
+  url: https://traefik.io/pricing/
+- type: Blog
+  url: https://traefik.io/blog/
+- type: ChangeLog
+  url: https://github.com/traefik/traefik/blob/master/CHANGELOG.md
+- type: GitHubOrganization
+  url: https://github.com/traefik
+- type: GitHubRepository
+  url: https://github.com/traefik/traefik
+- type: Issue Tracker
+  url: https://github.com/traefik/traefik/issues
+- type: Community
+  url: https://community.traefik.io/
+- type: StackOverflow
+  url: https://stackoverflow.com/questions/tagged/traefik
+- type: Plugin Catalog
+  url: https://plugins.traefik.io/
+- type: Helm Chart
+  url: https://github.com/traefik/traefik-helm-chart
+- type: Integrations
+  url: https://traefik.io/partners
+- type: JSONLD
+  url: json-ld/traefik-context.jsonld
+- type: JSONSchema
+  url: json-schema/traefik-router-schema.json
+- type: JSONSchema
+  url: json-schema/traefik-service-schema.json
+- type: JSONSchema
+  url: json-schema/traefik-middleware-schema.json
+- type: JSONSchema
+  url: json-schema/traefik-entrypoint-schema.json
+- type: JSONStructure
+  url: json-structure/traefik-router-structure.json
+- type: JSONStructure
+  url: json-structure/traefik-middleware-structure.json
+- type: Vocabulary
+  url: vocabulary/traefik-vocabulary.yml
+- type: Spectral
+  url: rules/traefik-proxy-rules.yml
+- type: Plans
+  url: plans/traefik-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/traefik-rate-limits.yml
+- type: FinOps
+  url: finops/traefik-finops.yml
+- type: LlmsText
+  url: https://traefik.io/llms.txt
+
 apis:
 - aid: traefik:traefik-proxy
   name: Traefik Proxy
@@ -441,6 +578,12 @@ apis:
     url: https://doc.traefik.io/traefik/reference/install-configuration/api-dashboard/
   - type: Spectral
     url: rules/traefik-proxy-rules.yml
+  - type: JSONSchema
+    url: json-schema/traefik-httprouter-schema.json
+  - type: JSONSchema
+    url: json-schema/traefik-httpservice-schema.json
+  - type: JSONSchema
+    url: json-schema/traefik-httpmiddleware-schema.json
 - aid: traefik:traefik-overview-api
   name: Traefik Labs Overview API
   description: Overview and version information for the running Traefik instance.
@@ -455,6 +598,10 @@ apis:
     url: https://doc.traefik.io/traefik/reference/install-configuration/api-dashboard/
   - type: Spectral
     url: rules/traefik-proxy-rules.yml
+  - type: JSONSchema
+    url: json-schema/traefik-overview-schema.json
+  - type: JSONSchema
+    url: json-schema/traefik-version-schema.json
 - aid: traefik:traefik-tcp-api
   name: Traefik Labs TCP API
   description: Endpoints for inspecting TCP routers, services, and middlewares.
@@ -469,6 +616,12 @@ apis:
     url: https://doc.traefik.io/traefik/reference/install-configuration/api-dashboard/
   - type: Spectral
     url: rules/traefik-proxy-rules.yml
+  - type: JSONSchema
+    url: json-schema/traefik-tcprouter-schema.json
+  - type: JSONSchema
+    url: json-schema/traefik-tcpservice-schema.json
+  - type: JSONSchema
+    url: json-schema/traefik-tcpmiddleware-schema.json
 - aid: traefik:traefik-udp-api
   name: Traefik Labs UDP API
   description: Endpoints for inspecting UDP routers and services.
@@ -483,6 +636,10 @@ apis:
     url: https://doc.traefik.io/traefik/reference/install-configuration/api-dashboard/
   - type: Spectral
     url: rules/traefik-proxy-rules.yml
+  - type: JSONSchema
+    url: json-schema/traefik-udpservice-schema.json
+  - type: JSONSchema
+    url: json-schema/traefik-udprouter-schema.json
 - aid: traefik:traefik-entry-points-api
   name: Traefik Labs Entry Points API
   description: Endpoints for listing configured entry points.
@@ -497,160 +654,100 @@ apis:
     url: https://doc.traefik.io/traefik/reference/install-configuration/api-dashboard/
   - type: Spectral
     url: rules/traefik-proxy-rules.yml
-common:
-  - type: IssueTracker
-    url: https://github.com/traefik/traefik/issues
-  - type: Releases
-    url: https://github.com/traefik/traefik/releases
-  - type: SecurityPolicy
-    url: https://github.com/traefik/traefik/blob/master/SECURITY.md
-  - type: CodeOfConduct
-    url: https://github.com/traefik/traefik/blob/master/CODE_OF_CONDUCT.md
-  - type: ContributionGuide
-    url: https://github.com/traefik/traefik/blob/master/CONTRIBUTING.md
-  - type: DeprecationPolicy
-    url: https://doc.traefik.io/traefik/deprecation/releases/
-  - type: PrivacyPolicy
-    url: https://traefik.io/legal/privacy-and-cookie-policy
-  - type: AgenticAccess
-    url: agentic-access/traefik-agentic-access.yml
-  - type: DomainSecurity
-    url: security/traefik-domain-security.yml
-  - type: LinkedIn
-    url: https://www.linkedin.com/company/traefik
-  - type: Website
-    url: https://traefik.io/
-  - type: Documentation
-    url: https://doc.traefik.io/traefik/
-  - type: GettingStarted
-    url: https://doc.traefik.io/traefik/getting-started/quick-start/
-  - type: Pricing
-    url: https://traefik.io/pricing/
-  - type: Blog
-    url: https://traefik.io/blog/
-  - type: ChangeLog
-    url: https://github.com/traefik/traefik/blob/master/CHANGELOG.md
-  - type: GitHubOrganization
-    url: https://github.com/traefik
-  - type: GitHubRepository
-    url: https://github.com/traefik/traefik
-  - type: Issue Tracker
-    url: https://github.com/traefik/traefik/issues
-  - type: Community
-    url: https://community.traefik.io/
-  - type: StackOverflow
-    url: https://stackoverflow.com/questions/tagged/traefik
-  - type: Plugin Catalog
-    url: https://plugins.traefik.io/
-  - type: Helm Chart
-    url: https://github.com/traefik/traefik-helm-chart
-  - type: Integrations
-    url: https://traefik.io/partners
-  - type: JSONLD
-    url: json-ld/traefik-context.jsonld
   - type: JSONSchema
-    url: json-schema/traefik-router-schema.json
-  - type: JSONSchema
-    url: json-schema/traefik-service-schema.json
-  - type: JSONSchema
-    url: json-schema/traefik-middleware-schema.json
-  - type: JSONSchema
-    url: json-schema/traefik-entrypoint-schema.json
-  - type: JSONStructure
-    url: json-structure/traefik-router-structure.json
-  - type: JSONStructure
-    url: json-structure/traefik-middleware-structure.json
-  - type: Vocabulary
-    url: vocabulary/traefik-vocabulary.yml
-  - type: Spectral
-    url: rules/traefik-proxy-rules.yml
-  - type: Plans
-    url: plans/traefik-plans-pricing.yml
-  - type: RateLimits
-    url: rate-limits/traefik-rate-limits.yml
-  - type: FinOps
-    url: finops/traefik-finops.yml
-  - type: LlmsText
-    url: https://traefik.io/llms.txt
+    url: json-schema/traefik-entry-point-schema.json
 solutions:
-  - name: API Gateway
-    description: Modern declarative API gateway with first-class Kubernetes integration.
-  - name: AI Gateway
-    description: Govern LLM traffic with safety guardrails and semantic caching.
-  - name: MCP Gateway
-    description: Govern AI agent access to Model Context Protocol servers.
-  - name: Web Application Firewall
-    description: Native WAF integrated into the Hub API Gateway data plane.
-  - name: API Mocking
-    description: Create and publish mock APIs with production-grade UX.
-  - name: Ingress NGINX Migration
-    description: Replace deprecated ingress-nginx with Traefik Proxy 3.7+.
-  - name: GitOps API Management
-    description: Declarative
-    CRD-driven API management workflows.: null
-  - name: Air-Gapped API Management
-    description: Run the full Hub stack in disconnected environments.
-  - name: Multi-Cluster API Inventory
-    description: Single pane of glass across federated Kubernetes clusters.
+- name: API Gateway
+  description: Modern declarative API gateway with first-class Kubernetes integration.
+- name: AI Gateway
+  description: Govern LLM traffic with safety guardrails and semantic caching.
+- name: MCP Gateway
+  description: Govern AI agent access to Model Context Protocol servers.
+- name: Web Application Firewall
+  description: Native WAF integrated into the Hub API Gateway data plane.
+- name: API Mocking
+  description: Create and publish mock APIs with production-grade UX.
+- name: Ingress NGINX Migration
+  description: Replace deprecated ingress-nginx with Traefik Proxy 3.7+.
+- name: GitOps API Management
+  description: Declarative
+  CRD-driven API management workflows.: null
+- name: Air-Gapped API Management
+  description: Run the full Hub stack in disconnected environments.
+- name: Multi-Cluster API Inventory
+  description: Single pane of glass across federated Kubernetes clusters.
+
 integrations:
-  - name: Kubernetes
-  - name: Kubernetes Gateway API
-  - name: Knative Serving
-  - name: Docker
-  - name: Docker Swarm
-  - name: HashiCorp Nomad
-  - name: HashiCorp Consul
-  - name: HashiCorp Vault
-  - name: Amazon ECS
-  - name: Etcd
-  - name: Rancher
-  - name: D2iQ
-  - name: Platform9
-  - name: Nutanix
-  - name: AWS
-  - name: Microsoft Azure
-  - name: Google Cloud
-  - name: Oracle OCI
-  - name: DigitalOcean
-  - name: Exoscale
-  - name: Equinix Metal
-  - name: Let's Encrypt
-  - name: Prometheus
-  - name: Datadog
-  - name: Grafana
-  - name: InfluxDB
-  - name: StatsD
-  - name: OpenTelemetry
-  - name: Jaeger
-  - name: Zipkin
-  - name: Elastic
-  - name: Splunk
-  - name: Sysdig
-  - name: Instana
-  - name: OpenAI
-  - name: Anthropic
-  - name: Azure OpenAI
-  - name: AWS Bedrock
-  - name: Cohere
-  - name: Google Gemini
-  - name: Mistral
-  - name: Ollama
-  - name: NVIDIA Safety NIM
-  - name: Microsoft Presidio
-  - name: Treblle
-  - name: Palo Alto Networks
-  - name: Ahead
-  - name: codecentric
-  - name: Data Essential
-  - name: Factor Group
-  - name: KPN
-  - name: linkbynet
-  - name: neoria
-  - name: nuaware
-  - name: smartwave
-  - name: SWNetwork
-  - name: treeptik
-  - name: zenika
-maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- name: Kubernetes
+- name: Kubernetes Gateway API
+- name: Knative Serving
+- name: Docker
+- name: Docker Swarm
+- name: HashiCorp Nomad
+- name: HashiCorp Consul
+- name: HashiCorp Vault
+- name: Amazon ECS
+- name: Etcd
+- name: Rancher
+- name: D2iQ
+- name: Platform9
+- name: Nutanix
+- name: AWS
+- name: Microsoft Azure
+- name: Google Cloud
+- name: Oracle OCI
+- name: DigitalOcean
+- name: Exoscale
+- name: Equinix Metal
+- name: Let's Encrypt
+- name: Prometheus
+- name: Datadog
+- name: Grafana
+- name: InfluxDB
+- name: StatsD
+- name: OpenTelemetry
+- name: Jaeger
+- name: Zipkin
+- name: Elastic
+- name: Splunk
+- name: Sysdig
+- name: Instana
+- name: OpenAI
+- name: Anthropic
+- name: Azure OpenAI
+- name: AWS Bedrock
+- name: Cohere
+- name: Google Gemini
+- name: Mistral
+- name: Ollama
+- name: NVIDIA Safety NIM
+- name: Microsoft Presidio
+- name: Treblle
+- name: Palo Alto Networks
+- name: Ahead
+- name: codecentric
+- name: Data Essential
+- name: Factor Group
+- name: KPN
+- name: linkbynet
+- name: neoria
+- name: nuaware
+- name: smartwave
+- name: SWNetwork
+- name: treeptik
+- name: zenika
+
+x-coverage:
+  state: unreadable
+  reason: js-rendered-docs
+  detail: Documentation pages are rendered client‑side JavaScript, preventing machine‑readable spec extraction.
+  evidence:
+  - url: https://doc.traefik.io/traefik/
+    status: 200
+  checked: '2026-10-04'
+x-enrichment:
+  date: '2026-10-04'
+  status: enriched
+  artifacts_added: 26
+  pass: modular-v1
+  engine: identity=local,contract=local,surfaces=local,docs=local,regulatory=local

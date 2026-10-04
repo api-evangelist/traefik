@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/traefik/main/json-schema/traefik-httprouter-schema.json",
+  "title": "HTTPRouter",
+  "description": "An HTTP router that matches incoming requests and routes them to services.",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/traefik-http-api-openapi.yml#/components/schemas/HTTPRouter",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the router in name@provider format."
+    },
+    "entryPoints": {
+      "type": "array",
+      "description": "Entry points this router is bound to.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "middlewares": {
+      "type": "array",
+      "description": "Middlewares applied to this router in order.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "service": {
+      "type": "string",
+      "description": "The service this router routes traffic to."
+    },
+    "rule": {
+      "type": "string",
+      "description": "The routing rule expression (e.g., Host, Path, Headers matchers)."
+    },
+    "ruleSyntax": {
+      "type": "string",
+      "description": "The syntax version of the rule."
+    },
+    "priority": {
+      "type": "integer",
+      "description": "The priority of the router when multiple routers match."
+    },
+    "status": {
+      "type": "string",
+      "description": "The current status of the router.",
+      "enum": [
+        "enabled",
+        "disabled",
+        "warning"
+      ]
+    },
+    "using": {
+      "type": "array",
+      "description": "Entry points being used by this router.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "provider": {
+      "type": "string",
+      "description": "The configuration provider that created this router."
+    },
+    "tls": {
+      "type": "object",
+      "description": "TLS configuration for this router.",
+      "properties": {
+        "options": {
+          "type": "string"
+        },
+        "certResolver": {
+          "type": "string"
+        },
+        "domains": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "main": {
+                "type": "string"
+              },
+              "sans": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/traefik/main/json-schema/traefik-entry-point-schema.json",
+  "title": "EntryPoint",
+  "description": "A configured entry point for accepting incoming traffic.",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/traefik-entry-points-api-openapi.yml#/components/schemas/EntryPoint",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the entry point."
+    },
+    "address": {
+      "type": "string",
+      "description": "The address the entry point listens on (e.g., \":80\", \":443\")."
+    },
+    "transport": {
+      "type": "object",
+      "description": "Transport layer configuration.",
+      "properties": {
+        "lifeCycle": {
+          "type": "object",
+          "properties": {
+            "requestAcceptGraceTimeout": {
+              "type": "string"
+            },
+            "graceTimeOut": {
+              "type": "string"
+            }
+          }
+        },
+        "respondingTimeouts": {
+          "type": "object",
+          "properties": {
+            "readTimeout": {
+              "type": "string"
+            },
+            "writeTimeout": {
+              "type": "string"
+            },
+            "idleTimeout": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

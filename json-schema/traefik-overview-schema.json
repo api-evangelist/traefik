@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/traefik/main/json-schema/traefik-overview-schema.json",
+  "title": "Overview",
+  "description": "Overview statistics of the running Traefik instance including counts of all configured objects.",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/traefik-overview-api-openapi.yml#/components/schemas/Overview",
+  "type": "object",
+  "properties": {
+    "http": {
+      "$ref": "#/$defs/OverviewSection"
+    },
+    "tcp": {
+      "$ref": "#/$defs/OverviewSection"
+    },
+    "udp": {
+      "$ref": "#/$defs/OverviewUDPSection"
+    },
+    "features": {
+      "type": "object",
+      "description": "Enabled features in the running instance.",
+      "properties": {
+        "tracing": {
+          "type": "string"
+        },
+        "metrics": {
+          "type": "string"
+        },
+        "accessLog": {
+          "type": "boolean"
+        }
+      }
+    },
+    "providers": {
+      "type": "array",
+      "description": "List of active configuration providers.",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "$defs": {
+    "OverviewSection": {
+      "type": "object",
+      "description": "Counts for routers, services, and middlewares in a protocol section.",
+      "properties": {
+        "routers": {
+          "$ref": "#/$defs/StatusCount"
+        },
+        "services": {
+          "$ref": "#/$defs/StatusCount"
+        },
+        "middlewares": {
+          "$ref": "#/$defs/StatusCount"
+        }
+      }
+    },
+    "OverviewUDPSection": {
+      "type": "object",
+      "description": "Counts for UDP routers and services.",
+      "properties": {
+        "routers": {
+          "$ref": "#/$defs/StatusCount"
+        },
+        "services": {
+          "$ref": "#/$defs/StatusCount"
+        }
+      }
+    },
+    "StatusCount": {
+      "type": "object",
+      "description": "Count of objects by status.",
+      "properties": {
+        "total": {
+          "type": "integer"
+        },
+        "warnings": {
+          "type": "integer"
+        },
+        "errors": {
+          "type": "integer"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/traefik/main/json-schema/traefik-tcprouter-schema.json",
+  "title": "TCPRouter",
+  "description": "A TCP router that matches incoming TCP connections and routes them to services.",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/traefik-tcp-api-openapi.yml#/components/schemas/TCPRouter",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the TCP router in name@provider format."
+    },
+    "entryPoints": {
+      "type": "array",
+      "description": "Entry points this router is bound to.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "service": {
+      "type": "string",
+      "description": "The TCP service this router routes traffic to."
+    },
+    "rule": {
+      "type": "string",
+      "description": "The TCP routing rule expression (HostSNI matcher)."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "enabled",
+        "disabled",
+        "warning"
+      ]
+    },
+    "provider": {
+      "type": "string"
+    },
+    "tls": {
+      "type": "object",
+      "properties": {
+        "passthrough": {
+          "type": "boolean"
+        },
+        "options": {
+          "type": "string"
+        },
+        "certResolver": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

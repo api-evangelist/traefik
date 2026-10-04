@@ -1,0 +1,197 @@
+generated: '2026-10-04'
+method: derived
+source: the pre-flight dossier, apis.yml pointers, spec servers, well-known, vendors -- nothing fetched here
+generator: derive-hosts.py
+summary:
+  hosts: 13
+  own: 10
+  other_domain: 0
+  platform: 3
+  roles:
+  - api
+  - community
+  - data
+  - docs
+  - other
+  - source
+  - status
+  - support
+  - website
+hosts:
+- host: api.traefik.io
+  found_by:
+  - contract-discovery
+  types: []
+  serves: []
+  registrable_domain: traefik.io
+  role: api
+  relation: own
+- host: community.traefik.io
+  found_by:
+  - pointer
+  - probed
+  - site-links
+  - contract-discovery
+  - well-known
+  types:
+  - Community
+  serves: []
+  registrable_domain: traefik.io
+  role: community
+  relation: own
+- host: data.traefik.io
+  found_by:
+  - probed
+  - site-links
+  - namespace-probe
+  types: []
+  serves: []
+  status: 200
+  registrable_domain: traefik.io
+  role: data
+  relation: own
+- host: doc.traefik.io
+  found_by:
+  - pointer
+  - apis[]
+  - probed
+  - site-links
+  - docs-index
+  - contract-discovery
+  - well-known
+  - vendor-detect
+  types:
+  - APIReference
+  - DeprecationPolicy
+  - Documentation
+  - GettingStarted
+  serves:
+  - docs
+  - cdn
+  vendor: fastly
+  registrable_domain: traefik.io
+  role: docs
+  relation: own
+- host: docs.traefik.io
+  found_by:
+  - probed
+  - site-links
+  - namespace-probe
+  - well-known
+  types: []
+  serves: []
+  title: Traefik Proxy Documentation - Traefik
+  status: 200
+  registrable_domain: traefik.io
+  role: docs
+  relation: own
+- host: github.com
+  found_by:
+  - pointer
+  - apis[]
+  types:
+  - IssueTracker
+  - Releases
+  - SecurityPolicy
+  - CodeOfConduct
+  - ContributionGuide
+  - ChangeLog
+  - GitHubOrganization
+  - GitHubRepository
+  - Issue Tracker
+  - Helm Chart
+  serves:
+  - docs
+  registrable_domain: github.com
+  role: source
+  relation: platform
+- host: info.traefik.io
+  found_by:
+  - probed
+  - site-links
+  - well-known
+  types: []
+  serves: []
+  registrable_domain: traefik.io
+  role: other
+  relation: own
+- host: plugins.traefik.io
+  found_by:
+  - pointer
+  - apis[]
+  - probed
+  - site-links
+  - contract-discovery
+  - well-known
+  types:
+  - Plugin Catalog
+  serves:
+  - docs
+  registrable_domain: traefik.io
+  role: other
+  relation: own
+- host: stackoverflow.com
+  found_by:
+  - pointer
+  types:
+  - StackOverflow
+  serves: []
+  registrable_domain: stackoverflow.com
+  role: other
+  relation: platform
+- host: status.traefik.io
+  found_by:
+  - pointer
+  - probed
+  - site-links
+  - well-known
+  types:
+  - StatusPage
+  serves: []
+  registrable_domain: traefik.io
+  role: status
+  relation: own
+- host: support.traefik.io
+  found_by:
+  - probed
+  - site-links
+  - well-known
+  types: []
+  serves: []
+  registrable_domain: traefik.io
+  role: support
+  relation: own
+- host: traefik.io
+  found_by:
+  - pointer
+  - apis[]
+  - probed
+  - contract-discovery
+  - well-known
+  - vendor-detect
+  types:
+  - TermsOfService
+  - Newsroom
+  - PrivacyPolicy
+  - Website
+  - Pricing
+  - Blog
+  - Integrations
+  - LlmsText
+  serves:
+  - docs
+  - cdn
+  - hosting
+  vendor: cloudflare
+  registrable_domain: traefik.io
+  role: website
+  relation: own
+- host: www.linkedin.com
+  found_by:
+  - pointer
+  types:
+  - LinkedIn
+  serves: []
+  registrable_domain: linkedin.com
+  role: other
+  relation: platform

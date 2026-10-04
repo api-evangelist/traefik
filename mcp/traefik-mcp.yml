@@ -1,0 +1,134 @@
+generated: '2026-10-04'
+method: derived
+generator: derive-mcp-candidate.py
+source:
+- openapi/traefik-entry-points-api-openapi.yml
+- openapi/traefik-health-api-openapi.yml
+- openapi/traefik-http-api-openapi.yml
+- openapi/traefik-overview-api-openapi.yml
+- openapi/traefik-tcp-api-openapi.yml
+- openapi/traefik-udp-api-openapi.yml
+status: candidate
+deployment:
+  mode: none
+  auth: unknown
+  verified: probed
+note: No MCP server was found. The pre-flight posted tools/list to /mcp on api.traefik.io, traefik.io, doc.traefik.io, plugins.traefik.io; verdict
+  absent. Candidate tools below are derived from the 23 operation(s) in the provider's own OpenAPI (23 listed); they describe what a server WOULD
+  expose, not one that exists.
+tools:
+- name: list_entry_points
+  operationId: listEntryPoints
+  method: GET
+  path: /entrypoints
+  description: List All Entry Points
+- name: ping
+  operationId: ping
+  method: GET
+  path: /ping
+  description: Health Check Ping
+- name: list_httprouters
+  operationId: listHTTPRouters
+  method: GET
+  path: /http/routers
+  description: List All HTTP Routers
+- name: get_version
+  operationId: getVersion
+  method: GET
+  path: /version
+  description: Get Traefik Version
+- name: list_tcprouters
+  operationId: listTCPRouters
+  method: GET
+  path: /tcp/routers
+  description: List All TCP Routers
+- name: list_udprouters
+  operationId: listUDPRouters
+  method: GET
+  path: /udp/routers
+  description: List All UDP Routers
+- name: get_entry_point
+  operationId: getEntryPoint
+  method: GET
+  path: /entrypoints/{name}
+  description: Get a Specific Entry Point
+- name: get_httprouter
+  operationId: getHTTPRouter
+  method: GET
+  path: /http/routers/{name}
+  description: Get a Specific HTTP Router
+- name: get_overview
+  operationId: getOverview
+  method: GET
+  path: /overview
+  description: Get Overview Statistics
+- name: get_tcprouter
+  operationId: getTCPRouter
+  method: GET
+  path: /tcp/routers/{name}
+  description: Get a Specific TCP Router
+- name: get_udprouter
+  operationId: getUDPRouter
+  method: GET
+  path: /udp/routers/{name}
+  description: Get a Specific UDP Router
+- name: list_httpservices
+  operationId: listHTTPServices
+  method: GET
+  path: /http/services
+  description: List All HTTP Services
+- name: get_raw_data
+  operationId: getRawData
+  method: GET
+  path: /rawdata
+  description: Get Raw Configuration Data
+- name: list_tcpservices
+  operationId: listTCPServices
+  method: GET
+  path: /tcp/services
+  description: List All TCP Services
+- name: list_udpservices
+  operationId: listUDPServices
+  method: GET
+  path: /udp/services
+  description: List All UDP Services
+- name: get_httpservice
+  operationId: getHTTPService
+  method: GET
+  path: /http/services/{name}
+  description: Get a Specific HTTP Service
+- name: get_support_dump
+  operationId: getSupportDump
+  method: GET
+  path: /support-dump
+  description: Get Anonymized Support Dump
+- name: get_tcpservice
+  operationId: getTCPService
+  method: GET
+  path: /tcp/services/{name}
+  description: Get a Specific TCP Service
+- name: get_udpservice
+  operationId: getUDPService
+  method: GET
+  path: /udp/services/{name}
+  description: Get a Specific UDP Service
+- name: list_httpmiddlewares
+  operationId: listHTTPMiddlewares
+  method: GET
+  path: /http/middlewares
+  description: List All HTTP Middlewares
+- name: list_tcpmiddlewares
+  operationId: listTCPMiddlewares
+  method: GET
+  path: /tcp/middlewares
+  description: List All TCP Middlewares
+- name: get_httpmiddleware
+  operationId: getHTTPMiddleware
+  method: GET
+  path: /http/middlewares/{name}
+  description: Get a Specific HTTP Middleware
+- name: get_tcpmiddleware
+  operationId: getTCPMiddleware
+  method: GET
+  path: /tcp/middlewares/{name}
+  description: Get a Specific TCP Middleware

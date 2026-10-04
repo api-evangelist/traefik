@@ -150,14 +150,6 @@ paths:
           description: Middleware not found
 components:
   parameters:
-    per_page:
-      name: per_page
-      in: query
-      required: false
-      description: Number of results per page.
-      schema:
-        type: integer
-        default: 100
     status:
       name: status
       in: query
@@ -168,6 +160,21 @@ components:
         enum:
         - enabled
         - disabled
+    search:
+      name: search
+      in: query
+      required: false
+      description: Filter results by name using a search string.
+      schema:
+        type: string
+    per_page:
+      name: per_page
+      in: query
+      required: false
+      description: Number of results per page.
+      schema:
+        type: integer
+        default: 100
     page:
       name: page
       in: query
@@ -176,39 +183,7 @@ components:
       schema:
         type: integer
         default: 1
-    search:
-      name: search
-      in: query
-      required: false
-      description: Filter results by name using a search string.
-      schema:
-        type: string
   schemas:
-    HTTPMiddleware:
-      type: object
-      description: An HTTP middleware that modifies requests or responses.
-      properties:
-        name:
-          type: string
-          description: The name of the middleware in name@provider format.
-        type:
-          type: string
-          description: The type of middleware (e.g., addPrefix, basicAuth, buffering, chain, circuitBreaker, compress, headers, ipAllowList, rateLimit, redirectScheme, replacePath, retry, stripPrefix).
-        status:
-          type: string
-          description: The current status of the middleware.
-          enum:
-          - enabled
-          - disabled
-          - warning
-        provider:
-          type: string
-          description: The configuration provider that created this middleware.
-        usedBy:
-          type: array
-          description: Routers currently using this middleware.
-          items:
-            type: string
     HTTPRouter:
       type: object
       description: An HTTP router that matches incoming requests and routes them to services.
@@ -272,6 +247,31 @@ components:
                     type: array
                     items:
                       type: string
+    HTTPMiddleware:
+      type: object
+      description: An HTTP middleware that modifies requests or responses.
+      properties:
+        name:
+          type: string
+          description: The name of the middleware in name@provider format.
+        type:
+          type: string
+          description: The type of middleware (e.g., addPrefix, basicAuth, buffering, chain, circuitBreaker, compress, headers, ipAllowList, rateLimit, redirectScheme, replacePath, retry, stripPrefix).
+        status:
+          type: string
+          description: The current status of the middleware.
+          enum:
+          - enabled
+          - disabled
+          - warning
+        provider:
+          type: string
+          description: The configuration provider that created this middleware.
+        usedBy:
+          type: array
+          description: Routers currently using this middleware.
+          items:
+            type: string
     HTTPService:
       type: object
       description: An HTTP service representing one or more backend servers.
