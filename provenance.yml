@@ -6,6 +6,12 @@ artifacts:
   agentic-access/traefik-agentic-access.yml:
     method: generated
     evidence: declared in the artifact
+  changelog/traefik-changelog.yml:
+    method: searched
+    evidence: declared in the artifact
+  cli/traefik-cli.yml:
+    method: searched
+    evidence: declared in the artifact
   collections/traefik-entrypoints-api.opencollection.json:
     method: unknown
     evidence: no authorship recorded
@@ -48,6 +54,9 @@ artifacts:
   collections/traefik-udp-api.postman_collection.json:
     method: derived
     evidence: openapi/traefik-udp-api
+  conformance/traefik-conformance.yml:
+    method: derived
+    evidence: declared in the artifact
   crd/hub-aiservice.yaml:
     method: unknown
     evidence: no authorship recorded
@@ -102,6 +111,12 @@ artifacts:
   crd/traefik-traefikservice.yaml:
     method: unknown
     evidence: no authorship recorded
+  data-model/traefik-data-model.yml:
+    method: derived
+    evidence: declared in the artifact
+  errors/traefik-problem-types.yml:
+    method: derived
+    evidence: declared in the artifact
   examples/traefik-get-overview-example.json:
     method: unknown
     evidence: no authorship recorded
@@ -126,13 +141,37 @@ artifacts:
   front-door-ai/2026-09-17.yml:
     method: unknown
     evidence: no authorship recorded
+  hosts/traefik-hosts.yml:
+    method: derived
+    evidence: declared in the artifact
+  integrations/_index.yml:
+    method: generated
+    evidence: carries an API Evangelist house phrase
+  integrations/traefik-integration-edges.yml:
+    method: searched
+    evidence: declared in the artifact
   json-ld/traefik-context.jsonld:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/traefik-entry-point-schema.json:
     method: unknown
     evidence: no authorship recorded
   json-schema/traefik-entrypoint-schema.json:
     method: unknown
     evidence: no authorship recorded
+  json-schema/traefik-httpmiddleware-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/traefik-httprouter-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/traefik-httpservice-schema.json:
+    method: unknown
+    evidence: no authorship recorded
   json-schema/traefik-middleware-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/traefik-overview-schema.json:
     method: unknown
     evidence: no authorship recorded
   json-schema/traefik-router-schema.json:
@@ -141,133 +180,31 @@ artifacts:
   json-schema/traefik-service-schema.json:
     method: unknown
     evidence: no authorship recorded
+  json-schema/traefik-tcpmiddleware-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/traefik-tcprouter-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/traefik-tcpservice-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/traefik-udprouter-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/traefik-udpservice-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/traefik-version-schema.json:
+    method: unknown
+    evidence: no authorship recorded
   json-structure/traefik-middleware-structure.json:
     method: unknown
     evidence: no authorship recorded
   json-structure/traefik-router-structure.json:
     method: unknown
     evidence: no authorship recorded
-  kin/checks-2026-09-24T161608.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T125852.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T133943.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T143147.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T154045.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-26T215308.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T094438.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T103455.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T123021.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T132314.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T140727.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-28T221322.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-29T213958.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-29T230545.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-30T203505.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-30T220315.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-31T223420.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-01T063623.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-01T210448.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-01T222808.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-02T211804.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-02T224043.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-03T161828.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-03T174231.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-04T062714.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-04T212454.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-04T224856.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T055819.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T072335.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T144739.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T195450.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T211839.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-06T011047.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-06T211804.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-06T224210.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-07T200636.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-07T213054.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-08T214843.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-08T232836.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-10T204815.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-10T222408.yml:
+  kin/checks-2026-10-11T110117.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
   kin/score-2026-09-12T062655.yml:
@@ -351,9 +288,30 @@ artifacts:
   kin/score-2026-09-24T161608.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-25T210408.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-25T232841.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-10-03T000835.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-10-03T024842.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-10-11T110117.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  llms/traefik-llms-provenance.yml:
+    method: searched
+    evidence: 'derive-llms-provenance.py: harvested'
   llms/traefik-llms.txt:
     method: searched
     evidence: 'derive-llms-provenance.py: harvested'
+  mcp/traefik-mcp.yml:
+    method: derived
+    evidence: declared in the artifact
   openapi/_original/traefik-proxy-openapi.yml:
     method: harvested
     evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
@@ -376,6 +334,12 @@ artifacts:
   openapi/traefik-udp-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  overlays/traefik-overview-api-overlay.yml:
+    method: derived
+    evidence: declared in the artifact
+  packages/traefik-packages.yml:
+    method: unknown
+    evidence: no authorship recorded
   plans/traefik-plans-pricing.yml:
     method: generated
     evidence: declared in the artifact
@@ -388,9 +352,24 @@ artifacts:
   rules/traefik-proxy-rules.yml:
     method: unknown
     evidence: no authorship recorded
+  rules/traefik-rules.yml:
+    method: generated
+    evidence: declared in the artifact
   security/traefik-domain-security.yml:
     method: unknown
     evidence: no authorship recorded
+  security/traefik-vulnerability-disclosure.yml:
+    method: searched
+    evidence: declared in the artifact
+  vendors/traefik-vendors.yml:
+    method: unknown
+    evidence: no authorship recorded
   vocabulary/traefik-vocabulary.yml:
+    method: unknown
+    evidence: no authorship recorded
+  well-known/traefik-security.txt:
+    method: unknown
+    evidence: no authorship recorded
+  well-known/traefik-well-known.yml:
     method: unknown
     evidence: no authorship recorded
